@@ -18,5 +18,6 @@ I develop the engine in tandem with a couple of small example games, as this has
 
 ## Dependencies:
 
+- CMake for building
 - SDL for rendering
 - https://github.com/nlohmann/json for handling JSON.
