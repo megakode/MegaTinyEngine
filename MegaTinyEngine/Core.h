@@ -12,6 +12,7 @@
 #include "Sprite.h"
 #include "InputManager.h"
 #include "Resources/ResourceLoader.h"
+#include "IGame.h"
 
 namespace Engine {
 
@@ -33,6 +34,8 @@ namespace Engine {
         // Initialization
 
         static bool init(SDL_Renderer *renderer );
+
+        static void runGame( IGame game );
 
         // Factory functions
 

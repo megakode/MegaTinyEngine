@@ -7,8 +7,8 @@
 
 
 #include <vector>
-#include "Sprite.h"
-#include "Rect.h"
+#include "../Sprite.h"
+#include "../Rect.h"
 
 namespace Engine {
 

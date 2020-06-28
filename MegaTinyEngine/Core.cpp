@@ -24,6 +24,11 @@ namespace Engine {
         return true;
     }
 
+    void Core::runGame(IGame game)
+    {
+
+    }
+
     std::shared_ptr<Sprite> Core::createSprite(const std::string& textureId, const std::string& animationId){
 
         auto texture = m_textureCache->getTextureWithIdentifier(textureId);

@@ -6,8 +6,8 @@
 #define SDLTEST_RESOURCELOADER_H
 
 #include <string>
-#include "../Vendor/json.hpp"
-#include "Animation.h"
+#include "Vendor/json.hpp"
+#include "MegaTinyEngine/Animation.h"
 
 namespace Engine {
 

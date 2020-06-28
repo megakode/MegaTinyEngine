@@ -1,7 +1,7 @@
 //
 // Created by Peter Bone on 24/06/2020.
 //
-#include "../Vendor/json.hpp"
+#include "Vendor/json.hpp"
 
 #ifndef SDLTEST_JSONSERIALIZATION_H
 #define SDLTEST_JSONSERIALIZATION_H

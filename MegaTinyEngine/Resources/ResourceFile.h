@@ -10,7 +10,7 @@
 #include <list>
 #include <string>
 #include <map>
-#include "Animation.h"
+#include "MegaTinyEngine/Animation.h"
 
 namespace Engine{
 

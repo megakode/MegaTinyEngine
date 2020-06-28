@@ -1,18 +1,16 @@
 //
 // Created by Peter Bone on 24/06/2020.
 //
-
-#include "ResourceLoader.h"
-#include "Animation.h"
-
 #include <string>
 #include <fstream>
 #include <iostream>
 
-#include "../Vendor/json.hpp"
-#include "Core.h"
-#include "Resources/JSONSerialization.h"
-#include "ResourceFile.h"
+#include "Vendor/json.hpp"
+#include "MegaTinyEngine/Core.h"
+#include "MegaTinyEngine/Resources/JSONSerialization.h"
+#include "MegaTinyEngine/Resources/ResourceFile.h"
+#include "MegaTinyEngine/Resources/ResourceLoader.h"
+#include "MegaTinyEngine/Animation.h"
 
 using json = nlohmann::json;
 

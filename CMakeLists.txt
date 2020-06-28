@@ -3,21 +3,15 @@ project(MTEngine)
 
 set(CMAKE_CXX_STANDARD 14)
 
-include_directories(MegaTinyEngine)
-include_directories(MegaTinyEngine/Collision)
-include_directories(MegaTinyEngine/Resources)
-include_directories(Vendor)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
-
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
-
 include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS})
 
 ADD_LIBRARY(MTEngine STATIC
         MegaTinyEngine/Collision/BoxCollider.cpp
-	MegaTinyEngine/Collision/BoxCollider.h
+		MegaTinyEngine/Collision/BoxCollider.h
         MegaTinyEngine/Collision/CollisionManager.cpp
         MegaTinyEngine/Collision/CollisionManager.h
         MegaTinyEngine/Resources/JSONSerialization.h
@@ -50,7 +44,12 @@ ADD_LIBRARY(MTEngine STATIC
         MegaTinyEngine/Texture.cpp
         MegaTinyEngine/Texture.hpp
         MegaTinyEngine/TextureCache.cpp
-        MegaTinyEngine/TextureCache.h)
+        MegaTinyEngine/TextureCache.h MegaTinyEngine/IGame.h)
+
+target_include_directories(MTEngine PRIVATE .)
+
+target_include_directories(MTEngine INTERFACE .)
+
 
 target_link_libraries(MTEngine ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
 
