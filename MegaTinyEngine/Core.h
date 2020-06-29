@@ -35,7 +35,7 @@ namespace Engine {
 
         static bool init(SDL_Renderer *renderer );
 
-        static void runGame( IGame game );
+        static int runGame(IGame *game, int windowWidth, int windowHeight, int logicalWidth, int logicalHeight);
 
         // Factory functions
 
@@ -62,7 +62,6 @@ namespace Engine {
         static InputManager *m_inputManager;
         static CollisionManager *m_collisionManager;
         static SDL_Renderer *m_renderer;
-
     };
 
 }

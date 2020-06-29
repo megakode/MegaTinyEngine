@@ -2,6 +2,8 @@
 // Created by Peter Bone on 06/06/2020.
 //
 
+#include <iostream>
+#include "SDL_image.h"
 #include "Core.h"
 #include "Sprite.h"
 
@@ -24,9 +26,108 @@ namespace Engine {
         return true;
     }
 
-    void Core::runGame(IGame game)
+    int Core::runGame(IGame *game, int windowWidth, int windowHeight, int logicalWidth, int logicalHeight)
     {
+        // Init SDL
 
+        if (SDL_Init(SDL_INIT_VIDEO) != 0){
+            std::cerr << "SDL_Init Error: " << SDL_GetError() << std::endl;
+            return 1;
+        }
+
+        // Create Window
+
+        SDL_Window *win = SDL_CreateWindow("SDL MegaMiniEngine", 100, 100, windowWidth, windowHeight, SDL_WINDOW_MAXIMIZED | SDL_WINDOW_SHOWN );
+        if (win == nullptr){
+            std::cerr << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
+            SDL_Quit();
+            return 1;
+        }
+
+        // Init SDL_Image library, so we can load PNGs
+
+        if( !(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
+            std::cerr << "Could not init PNG image library";
+            SDL_DestroyWindow(win);
+            SDL_Quit();
+            return 1;
+        }
+
+        // Create renderer
+
+        SDL_Renderer *ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
+
+        SDL_RenderSetLogicalSize(ren, logicalWidth, logicalHeight);
+        //SDL_RenderSetIntegerScale(ren,SDL_TRUE);
+
+        if (ren == nullptr){
+            std::cerr << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
+            SDL_DestroyWindow(win);
+            SDL_Quit();
+            return 1;
+        }
+
+
+        bool quit = false;
+        Uint32 lastTime, currentTime;
+        SDL_Event e;
+
+        Core::init(ren);
+
+        game->initialize();
+
+        Core::inputManager()->setListener(game);
+
+        lastTime = currentTime = SDL_GetTicks();
+
+        while (!quit) {
+
+            //First clear the renderer
+            SDL_SetRenderDrawColor(ren, 25, 42, 88, 255);
+            SDL_RenderClear(ren);
+
+            game->draw(ren);
+
+            //Update the screen
+            SDL_RenderPresent(ren);
+
+            currentTime = SDL_GetTicks();
+
+            float frameTime = (float)(currentTime-lastTime) / 1000;
+
+            Core::animationManager()->updateAnimations(frameTime);
+
+            // Update Game
+
+            game->update(frameTime);
+
+            Core::collisionManager()->doCollisionChecks();
+
+
+            lastTime = currentTime;
+
+
+            while (SDL_PollEvent(&e)) {
+                switch (e.type) {
+                    case SDL_QUIT:
+                        quit = true;
+                        break;
+                    case SDL_KEYDOWN:
+                        Core::inputManager()->processInput(e);
+                        break;
+                    case SDL_KEYUP:
+                        Core::inputManager()->processInput(e);
+                        break;
+                }
+
+            }
+        }
+
+        Core::inputManager()->setListener(nullptr);
+
+        SDL_DestroyRenderer(ren);
+        SDL_DestroyWindow(win);
+        SDL_Quit();
     }
 
     std::shared_ptr<Sprite> Core::createSprite(const std::string& textureId, const std::string& animationId){
