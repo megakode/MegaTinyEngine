@@ -62,6 +62,16 @@ namespace Engine {
         /// Whether the Sprite is drawn or not
         bool isVisible();
 
+        /// Set a sprites alpha value used when rendering the texture
+        ///
+        /// \param alpha value between 0.0-1.0
+        void setAlpha( float alpha );
+
+        /// Get a sprites alpha value used when rendering the texture
+        ///
+        /// \return alpha value between 0.0-1.0
+        float getAlpha();
+
         /// Get the current textureRect. If an animation is playing this will change with the animation. If not, this will be the full size of the texture.
         const Rect & textureRect();
 
@@ -77,6 +87,7 @@ namespace Engine {
         bool m_kinematicsEnabled = false;
 
         bool m_debugDraw = false;
+        float m_alpha = 1.0f;
 
 
         void updateTextureRect();

@@ -147,7 +147,8 @@ namespace Engine {
             SDL_Rect srcRect = {m_textureRect.x,m_textureRect.y,m_textureRect.width,m_textureRect.height};
             SDL_Rect dstRect = {wp.x, wp.y, m_textureRect.width,m_textureRect.height };
             SDL_Point p {0,0};
-
+            
+            SDL_SetTextureAlphaMod(m_texture->Get(), m_alpha*255);
             SDL_RenderCopyEx(renderer, m_texture->Get(), &srcRect, &dstRect, 0, &p, SDL_FLIP_NONE);
 
             if(m_debugDraw){
@@ -205,6 +206,11 @@ namespace Engine {
     {
         m_kinematicBody.position = pos;
         GameObject::setLocalPosition( (int)m_kinematicBody.position.x , (int)m_kinematicBody.position.y );
+    }
+
+    void Sprite::setAlpha( float alpha )
+    {
+        m_alpha = alpha;
     }
 
 }
