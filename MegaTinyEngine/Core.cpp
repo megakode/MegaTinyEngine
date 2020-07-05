@@ -13,6 +13,7 @@ namespace Engine {
     TextureCache* Core::m_textureCache;
     InputManager* Core::m_inputManager;
     CollisionManager* Core::m_collisionManager;
+    ActionManager* Core::m_actionManager;
     SDL_Renderer* Core::m_renderer;
 
     bool Core::init( SDL_Renderer *renderer ) {
@@ -21,6 +22,7 @@ namespace Engine {
         m_textureCache = new TextureCache(renderer);
         m_inputManager = new InputManager();
         m_collisionManager = new CollisionManager();
+        m_actionManager = new ActionManager();
         m_renderer = renderer;
 
         return true;
@@ -103,6 +105,8 @@ namespace Engine {
 
             Core::collisionManager()->doCollisionChecks();
 
+            Core::actionManager()->update(frameTime);
+
 
             lastTime = currentTime;
 
@@ -128,6 +132,8 @@ namespace Engine {
         SDL_DestroyRenderer(ren);
         SDL_DestroyWindow(win);
         SDL_Quit();
+
+        return 0;
     }
 
     std::shared_ptr<Sprite> Core::createSprite(const std::string& textureId, const std::string& animationId){
@@ -164,6 +170,10 @@ namespace Engine {
 
     CollisionManager *Core::collisionManager() {
         return m_collisionManager;
+    }
+
+    ActionManager *Core::actionManager() {
+        return m_actionManager;
     }
 
     Rect Core::getLogicalWindowSize() {

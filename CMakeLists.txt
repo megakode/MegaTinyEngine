@@ -44,7 +44,7 @@ ADD_LIBRARY(MTEngine STATIC
         MegaTinyEngine/Texture.cpp
         MegaTinyEngine/Texture.hpp
         MegaTinyEngine/TextureCache.cpp
-        MegaTinyEngine/TextureCache.h MegaTinyEngine/IGame.h)
+        MegaTinyEngine/TextureCache.h MegaTinyEngine/IGame.h MegaTinyEngine/Actions/ActionManager.cpp MegaTinyEngine/Actions/ActionManager.h MegaTinyEngine/Actions/Action.cpp MegaTinyEngine/Actions/Action.h MegaTinyEngine/Actions/FadeAction.cpp MegaTinyEngine/Actions/FadeAction.h MegaTinyEngine/Actions/MoveAction.cpp MegaTinyEngine/Actions/MoveAction.h MegaTinyEngine/Actions/Easings.h MegaTinyEngine/Actions/DestroyAction.cpp MegaTinyEngine/Actions/DestroyAction.h)
 
 target_include_directories(MTEngine PRIVATE .)
 

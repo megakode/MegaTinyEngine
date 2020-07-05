@@ -6,6 +6,7 @@
 #define SDLTEST_CORE_H
 
 
+#include <MegaTinyEngine/Actions/ActionManager.h>
 #include "Collision/CollisionManager.h"
 #include "AnimationManager.h"
 #include "TextureCache.h"
@@ -47,6 +48,7 @@ namespace Engine {
         static TextureCache* textureCache();
         static InputManager* inputManager();
         static CollisionManager* collisionManager();
+        static ActionManager* actionManager();
 
         // Settings
 
@@ -61,6 +63,7 @@ namespace Engine {
         static TextureCache *m_textureCache;
         static InputManager *m_inputManager;
         static CollisionManager *m_collisionManager;
+        static ActionManager *m_actionManager;
         static SDL_Renderer *m_renderer;
     };
 
