@@ -22,10 +22,6 @@ namespace Engine {
     Sprite::~Sprite( ){
     }
 
-    void Sprite::onCollide(BoxCollider *other) {
-        //std::cout << debugName << " collided with something!" << std::endl;
-    }
-
     void Sprite::setDefaultBBox()
     {
         auto wp = getWorldPosition();

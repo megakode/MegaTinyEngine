@@ -15,7 +15,6 @@ namespace Engine {
 
     public:
         virtual Rect bbox() = 0;
-        virtual void onCollide( BoxCollider *other ){};
 
         /// The collision mask bits are AND'ed together when the collision manager determines if two objects collide. If the results is > 0, a collision occurs.
         std::uint32_t collision_mask_bits = 0;
