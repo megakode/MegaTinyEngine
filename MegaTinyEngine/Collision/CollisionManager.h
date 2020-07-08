@@ -14,7 +14,7 @@ namespace Engine {
 
     class ICollisionManagerListener {
     public:
-        virtual void collisionManagerDetectedCollisionBetween( BoxCollider *firstObject , BoxCollider *secondObject ) = 0;
+        virtual void collisionManagerDetectedCollisionBetween( const std::shared_ptr<BoxCollider>& firstObject , const std::shared_ptr<BoxCollider>& secondObject ) = 0;
     };
 
     class CollisionManager {
@@ -25,13 +25,13 @@ namespace Engine {
         /// Add item to list of colliders being checked for collision, every time 'doCollisionChecks' is called.
         /// \param collider to add
         ///
-        void addCollider( BoxCollider* collider );
+        void addCollider( const std::shared_ptr<BoxCollider>& collider );
 
         ///
         /// Remove item from list of colliders being checked for collision, every time 'doCollisionChecks' is called.
         /// \param collider to add
         ///
-        void removeCollider( BoxCollider* collider );
+        void removeCollider( const std::shared_ptr<BoxCollider>& collider );
 
         ///
         /// Do collision checks on all added BoxColliders, and notify them by calling the 'onCollide()' BoxCollider interface method.
@@ -47,7 +47,7 @@ namespace Engine {
     private:
 
         ICollisionManagerListener *m_listener = nullptr;
-        std::vector<BoxCollider*> m_objects;
+        std::vector<std::shared_ptr<BoxCollider>> m_objects;
 
     };
 

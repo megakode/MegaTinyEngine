@@ -17,11 +17,9 @@ namespace Engine {
     {
         m_currentAnimation = nullptr;
         m_texture = texture;
-        Core::collisionManager()->addCollider(this);
     }
 
     Sprite::~Sprite( ){
-        Core::collisionManager()->removeCollider(this);
     }
 
     void Sprite::onCollide(BoxCollider *other) {

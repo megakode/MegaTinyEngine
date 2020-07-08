@@ -8,6 +8,8 @@
 
 #include "GameObject.h"
 #include <iostream>
+#include <assert.h>
+#include <algorithm>
 
 namespace Engine {
 

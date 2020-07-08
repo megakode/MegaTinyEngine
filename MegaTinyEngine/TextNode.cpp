@@ -6,7 +6,7 @@
 
 namespace Engine {
 
-    TextNode::TextNode(const std::shared_ptr<Texture> &texture, char firstCharacter, char lastCharacter , uint characterWidth, uint characterHeight ) {
+    TextNode::TextNode(const std::shared_ptr<Texture> &texture, char firstCharacter, char lastCharacter , unsigned int characterWidth, unsigned int characterHeight ) {
 
         m_texture = texture;
         m_first_character = firstCharacter;

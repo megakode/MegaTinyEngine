@@ -4,14 +4,15 @@
 
 #include <iostream>
 #include "CollisionManager.h"
+#include "CollisionInfo.h"
 
 namespace Engine {
 
-    void CollisionManager::addCollider( BoxCollider* collider ) {
+    void CollisionManager::addCollider( const std::shared_ptr<BoxCollider>& collider ) {
         m_objects.push_back(collider);
     }
 
-    void CollisionManager::removeCollider( BoxCollider* collider ) {
+    void CollisionManager::removeCollider( const std::shared_ptr<BoxCollider>& collider ) {
 
         auto it = std::find(m_objects.begin(),m_objects.end(),collider);
 
@@ -29,22 +30,27 @@ namespace Engine {
             boxes.push_back( obj->bbox() );
         }
 
+        std::vector<CollisionInfo> collisions;
+
         for( int i = 0 ; i < boxes.size()-1 ; i++ ){
             for( int j = i+1 ; j < boxes.size() ; j++){
                 //std::cout << "checking element " << i << "-" << j << std::endl;
                 if( (m_objects[i]->collision_mask_bits & m_objects[j]->collision_mask_bits) && boxes[i].intersects(boxes[j])){
                     auto a = m_objects[i];
                     auto b = m_objects[j];
-
-                    if(m_listener != nullptr){
-                        m_listener->collisionManagerDetectedCollisionBetween(a,b);
-                    }
-
-                    // Do this last, as it potentially deletes the object on collision
-                    a->onCollide(b);
-
+                    collisions.emplace_back(CollisionInfo{a,b});
                 }
             }
+        }
+
+        for( auto& collision : collisions){
+            if(m_listener != nullptr){
+                m_listener->collisionManagerDetectedCollisionBetween(collision.first,collision.second);
+            }
+
+            // Do this last, as it potentially deletes the object on collision
+            //a->onCollide(b);
+
         }
 
     }
@@ -52,5 +58,6 @@ namespace Engine {
     void CollisionManager::setListener(ICollisionManagerListener* listener) {
         m_listener = listener;
     }
+
 
 }
