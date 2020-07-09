@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 project(MTEngine)
 
 set(CMAKE_CXX_STANDARD 14)
+
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} C:/Users/peter/Code/libs/SDL2-2.0.12/ C:/Users/peter/Code/libs/SDL2_image-2.0.5/)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
 

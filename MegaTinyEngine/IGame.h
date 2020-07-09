@@ -5,7 +5,7 @@
 #ifndef IGAME_H
 #define IGAME_H
 
-#include "SDL.h"
+#include <SDL.h>
 #include "InputManager.h"
 
 namespace Engine {

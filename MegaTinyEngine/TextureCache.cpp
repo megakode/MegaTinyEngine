@@ -25,6 +25,7 @@ namespace Engine {
         sdl_texture = IMG_LoadTexture(m_renderer, (absoluteFileNameWithPath.c_str()));
 
         if (sdl_texture == nullptr) {
+            std::cerr << SDL_GetError();
             throw std::runtime_error(SDL_GetError());
         }
 

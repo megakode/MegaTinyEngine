@@ -42,7 +42,6 @@ namespace Engine {
         // Collision
 
         Rect bbox() override;
-        void onCollide(BoxCollider *other) override;
 
         // Physics
         void setVelocity( const Vec2f& velocity );

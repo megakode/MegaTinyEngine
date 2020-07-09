@@ -34,8 +34,6 @@ namespace Engine {
 
         // Initialization
 
-        static bool init(SDL_Renderer *renderer );
-
         static int runGame(IGame *game, int windowWidth, int windowHeight, int logicalWidth, int logicalHeight);
 
         // Factory functions
@@ -58,6 +56,8 @@ namespace Engine {
 
         Core() = default;
         ~Core() = default;
+
+        static bool init(SDL_Renderer *renderer );
 
         static AnimationManager *m_animationManager;
         static TextureCache *m_textureCache;
