@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <algorithm>
 #include "CollisionManager.h"
 #include "CollisionInfo.h"
 
@@ -32,7 +33,7 @@ namespace Engine {
 
         std::vector<CollisionInfo> collisions;
 
-        for( int i = 0 ; i < boxes.size()-1 ; i++ ){
+        for( int i = 0 ; i < std::max(0,(int)boxes.size()-1) ; i++ ){
             for( int j = i+1 ; j < boxes.size() ; j++){
                 //std::cout << "checking element " << i << "-" << j << std::endl;
                 if( (m_objects[i]->collision_mask_bits & m_objects[j]->collision_mask_bits) && boxes[i].intersects(boxes[j])){
