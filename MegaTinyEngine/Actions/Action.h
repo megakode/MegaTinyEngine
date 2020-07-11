@@ -17,6 +17,10 @@ namespace Engine
 
         bool isDone() const;
 
+        /// Set the current action to done, without progressing it to its finishing stage.
+        void stop();
+
+        /// The + operator can chain actions sequentially, and return one action that runs the two added ones.
         friend std::shared_ptr<Action> operator+(std::shared_ptr<Action> firstAction, const std::shared_ptr<Action>& otherAction);
 
     protected:

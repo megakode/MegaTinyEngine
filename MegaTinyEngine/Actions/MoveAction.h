@@ -19,7 +19,7 @@ namespace Engine {
         /// \param target The Sprite to move
         /// \param srcPoint The local position to start moving the Sprite from
         /// \param dstPoint The local position to move the Sprite to
-        static std::shared_ptr<MoveAction> create( const std::shared_ptr<Sprite>& target, float duration, const Vec2i& srcPoint, const Vec2i& dstPoint ){
+        static std::shared_ptr<MoveAction> create( const std::shared_ptr<GameObject>& target, float duration, const Vec2i& srcPoint, const Vec2i& dstPoint ){
             auto action = std::make_shared<MoveAction>();
             action->m_duration = duration;
             action->m_srcPoint = srcPoint;
@@ -38,7 +38,7 @@ namespace Engine {
 
     private:
 
-        std::shared_ptr<Sprite> m_target;
+        std::shared_ptr<GameObject> m_target;
         Vec2i m_srcPoint;
         Vec2i m_dstPoint;
 

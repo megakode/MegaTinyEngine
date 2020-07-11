@@ -5,12 +5,13 @@
 #ifndef SDLTEST_BASE_H
 #define SDLTEST_BASE_H
 
+#include <cmath>
+
+struct Vec2i;
 
 struct Vec2f {
     float x  = 0;
     float y = 0;
-
-
 };
 
 
@@ -19,8 +20,13 @@ struct Vec2i {
     int y = 0;
 
     explicit operator Vec2f() const { return {static_cast<float>(x),static_cast<float>(y)}; };
-};
 
+    Vec2i operator - (const Vec2i& other ) const { return Vec2i{x-other.x,y-other.y};};
+    Vec2i operator + (const Vec2i& other ) const { return Vec2i{x+other.x,y+other.y};};
+    Vec2i operator * (const Vec2i& other ) const { return Vec2i{x*other.x,y*other.y};};
+
+    int dist( const Vec2i& other ) const { return std::sqrt( (other.x-x)*(other.x-x) + (other.y-y)*(other.y-y) ); };
+};
 
 
 //#define ENABLE_ASSERTS

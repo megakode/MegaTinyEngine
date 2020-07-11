@@ -10,15 +10,20 @@
 #include <memory>
 #include <map>
 #include <set>
+#include "Base.h"
 
 namespace Engine {
 
     enum class InputKeyState {
         Pressed,
-        Released
+        Released,
+        Moved
     };
 
     enum class InputKey {
+        UNKNOWN,
+        MouseButtonLeft,
+        MouseButtonRight,
         Left,
         Right,
         Up,
@@ -30,9 +35,16 @@ namespace Engine {
         F
     };
 
+    enum class InputDeviceType {
+        Keyboard,
+        Mouse
+    };
+
     struct InputEvent {
+        InputDeviceType deviceType;
         InputKeyState state;
         InputKey key;
+        Vec2f position;
     };
 
     class IInputListener {
@@ -58,6 +70,12 @@ namespace Engine {
 
         std::set<InputKey> m_pressedKeys;
         std::map<int,InputKey> m_sdlToInputManagerKeyMappings;
+
+
+        /// Maps a mouse button index from SDL to an InputKey enum
+        /// \param index Mouse button index (1..n)
+        /// \return InputKey enum
+        InputKey MouseButtonFromIndex(int index);
     };
 
 }

@@ -37,9 +37,14 @@ namespace Engine {
 
         }
 
-        void setAcceleration( const Vec2f& force ){
-            accel.x = force.x;
-            accel.y = force.y;
+        void setAcceleration( const Vec2f& a ){
+            accel.x = a.x;
+            accel.y = a.y;
+        }
+
+        void setVelocity( const Vec2f& v ){
+            velocity.x = v.x;
+            velocity.y = v.y;
         }
 
         void applyForce( const Vec2f& force ){

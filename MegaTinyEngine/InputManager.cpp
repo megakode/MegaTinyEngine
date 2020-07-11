@@ -2,6 +2,7 @@
 // Created by Peter Bone on 15/06/2020.
 //
 
+#include <iostream>
 #include "InputManager.h"
 
 namespace Engine {
@@ -23,6 +24,17 @@ namespace Engine {
 
     }
 
+    InputKey InputManager::MouseButtonFromIndex( int index ){
+        switch(index){
+            case 1:
+                return InputKey::MouseButtonLeft;
+            case 3:
+                return InputKey::MouseButtonRight;
+            default:
+                return InputKey::UNKNOWN;
+        }
+    };
+
     void InputManager::processInput(const SDL_Event &event) {
 
         InputEvent inputEvent{};
@@ -30,34 +42,59 @@ namespace Engine {
         // Determine if we pressed or released a key
 
         if( event.type == SDL_KEYDOWN ){
+            inputEvent.deviceType = InputDeviceType::Keyboard;
             inputEvent.state = InputKeyState::Pressed;
         } else if( event.type == SDL_KEYUP ){
+            inputEvent.deviceType = InputDeviceType::Keyboard;
             inputEvent.state = InputKeyState::Released;
+        } else if( event.type == SDL_MOUSEBUTTONDOWN ){
+            inputEvent.deviceType = InputDeviceType::Mouse;
+            inputEvent.state = InputKeyState::Pressed;
+            inputEvent.key = MouseButtonFromIndex(event.button.button);
+        } else if( event.type == SDL_MOUSEBUTTONUP ){
+            inputEvent.deviceType = InputDeviceType::Mouse;
+            inputEvent.state = InputKeyState::Released;
+            inputEvent.key = MouseButtonFromIndex(event.button.button);
+        } else if( event.type == SDL_MOUSEMOTION ) {
+            inputEvent.deviceType = InputDeviceType::Mouse;
+            inputEvent.state = InputKeyState::Moved;
         } else {
             // Unsupported type
             return;
         }
 
-        // Map the key from SDL to InputManager
 
-        if( m_sdlToInputManagerKeyMappings.count(event.key.keysym.sym) ){
-            inputEvent.key = m_sdlToInputManagerKeyMappings[event.key.keysym.sym];
-        } else {
-            // No SDL -> InputManager key mapping defined
-            return;
+
+        if( inputEvent.deviceType == InputDeviceType::Keyboard ){
+
+            // Map the key from SDL to InputManager
+
+            if( m_sdlToInputManagerKeyMappings.count(event.key.keysym.sym) ){
+                inputEvent.key = m_sdlToInputManagerKeyMappings[event.key.keysym.sym];
+            } else {
+                // No SDL -> InputManager key mapping defined
+                return;
+            }
+
+            // Filter key-repeat
+            if( inputEvent.state == InputKeyState::Pressed && m_pressedKeys.count(inputEvent.key) ){
+                // Key was already pressed
+                return;
+            }
+
+            if( inputEvent.state == InputKeyState::Pressed ){
+                m_pressedKeys.insert(inputEvent.key);
+            } else {
+                m_pressedKeys.erase(inputEvent.key);
+            }
+        } else if (inputEvent.deviceType == InputDeviceType::Mouse){
+
+            inputEvent.position.x = event.motion.x;
+            inputEvent.position.y = event.motion.y;
+
         }
 
-        // Filter key-repeat
-        if( inputEvent.state == InputKeyState::Pressed && m_pressedKeys.count(inputEvent.key) ){
-            // Key was already pressed
-            return;
-        }
 
-        if( inputEvent.state == InputKeyState::Pressed ){
-            m_pressedKeys.insert(inputEvent.key);
-        } else {
-            m_pressedKeys.erase(inputEvent.key);
-        }
 
 
         // Send the event to our listener

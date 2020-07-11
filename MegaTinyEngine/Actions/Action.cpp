@@ -25,6 +25,10 @@ namespace Engine {
         return m_isDone && nextActionDone;
     }
 
+    void Action::stop() {
+        m_isDone = true;
+    }
+
     std::shared_ptr<Action> operator+(std::shared_ptr<Action> firstAction, const std::shared_ptr<Action> &otherAction)
     {
         firstAction->nextAction = otherAction;

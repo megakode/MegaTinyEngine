@@ -117,11 +117,13 @@ namespace Engine {
                         quit = true;
                         break;
                     case SDL_KEYDOWN:
-                        Core::inputManager()->processInput(e);
-                        break;
                     case SDL_KEYUP:
+                    case SDL_MOUSEBUTTONDOWN:
+                    case SDL_MOUSEBUTTONUP:
+                    case SDL_MOUSEMOTION:
                         Core::inputManager()->processInput(e);
                         break;
+
                 }
 
             }
