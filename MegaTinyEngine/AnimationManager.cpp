@@ -45,7 +45,7 @@ void AnimationManager::updateAnimations( float deltaTime ) {
 
     for( auto& animation : m_animations )
     {
-        if(animation->isFinished)
+        if(animation->isFinished || animation->type == AnimationType::Manual)
         {
             continue;
         }

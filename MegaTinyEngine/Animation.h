@@ -13,7 +13,8 @@ namespace Engine{
 enum class AnimationType {
     PlayOnce,
     Loop,
-    PingPong
+    PingPong,
+    Manual
 };
 
 enum class AnimationDirection {

@@ -74,6 +74,8 @@ namespace Engine {
         /// Get the current textureRect. If an animation is playing this will change with the animation. If not, this will be the full size of the texture.
         const Rect & textureRect();
 
+        void setCurrentFrame(int frameNum);
+
     protected:
 
         std::shared_ptr<SpriteAnimation> m_currentAnimation;

@@ -16,6 +16,35 @@ using json = nlohmann::json;
 
 namespace Engine {
 
+#ifdef _WIN32
+    const char PATH_SEP = '\\';
+#else
+    const char PATH_SEP = '/';
+#endif
+
+    void ResourceLoader::convertPathSeparatorsToCurrentPlatform( std::string& input ){
+#ifdef _WIN32
+        const char FROM = '/';
+        const char TO = '\\';
+#else
+        const char TO = '/';
+        const char FROM = '\\';
+#endif
+        std::replace( input.begin(), input.end(), FROM, TO );
+    }
+
+
+    std::string ResourceLoader::getDirectoryFromFilename( const std::string& path ){
+
+        const size_t lastIndex = path.rfind(PATH_SEP);
+        if (std::string::npos != lastIndex)
+        {
+            return path.substr(0, lastIndex+1); // +1 to include the last path seperator itself
+        } else {
+            return path;
+        }
+    }
+
     void ResourceLoader::loadFromJSON( std::string jsonFileName )
     {
 
@@ -23,7 +52,15 @@ namespace Engine {
         ResourceFile resourceFile;
         std::string resourceFolder = getResourcePath();
 
+        convertPathSeparatorsToCurrentPlatform(jsonFileName);
+
         std::ifstream inputFile(resourceFolder + jsonFileName);
+
+        if(!inputFile){
+            std::cerr << "could not open JSON file: " << resourceFolder << jsonFileName << std::endl;
+            assert(0);
+            return;
+        }
 
         try {
             inputFile >> json;
@@ -36,9 +73,9 @@ namespace Engine {
 
         //std::cout << "Loaded JSON: " << json << std::endl;
 
+        std::string jsonFilePath = getDirectoryFromFilename(resourceFolder + jsonFileName);
+
         for (auto& element : json.items()) {
-
-
 
             if(element.key() == "animations" && element.value().is_object())
             {
@@ -70,7 +107,8 @@ namespace Engine {
         // Add loaded data to core managers
 
         for( auto& texture : resourceFile.textureFileNames){
-            Core::textureCache()->loadTexture(resourceFolder,texture);
+            std::string absoluteTextureFileName = jsonFilePath + texture;
+            Core::textureCache()->loadTexture(absoluteTextureFileName,texture);
         }
 
         for( auto& animation : resourceFile.animations){
@@ -119,12 +157,6 @@ namespace Engine {
     std::string ResourceLoader::getResourcePath(const std::string &subDir)
     {
 
-        #ifdef _WIN32
-        const char PATH_SEP = '\\';
-        #else
-        const char PATH_SEP = '/';
-        #endif
-
         //This will hold the base resource path: /res/
         //We give it static lifetime so that we'll only need to call
         //SDL_GetBasePath once to get the executable path
@@ -141,8 +173,8 @@ namespace Engine {
                 return "";
             }
             //We replace the last bin/ with res/ to get the the resource path
-            size_t pos = baseRes.rfind("bin");
-            baseRes = baseRes.substr(0, pos) + "Resources" + PATH_SEP;
+            //size_t pos = baseRes.rfind("bin");
+            //baseRes = baseRes.substr(0, pos) + "Resources" + PATH_SEP;
         }
         //If we want a specific subdirectory path in the resource directory append it to the base path.
         return subDir.empty() ? baseRes : baseRes + subDir + PATH_SEP;

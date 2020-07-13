@@ -73,6 +73,12 @@ namespace Engine {
         }
     }
 
+    void Sprite::setCurrentFrame(int frameNum){
+        if(m_currentAnimation!= nullptr){
+            m_currentAnimation->currentFrame = frameNum;
+        }
+    }
+
     ///
     /// Visibility
     ///

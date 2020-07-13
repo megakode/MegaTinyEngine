@@ -20,6 +20,12 @@ namespace Engine {
         static void saveAnimations( std::string filename );
 
         static std::string getResourcePath(const std::string &subDir = "");
+
+    private:
+
+        static void convertPathSeparatorsToCurrentPlatform(std::string &input);
+
+        static std::string getDirectoryFromFilename(const std::string &path);
     };
 
 }

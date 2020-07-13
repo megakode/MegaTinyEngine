@@ -31,7 +31,7 @@ namespace Engine {
         /// \brief Loads a m_texture from disk into m_texture memory and stores them in a map with the fileName (excluding the path) as key.
         /// \returns A shared pointer to the newly loaded `m_texture`.
 
-        std::shared_ptr<Texture> loadTexture(const std::string &resourceFolderPath, const std::string &fileName);
+        std::shared_ptr<Texture> loadTexture( const std::string& absoluteFileNameWithPath, const std::string& identifier );
 
         ///
         /// \brief gets a m_texture with the given identifier from the cache

@@ -17,10 +17,9 @@ namespace Engine {
         m_renderer = renderer;
     }
 
-    std::shared_ptr<Texture> TextureCache::loadTexture( const std::string& resourceFolderPath, const std::string& fileName )
+    std::shared_ptr<Texture> TextureCache::loadTexture( const std::string& absoluteFileNameWithPath, const std::string& identifier )
     {
         SDL_Texture *sdl_texture;
-        std::string absoluteFileNameWithPath = resourceFolderPath + fileName;
 
         sdl_texture = IMG_LoadTexture(m_renderer, (absoluteFileNameWithPath.c_str()));
 
@@ -30,9 +29,9 @@ namespace Engine {
         }
 
         auto texture = std::make_shared<Texture>(sdl_texture);
-        m_textures[fileName] = texture;
+        m_textures[identifier] = texture;
 
-        std::cout << "Texture loaded: " << fileName << " size=" << std::to_string(texture->getWidth()) << "x" << std::to_string(texture->getHeight()) << std::endl;
+        std::cout << "Texture loaded: " << identifier << " size=" << std::to_string(texture->getWidth()) << "x" << std::to_string(texture->getHeight()) << std::endl;
 
         return texture;
 
