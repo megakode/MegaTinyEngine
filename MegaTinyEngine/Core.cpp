@@ -39,7 +39,7 @@ namespace Engine {
 
         // Create Window
 
-        SDL_Window *win = SDL_CreateWindow("SDL MegaMiniEngine", 100, 100, windowWidth, windowHeight, SDL_WINDOW_MAXIMIZED | SDL_WINDOW_SHOWN );
+        SDL_Window *win = SDL_CreateWindow("SDL MegaMiniEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, SDL_WINDOW_SHOWN );
         if (win == nullptr){
             std::cerr << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
             SDL_Quit();
@@ -60,7 +60,7 @@ namespace Engine {
         SDL_Renderer *ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
 
         SDL_RenderSetLogicalSize(ren, logicalWidth, logicalHeight);
-        //SDL_RenderSetIntegerScale(ren,SDL_TRUE);
+        SDL_RenderSetIntegerScale(ren,SDL_TRUE);
 
         if (ren == nullptr){
             std::cerr << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;

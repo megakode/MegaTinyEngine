@@ -2,13 +2,27 @@
 // Created by Peter Bone on 14/06/2020.
 //
 
+#include <cmath>
+#include <iostream>
 #include "Camera.h"
 #include "Core.h"
 #include "Actions/MoveAction.h"
 void Engine::Camera::update(float ticksSinceLast) {
 
+    int minAllowedX =  (Core::getLogicalWindowSize().width - m_bounds.width - m_bounds.x);
+    int minAllowedY =  (Core::getLogicalWindowSize().height - m_bounds.height - m_bounds.y);
+    int maxAllowedX =  m_bounds.x;
+    int maxAllowedY =  m_bounds.y;
+
     if(m_isMouseDragging && dragIsDirty){
         Vec2i newLocalPos = localPosAtStartDrag + (dragCurrentPos-dragStartPos);
+
+        // To prevent flickering by creating a drag animation that drags outside our bounds, also confine the drag target position to bounds
+        newLocalPos.x = std::max(minAllowedX,newLocalPos.x);
+        newLocalPos.y = std::max(newLocalPos.y,minAllowedY);
+        newLocalPos.x = std::min(newLocalPos.x,maxAllowedX);
+        newLocalPos.y = std::min(newLocalPos.y,maxAllowedY);
+
         //int moveDist = newLocalPos.dist(getLocalPosition());
         float duration = 0.4; // Lets start with a fixed duration, and not factoring in the distance.
         auto move = MoveAction::create(shared_from_this(),duration,getLocalPosition(),newLocalPos);
@@ -32,6 +46,33 @@ void Engine::Camera::update(float ticksSinceLast) {
     m_kinematicBody.update(ticksSinceLast);
 
     GameObject::update(ticksSinceLast);
+
+    // Confine to bounds
+
+    if(getLocalPosition().x > maxAllowedX){
+        setLocalPosition(maxAllowedX,getY());
+        m_kinematicBody.velocity.x = 0;
+        m_kinematicBody.position.x = (float)maxAllowedX;
+        m_CurrentMoveAction->stop();
+    } else if( getLocalPosition().x < minAllowedX ){
+        setLocalPosition(minAllowedX,getY());
+        m_kinematicBody.velocity.x = 0;
+        m_kinematicBody.position.x = (float)minAllowedX;
+        m_CurrentMoveAction->stop();
+    }
+
+    if(getLocalPosition().y > maxAllowedY){
+        setLocalPosition(getX(),maxAllowedY);
+        m_kinematicBody.velocity.y = 0;
+        m_kinematicBody.position.y = (float)maxAllowedY;
+        m_CurrentMoveAction->stop();
+    } else if( getLocalPosition().y < minAllowedY ){
+        setLocalPosition(getX(),minAllowedY);
+        m_kinematicBody.velocity.y = 0;
+        m_kinematicBody.position.y = (float)minAllowedY;
+        m_CurrentMoveAction->stop();
+    }
+
 }
 
 void Engine::Camera::draw(SDL_Renderer *renderer) {
@@ -90,4 +131,8 @@ bool Engine::Camera::handleEvent(const Engine::InputEvent &event) {
     }
 
     return false;
+ }
+
+void Engine::Camera::setScrollingBounds(const Engine::Rect& rect) {
+    m_bounds = rect;
 }

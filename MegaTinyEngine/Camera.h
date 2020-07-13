@@ -23,6 +23,10 @@ namespace Engine {
 
         bool handleEvent(const InputEvent &event) override;
 
+        /// Set the size of the scrollable canvas. The x and y can also be set to offset the displayed canvas.
+        /// \param rect Bounds rect
+        void setScrollingBounds( const Rect& rect );
+
     private:
 
         KinematicBody m_kinematicBody;
@@ -32,6 +36,7 @@ namespace Engine {
         Vec2i dragCurrentPos; // The current mouse window position when dragging
         bool dragIsDirty = false;
         std::shared_ptr<MoveAction> m_CurrentMoveAction = nullptr;
+        Rect m_bounds;
 
     };
 
