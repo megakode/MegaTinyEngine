@@ -213,4 +213,13 @@ namespace Engine {
         m_alpha = alpha;
     }
 
+    void Sprite::setTexture( const std::shared_ptr<Texture>& texture ) {
+        m_texture = texture;
+        updateTextureRect();
+    }
+
+    std::shared_ptr<Texture> Sprite::texture() {
+        return m_texture;
+    }
+
 }

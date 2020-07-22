@@ -136,6 +136,9 @@ namespace Engine {
     ///
 
     bool GameObject::handleEvent(const InputEvent& event) {
+        for( const auto& child : children ){
+            child->handleEvent(event);
+        }
         return false;
     }
 

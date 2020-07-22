@@ -130,6 +130,8 @@ bool Engine::Camera::handleEvent(const Engine::InputEvent &event) {
 
     }
 
+    GameObject::handleEvent(event);
+
     return false;
  }
 

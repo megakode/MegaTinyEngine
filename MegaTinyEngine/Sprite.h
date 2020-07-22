@@ -76,12 +76,15 @@ namespace Engine {
 
         void setCurrentFrame(int frameNum);
 
+        void setTexture(  const std::shared_ptr<Texture>& texture );
+
+        std::shared_ptr<Texture> texture();
+
     protected:
 
         std::shared_ptr<SpriteAnimation> m_currentAnimation;
-        std::shared_ptr<Texture> m_texture;
+
         Rect m_textureRect;
-        Rect m_bbox;
         KinematicBody m_kinematicBody;
 
         bool m_visible = true;
@@ -100,6 +103,10 @@ namespace Engine {
 
         void setBBox(int xoffset, int yoffset, int width, int height);
 
+    private:
+        Rect m_bbox;
+
+        std::shared_ptr<Texture> m_texture;
 
     };
 

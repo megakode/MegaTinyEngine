@@ -38,6 +38,12 @@ namespace Engine {
         ///
         void doCollisionChecks();
 
+
+        /// Shoots a ray into the screen and detects which objects it hits. Useful for doing mouse over collision.
+        /// \param at the point at which to shoot a ray, in world coordinates.
+        /// \return A vector of colliders which were hit by the ray.
+        std::vector<std::shared_ptr<BoxCollider>> ray( const Vec2i& at );
+
         ///
         /// Set listener to be called whenever a collision occurs
         /// Apart from this listener, the individual elements who are colliding are also called using their 'onCollide' method.

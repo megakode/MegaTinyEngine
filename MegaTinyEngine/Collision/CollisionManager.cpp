@@ -22,6 +22,22 @@ namespace Engine {
         }
     }
 
+    std::vector<std::shared_ptr<BoxCollider>> CollisionManager::ray( const Vec2i& at ){
+
+        std::vector<std::shared_ptr<BoxCollider>> colliders;
+        Rect mouseRect = {at.x,at.y,1,1};
+
+        for( auto object : m_objects ){
+            if(object->bbox().intersects(mouseRect)){
+                colliders.push_back(object);
+            }
+        }
+
+
+        return colliders;
+
+    }
+
     void CollisionManager::doCollisionChecks() {
 
         std::vector<Rect> boxes;
