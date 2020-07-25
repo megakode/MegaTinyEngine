@@ -88,7 +88,9 @@ namespace Engine {
             SDL_SetRenderDrawColor(ren, 25, 42, 88, 255);
             SDL_RenderClear(ren);
 
+            // Draw scene
             sceneNode->draw(ren);
+            // Let the game do additional drawing
             game->draw(ren);
 
             //Update the screen

@@ -7,6 +7,7 @@
 
 #include <SDL.h>
 #include "InputManager.h"
+#include "Scene.h"
 
 namespace Engine {
 
@@ -14,7 +15,7 @@ namespace Engine {
 
     public:
 
-        virtual std::shared_ptr<GameObject> initialize() = 0;
+        virtual std::shared_ptr<Scene> initialize() = 0;
         virtual void update( float deltaTime ) = 0;
         virtual void draw( SDL_Renderer *renderer ) = 0;
         void handleInput( const InputEvent& event ) override = 0;
@@ -22,5 +23,7 @@ namespace Engine {
     };
 
 }
+
+
 
 #endif //IGAME_H

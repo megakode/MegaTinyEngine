@@ -52,6 +52,9 @@ namespace Engine{
     }
 
     bool Button::handleEvent(const InputEvent &event) {
+
+        // TODO: Huset OG knapperne bliver stadig triggered på mouse up når de er over hinanden
+
         if(event.key == InputKey::MouseButtonLeft && event.state == InputKeyState::Pressed){
             Rect b = bbox();
             if( b.intersects({(int)event.position.x,(int)event.position.y,1,1})){
