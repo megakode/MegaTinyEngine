@@ -18,8 +18,14 @@ public:
 
     void addAnimationPreset(const std::string& id, const SpriteAnimation& animation);
 
-    std::shared_ptr<SpriteAnimation> createAnimation(const std::string& id);
+    /// Creates an animation from a preset and adds it to internal list of animations to update and keep track of.
+    /// \param preset_id Id of the animation preset to use. Must be added with 'addAnimationPreset' first. Done automatically by ResourceLoader when loading JSON resources.
+    /// \param addToList Whether to add the created animation to the internal list of animations, that are updated on each call to AnimationManager::update(). Default: true.
+    /// \return A shared pointer to the created animation.
+    std::shared_ptr<SpriteAnimation> createAnimation(const std::string& preset_id, bool addToList = true );
 
+    /// Delete an animation from the internal list.
+    /// \param animation to remove
     void destroyAnimation(const std::shared_ptr<SpriteAnimation>& animation);
 
     void updateAnimations( float deltaTime );

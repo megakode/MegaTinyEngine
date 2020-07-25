@@ -22,14 +22,16 @@ namespace Engine {
         }
     }
 
-    std::vector<std::shared_ptr<BoxCollider>> CollisionManager::ray( const Vec2i& at ){
+    std::vector<std::shared_ptr<BoxCollider>> CollisionManager::ray( const Vec2i& at , int collision_group_id ){
 
         std::vector<std::shared_ptr<BoxCollider>> colliders;
         Rect mouseRect = {at.x,at.y,1,1};
 
-        for( auto object : m_objects ){
-            if(object->bbox().intersects(mouseRect)){
-                colliders.push_back(object);
+        for( auto object : m_objects ) {
+            if (collision_group_id == -1 || collision_group_id == object->collision_group_id) {
+                if (object->bbox().intersects(mouseRect)) {
+                    colliders.push_back(object);
+                }
             }
         }
 

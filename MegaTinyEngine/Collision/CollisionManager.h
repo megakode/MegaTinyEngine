@@ -41,8 +41,9 @@ namespace Engine {
 
         /// Shoots a ray into the screen and detects which objects it hits. Useful for doing mouse over collision.
         /// \param at the point at which to shoot a ray, in world coordinates.
+        /// \param collision_group_id id of the collision group to filter by. (Disables filter with default value of -1)
         /// \return A vector of colliders which were hit by the ray.
-        std::vector<std::shared_ptr<BoxCollider>> ray( const Vec2i& at );
+        std::vector<std::shared_ptr<BoxCollider>> ray( const Vec2i& at , int collision_group_id = -1 );
 
         ///
         /// Set listener to be called whenever a collision occurs

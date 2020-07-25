@@ -11,10 +11,10 @@
 namespace Engine{
 
 enum class AnimationType {
+    Manual,
     PlayOnce,
     Loop,
-    PingPong,
-    Manual
+    PingPong
 };
 
 enum class AnimationDirection {
@@ -22,7 +22,7 @@ enum class AnimationDirection {
     Reverse
 };
 
-struct Animation {
+struct SpriteAnimation {
 
     AnimationType type = AnimationType::PingPong;
     AnimationDirection direction = AnimationDirection::Forward;
@@ -34,9 +34,8 @@ struct Animation {
     int ticksSinceLastUpdate = 0;
 
     bool isFinished = false;
-};
 
-struct SpriteAnimation : Animation {
+    std::string textureId;
 
     std::vector<SpriteFrame> frames;
 

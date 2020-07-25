@@ -29,7 +29,7 @@ namespace Engine {
 
     void to_json(json& j, const SpriteAnimation& spriteAnimation) {
 
-        j = json{{"ticksPrFrame", spriteAnimation.ticksPrFrame}, {"type", spriteAnimation.type}, {"direction", spriteAnimation.direction}};
+        j = json{{"ticksPrFrame", spriteAnimation.ticksPrFrame}, {"type", spriteAnimation.type}, {"direction", spriteAnimation.direction}, {"texture", spriteAnimation.textureId}};
 
         for( auto& frame : spriteAnimation.frames){
             j["frames"].push_back(frame);
@@ -41,6 +41,7 @@ namespace Engine {
         j.at("ticksPrFrame").get_to(sa.ticksPrFrame);
         j.at("type").get_to(sa.type);
         j.at("direction").get_to(sa.direction);
+        j.at("texture").get_to(sa.textureId);
         for( auto& element : j.at("frames") ){
             auto frame = element.get<SpriteFrame>();
             sa.frames.push_back(frame);

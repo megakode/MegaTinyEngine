@@ -19,18 +19,20 @@ void AnimationManager::addAnimationPreset(const std::string& id, const SpriteAni
     m_animationPresets[id] = animation;
 }
 
-std::shared_ptr<SpriteAnimation> AnimationManager::createAnimation(const std::string& id){
+std::shared_ptr<SpriteAnimation> AnimationManager::createAnimation(const std::string& preset_id, bool addToList ){
 
-    if(m_animationPresets.count(id) == 0){
+    if(m_animationPresets.count(preset_id) == 0){
         std::cout << "Trying to create an animation from an ID which has no preset in AnimationManager";
         assert(0);
         return nullptr;
     }
 
-    SpriteAnimation animation = m_animationPresets[id];
-    std::shared_ptr<SpriteAnimation> ptr = std::make_shared<SpriteAnimation>(m_animationPresets[id]);
+    SpriteAnimation animation = m_animationPresets[preset_id];
+    std::shared_ptr<SpriteAnimation> ptr = std::make_shared<SpriteAnimation>(m_animationPresets[preset_id]);
 
-    m_animations.push_back(ptr);
+    if(addToList){
+        m_animations.push_back(ptr);
+    }
 
     return ptr;
 }

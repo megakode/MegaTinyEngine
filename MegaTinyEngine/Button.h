@@ -12,7 +12,7 @@ namespace Engine {
 
 
 
-    class Button : public Sprite {
+class Button : public Sprite, public std::enable_shared_from_this<Button> {
 
     public:
 
@@ -23,6 +23,18 @@ namespace Engine {
         /// Set whether the button will be highlighted when drawn.
         void setHighlight(bool highlighted);
 
+        /// Set callback to be called when button is pressed. Is triggered on mouse up.
+        ///
+        /// Example:
+        ///
+        /// button->setCallback(std::bind(&MyClass::buttonWasPressed,this,std::placeholders::_1));
+        ///
+        /// or as lambda function:
+        ///
+        /// auto lambda = [] (int tag) { std::cout << "lambda button press " << tag << std::endl; };
+        ///  button->setCallback(lambda);
+        ///
+        /// \param callback
         void setCallback(const std::function<void(int)>& callback) {
             m_callback = callback;
         }

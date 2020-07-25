@@ -76,7 +76,7 @@ namespace Engine {
 
         Core::init(ren);
 
-        game->initialize();
+        auto sceneNode = game->initialize();
 
         Core::inputManager()->setListener(game);
 
@@ -88,6 +88,7 @@ namespace Engine {
             SDL_SetRenderDrawColor(ren, 25, 42, 88, 255);
             SDL_RenderClear(ren);
 
+            sceneNode->draw(ren);
             game->draw(ren);
 
             //Update the screen
@@ -101,6 +102,7 @@ namespace Engine {
 
             // Update Game
 
+            sceneNode->update(frameTime);
             game->update(frameTime);
 
             Core::collisionManager()->doCollisionChecks();

@@ -14,7 +14,7 @@ namespace Engine {
 
     public:
 
-        virtual void initialize() = 0;
+        virtual std::shared_ptr<GameObject> initialize() = 0;
         virtual void update( float deltaTime ) = 0;
         virtual void draw( SDL_Renderer *renderer ) = 0;
         void handleInput( const InputEvent& event ) override = 0;
