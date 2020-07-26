@@ -30,6 +30,7 @@ namespace Engine {
     {
         // Maybe we should use a raw pointer for the parent instead (i've seen this recommended for trees, as there should never be a parentless child, so no dangling )
         child->parent = this;
+        child->setWorldPositionIsDirtyRecursively(true);
         children.push_back(child);
     }
 
@@ -136,8 +137,8 @@ namespace Engine {
     ///
 
     bool GameObject::handleEvent(const InputEvent& event) {
-        for( auto iter = children.begin() ; iter != children.end() ; ++iter ){
-            if(iter->get()->handleEvent(event)){
+        for(auto & iter : children){
+            if(iter.get()->handleEvent(event)){
                 return true;
             }
         }
