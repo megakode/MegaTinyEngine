@@ -53,15 +53,14 @@ namespace Engine{
 
     bool Button::handleEvent(const InputEvent &event) {
 
-        // TODO: Huset OG knapperne bliver stadig triggered på mouse up når de er over hinanden
-
         if(event.key == InputKey::MouseButtonLeft && event.state == InputKeyState::Pressed){
             Rect b = bbox();
             if( b.intersects({(int)event.position.x,(int)event.position.y,1,1})){
                 setCurrentFrame(1);
+                m_wasPressed = true;
                 return true;
             }
-        } else if(event.key == InputKey::MouseButtonLeft && event.state == InputKeyState::Released ){
+        } else if(m_wasPressed && event.key == InputKey::MouseButtonLeft && event.state == InputKeyState::Released){
             Rect b = bbox();
             setCurrentFrame(0);
             if( b.intersects({(int)event.position.x,(int)event.position.y,1,1})){
@@ -69,6 +68,7 @@ namespace Engine{
                     m_callback(m_tag);
                 }
             }
+            m_wasPressed = false;
         }
         return false;
     }

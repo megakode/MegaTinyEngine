@@ -51,6 +51,8 @@ class Button : public Sprite, public std::enable_shared_from_this<Button> {
         /// Whether the button will be highlighted when drawn.
         bool m_highlighted = false;
 
+        bool m_wasPressed = false;
+
 
     };
 
