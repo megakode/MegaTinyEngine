@@ -6,6 +6,7 @@
 #define SDLTEST_ANIMATION_H
 
 #include <vector>
+#include <cassert>
 #include "SpriteFrame.h"
 
 namespace Engine{
@@ -40,6 +41,7 @@ struct SpriteAnimation {
     std::vector<SpriteFrame> frames;
 
     SpriteFrame* getCurrentFrame(){
+        assert(currentFrame < frames.size());
         return &frames[currentFrame];
     }
 

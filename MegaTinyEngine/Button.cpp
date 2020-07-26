@@ -7,6 +7,11 @@
 
 namespace Engine{
 
+
+    ButtonPtr Button::create(const std::string &animationPresetId, int tag) {
+        return std::make_shared<Button>(animationPresetId,tag);
+    }
+
     Button::Button(const std::string &animationPresetId ,  int tag )  {
 
         m_currentAnimation = Core::animationManager()->createAnimation(animationPresetId,false);
@@ -65,7 +70,7 @@ namespace Engine{
             setCurrentFrame(0);
             if( b.intersects({(int)event.position.x,(int)event.position.y,1,1})){
                 if(m_callback != nullptr){
-                    m_callback(m_tag);
+                    m_callback(m_tag,shared_from_this());
                 }
             }
             m_wasPressed = false;

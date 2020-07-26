@@ -13,9 +13,12 @@
 
 namespace Engine {
 
+    SpritePtr Sprite::create(const std::shared_ptr<Texture> &texture) {
+        return std::make_shared<Sprite>(texture);
+    }
+
     Sprite::Sprite( const std::shared_ptr<Texture>& texture )
     {
-        m_currentAnimation = nullptr;
         m_texture = texture;
     }
 
@@ -75,7 +78,7 @@ namespace Engine {
 
     void Sprite::setCurrentFrame(int frameNum){
         if(m_currentAnimation!= nullptr){
-            m_currentAnimation->currentFrame = frameNum;
+            m_currentAnimation->currentFrame = std::max(0,std::min(frameNum,(int)m_currentAnimation->frames.size()-1));
         }
     }
 

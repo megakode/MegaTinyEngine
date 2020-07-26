@@ -24,9 +24,14 @@
 
 namespace Engine {
 
+    class Sprite;
+    typedef std::shared_ptr<Sprite> SpritePtr;
+
     class Sprite : public GameObject, public BoxCollider {
 
     public:
+
+        static SpritePtr create( const std::shared_ptr<Texture>& texture = nullptr );
 
         Sprite( const std::shared_ptr<Texture>& texture = nullptr );
 
@@ -82,7 +87,7 @@ namespace Engine {
 
     protected:
 
-        std::shared_ptr<SpriteAnimation> m_currentAnimation;
+        std::shared_ptr<SpriteAnimation> m_currentAnimation = nullptr;
 
         Rect m_textureRect;
         KinematicBody m_kinematicBody;

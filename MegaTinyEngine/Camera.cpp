@@ -130,9 +130,9 @@ bool Engine::Camera::handleEvent(const Engine::InputEvent &event) {
 
     }
 
-    GameObject::handleEvent(event);
+    return GameObject::handleEvent(event);
 
-    return false;
+    //return false;
  }
 
 void Engine::Camera::setScrollingBounds(const Engine::Rect& rect) {

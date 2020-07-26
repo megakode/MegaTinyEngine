@@ -10,11 +10,14 @@
 
 namespace Engine {
 
+class Button;
+typedef std::shared_ptr<Button> ButtonPtr;
 
-
-class Button : public Sprite, public std::enable_shared_from_this<Button> {
+class Button : public Sprite{
 
     public:
+
+        static std::shared_ptr<Button> create(const std::string& animationPresetId, int tag);
 
         Button(const std::string& textureIdentifier, int tag = 0 );
 
@@ -35,7 +38,7 @@ class Button : public Sprite, public std::enable_shared_from_this<Button> {
         ///  button->setCallback(lambda);
         ///
         /// \param callback
-        void setCallback(const std::function<void(int)>& callback) {
+        void setCallback(const std::function<void(int,std::shared_ptr<GameObject>)> callback) {
             m_callback = callback;
         }
 
@@ -43,7 +46,7 @@ class Button : public Sprite, public std::enable_shared_from_this<Button> {
 
     private:
 
-        std::function<void(int)> m_callback;
+        std::function<void(int,std::shared_ptr<GameObject>)> m_callback;
 
         /// The tag that identifies this button. Is also sent as a parameter to the IButtonDelegate when the button is pressed.
         int m_tag;

@@ -30,6 +30,8 @@ std::shared_ptr<SpriteAnimation> AnimationManager::createAnimation(const std::st
     SpriteAnimation animation = m_animationPresets[preset_id];
     std::shared_ptr<SpriteAnimation> ptr = std::make_shared<SpriteAnimation>(m_animationPresets[preset_id]);
 
+    assert(animation.frames.size() != 0);
+
     if(addToList){
         m_animations.push_back(ptr);
     }
