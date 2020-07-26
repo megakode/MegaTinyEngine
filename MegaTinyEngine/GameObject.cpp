@@ -136,15 +136,15 @@ namespace Engine {
     ///
 
     bool GameObject::handleEvent(const InputEvent& event) {
-        for( const auto& child : children ){
-            if(child->handleEvent(event)){
+        for( auto iter = children.begin() ; iter != children.end() ; ++iter ){
+            if(iter->get()->handleEvent(event)){
                 return true;
             }
         }
         return false;
     }
 
-    const std::vector<std::shared_ptr<GameObject>>& GameObject::getChildren() {
+    const std::list<std::shared_ptr<GameObject>>& GameObject::getChildren() {
         return children;
     }
 

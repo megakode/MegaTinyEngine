@@ -12,6 +12,7 @@
 #include <memory>
 #include <vector>
 #include <string>
+#include <list>
 #include "SDL.h"
 #include "InputManager.h"
 #include "Base.h"
@@ -28,7 +29,7 @@ namespace Engine {
         ~GameObject();
 
         void addChild(const std::shared_ptr<GameObject>& child);
-        const std::vector<std::shared_ptr<GameObject>>& getChildren();
+        const std::list<std::shared_ptr<GameObject>>& getChildren();
 
         void removeAllChildren();
 
@@ -58,7 +59,7 @@ namespace Engine {
 
         bool isWorldPositionDirty;
 
-        std::vector<std::shared_ptr<GameObject>> children;
+        std::list<std::shared_ptr<GameObject>> children;
         GameObject *parent = nullptr;
 
         ///
