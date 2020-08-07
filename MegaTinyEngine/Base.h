@@ -6,43 +6,56 @@
 #define SIMPLEWESTERNGAME_BASE_H
 
 #include <cmath>
+#include <stdint.h>
 
-struct Vec2i;
+namespace Engine {
 
-struct Vec2f {
-    float x  = 0;
-    float y = 0;
-    operator Vec2i() const;
-};
+    struct Vec2i;
 
-
-struct Vec2i {
-    int x  = 0;
-    int y = 0;
-
-    operator Vec2f() const;
-
-    Vec2i operator - (const Vec2i& other ) const { return Vec2i{x-other.x,y-other.y};};
-    Vec2i operator + (const Vec2i& other ) const { return Vec2i{x+other.x,y+other.y};};
-    Vec2i operator * (const Vec2i& other ) const { return Vec2i{x*other.x,y*other.y};};
-
-    int dist( const Vec2i& other ) const { return std::sqrt( (other.x-x)*(other.x-x) + (other.y-y)*(other.y-y) ); };
-};
+    struct Vec2f {
+        float x  = 0;
+        float y = 0;
+        operator Vec2i() const;
+    };
 
 
-//#define ENABLE_ASSERTS
+    struct Vec2i {
+        int x  = 0;
+        int y = 0;
 
-#define ENGINE_ASSERT(x, msg) { if(!(x)) { assert(msg,0); } }
+        operator Vec2f() const;
+
+        Vec2i operator - (const Vec2i& other ) const { return Vec2i{x-other.x,y-other.y};};
+        Vec2i operator + (const Vec2i& other ) const { return Vec2i{x+other.x,y+other.y};};
+        Vec2i operator * (const Vec2i& other ) const { return Vec2i{x*other.x,y*other.y};};
+
+        int dist( const Vec2i& other ) const { return std::sqrt( (other.x-x)*(other.x-x) + (other.y-y)*(other.y-y) ); };
+    };
 
 
-struct DeltaTime {
-public:
+    //#define ENABLE_ASSERTS
 
-    operator float() const { return m_time; }
+    #define ENGINE_ASSERT(x, msg) { if(!(x)) { assert(msg,0); } }
 
-private:
-    float m_time;
-};
+
+    struct DeltaTime {
+    public:
+
+        operator float() const { return m_time; }
+
+    private:
+        float m_time;
+    };
+
+    struct ColorRGBA8 {
+        uint8_t r;
+        uint8_t g;
+        uint8_t b;
+        uint8_t a;
+    };
+
+}
+
 
 
 #endif //SIMPLEWESTERNGAME_BASE_H
