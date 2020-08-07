@@ -5,6 +5,8 @@
 #ifndef SDLTEST_RECT_H
 #define SDLTEST_RECT_H
 
+#include "Base.h"
+
 namespace Engine {
 
     struct Rect {
@@ -12,6 +14,10 @@ namespace Engine {
         int y = 0;
         int width = 0;
         int height = 0;
+
+        bool intersects( const Vec2i& point ){
+            return ( point.x >= x && point.x <= x + width && point.y >= y && point.y <= y + height);
+        }
 
         bool intersects( const Rect& other ) const {
             int max_x = x+width;

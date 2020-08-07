@@ -53,24 +53,34 @@ void Engine::Camera::update(float ticksSinceLast) {
         setLocalPosition(maxAllowedX,getY());
         m_kinematicBody.velocity.x = 0;
         m_kinematicBody.position.x = (float)maxAllowedX;
-        m_CurrentMoveAction->stop();
+        if(m_CurrentMoveAction != nullptr)
+        {
+            m_CurrentMoveAction->stop();
+        }
     } else if( getLocalPosition().x < minAllowedX ){
         setLocalPosition(minAllowedX,getY());
         m_kinematicBody.velocity.x = 0;
         m_kinematicBody.position.x = (float)minAllowedX;
-        m_CurrentMoveAction->stop();
+        if(m_CurrentMoveAction != nullptr)
+        {
+            m_CurrentMoveAction->stop();
+        }
     }
 
     if(getLocalPosition().y > maxAllowedY){
         setLocalPosition(getX(),maxAllowedY);
         m_kinematicBody.velocity.y = 0;
         m_kinematicBody.position.y = (float)maxAllowedY;
-        m_CurrentMoveAction->stop();
+        if(m_CurrentMoveAction != nullptr){
+            m_CurrentMoveAction->stop();
+        }
     } else if( getLocalPosition().y < minAllowedY ){
         setLocalPosition(getX(),minAllowedY);
         m_kinematicBody.velocity.y = 0;
         m_kinematicBody.position.y = (float)minAllowedY;
-        m_CurrentMoveAction->stop();
+        if(m_CurrentMoveAction!= nullptr){
+            m_CurrentMoveAction->stop();
+        }
     }
 
 }
