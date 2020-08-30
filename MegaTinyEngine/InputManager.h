@@ -64,12 +64,15 @@ namespace Engine {
         /// \param listener
         void setListener(IInputListener * const listener);
 
+        InputEvent getLastMousePosition();
+
     private:
 
         IInputListener *m_listener;
 
         std::set<InputKey> m_pressedKeys;
         std::map<int,InputKey> m_sdlToInputManagerKeyMappings;
+        InputEvent m_lastMousePosition;
 
 
         /// Maps a mouse button index from SDL to an InputKey enum

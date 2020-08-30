@@ -14,6 +14,7 @@ namespace Engine {
     InputManager* Core::m_inputManager;
     CollisionManager* Core::m_collisionManager;
     ActionManager* Core::m_actionManager;
+    UIManager* Core::m_uiManager;
     SDL_Renderer* Core::m_renderer;
 
     bool Core::init( SDL_Renderer *renderer ) {
@@ -23,6 +24,7 @@ namespace Engine {
         m_inputManager = new InputManager();
         m_collisionManager = new CollisionManager();
         m_actionManager = new ActionManager();
+        m_uiManager = new UIManager();
         m_renderer = renderer;
 
         return true;
@@ -109,6 +111,7 @@ namespace Engine {
 
             Core::collisionManager()->doCollisionChecks();
 
+
             Core::actionManager()->update(frameTime);
 
 
@@ -127,13 +130,22 @@ namespace Engine {
                     case SDL_MOUSEMOTION:
                         Core::inputManager()->processInput(e);
                         break;
-
                 }
 
             }
+
+            // Get the last mouse position instead of doing it pr. SDL event, so we reduce the heavy uiManager call to once pr. frame
+            m_uiManager->handleInput(m_inputManager->getLastMousePosition());
         }
 
         Core::inputManager()->setListener(nullptr);
+
+        delete m_animationManager;
+        delete m_textureCache;
+        delete m_inputManager;
+        delete m_collisionManager;
+        delete m_actionManager;
+        delete m_uiManager;
 
         SDL_DestroyRenderer(ren);
         SDL_DestroyWindow(win);
@@ -156,12 +168,6 @@ namespace Engine {
         return sprite;
     }
 
-    /*
-    std::shared_ptr<Sprite> Core::createSprite(const std::string& textureId ){
-        auto sprite = std::make_shared<Sprite>(Core::getInstance().textureCache()->getTextureWithIdentifier("taco"));
-        return sprite;
-    }
-    */
     AnimationManager* Core::animationManager() {
         return m_animationManager;
     }
@@ -190,6 +196,12 @@ namespace Engine {
         } else {
             return {0,0,0,0};
         }
+    }
+
+    // Private stuff
+
+    void Core::destroy(){
+
     }
 
 

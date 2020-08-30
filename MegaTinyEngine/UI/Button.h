@@ -38,7 +38,7 @@ class Button : public Sprite{
         ///  button->setCallback(lambda);
         ///
         /// \param callback
-        void setCallback(const std::function<void(int,std::shared_ptr<GameObject>)> callback) {
+        void setCallback(const std::function<void(int,std::shared_ptr<GameObject>)>& callback) {
             m_callback = callback;
         }
 

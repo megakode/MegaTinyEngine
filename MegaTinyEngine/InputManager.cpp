@@ -91,6 +91,7 @@ namespace Engine {
 
             inputEvent.position.x = event.motion.x;
             inputEvent.position.y = event.motion.y;
+            m_lastMousePosition = inputEvent;
 
         }
 
@@ -109,6 +110,11 @@ namespace Engine {
     void InputManager::setListener(IInputListener * const listener)
     {
         m_listener = listener;
+    }
+
+    InputEvent InputManager::getLastMousePosition()
+    {
+        return m_lastMousePosition;
     }
 
 }

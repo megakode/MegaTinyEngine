@@ -9,7 +9,14 @@ namespace Engine{
 
 
     ButtonPtr Button::create(const std::string &animationPresetId, int tag) {
-        return std::make_shared<Button>(animationPresetId,tag);
+        auto button = std::make_shared<Button>(animationPresetId,tag);
+
+        // Add to collisionmanager so the UIManager can query it and do mouse over events
+        button->collision_group_id = UICollisionGroupID;
+        Core::collisionManager()->addCollider(button);
+        // TODO: find a way to remove collider when we are destroyed
+
+        return button;
     }
 
     Button::Button(const std::string &animationPresetId ,  int tag )  {
@@ -26,8 +33,6 @@ namespace Engine{
 
         m_tag = tag;
 
-        //Core::collisionManager()->addCollider(enable_shared_from_this<Engine::Button>::shared_from_this());
-        // TODO: find a way to remove collider when we are destroyed
     }
 
     void Button::setHighlight(bool highlighted) {
@@ -58,6 +63,8 @@ namespace Engine{
 
     bool Button::handleEvent(const InputEvent &event) {
 
+        // Mouse pressed
+
         if(event.key == InputKey::MouseButtonLeft && event.state == InputKeyState::Pressed){
             Rect b = bbox();
             if( b.intersects({(int)event.position.x,(int)event.position.y,1,1})){
@@ -65,7 +72,11 @@ namespace Engine{
                 m_wasPressed = true;
                 return true;
             }
-        } else if(m_wasPressed && event.key == InputKey::MouseButtonLeft && event.state == InputKeyState::Released){
+        }
+
+        // Mouse released
+
+        else if(m_wasPressed && event.key == InputKey::MouseButtonLeft && event.state == InputKeyState::Released){
             Rect b = bbox();
             setCurrentFrame(0);
             if( b.intersects({(int)event.position.x,(int)event.position.y,1,1})){
@@ -75,8 +86,10 @@ namespace Engine{
             }
             m_wasPressed = false;
         }
+
         return false;
     }
+
 
 
 }

@@ -15,6 +15,10 @@ namespace Engine {
         m_character_height = characterHeight;
     }
 
+    std::shared_ptr<TextNode> TextNode::create(const std::shared_ptr<Texture> &texture, char firstCharacter, char lastCharacter, unsigned int characterWidth, unsigned int characterHeight) {
+        return std::make_shared<TextNode>(texture,firstCharacter,lastCharacter,characterWidth,characterHeight);
+    }
+
 
     void TextNode::setText( const std::string& text ){
         m_text = text;
@@ -48,6 +52,5 @@ namespace Engine {
             child->draw(renderer);
         }
     }
-
 
 }

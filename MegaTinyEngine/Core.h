@@ -7,6 +7,7 @@
 
 
 #include <MegaTinyEngine/Actions/ActionManager.h>
+#include <MegaTinyEngine/UI/UIManager.h>
 #include "Collision/CollisionManager.h"
 #include "AnimationManager.h"
 #include "TextureCache.h"
@@ -65,6 +66,9 @@ namespace Engine {
         static CollisionManager *m_collisionManager;
         static ActionManager *m_actionManager;
         static SDL_Renderer *m_renderer;
+        static UIManager *m_uiManager;
+
+        static void destroy();
     };
 
 }
