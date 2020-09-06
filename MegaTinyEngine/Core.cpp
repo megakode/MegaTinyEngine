@@ -15,6 +15,7 @@ namespace Engine {
     CollisionManager* Core::m_collisionManager;
     ActionManager* Core::m_actionManager;
     UIManager* Core::m_uiManager;
+    FontManager* Core::m_fontManager;
     SDL_Renderer* Core::m_renderer;
 
     bool Core::init( SDL_Renderer *renderer ) {
@@ -25,6 +26,7 @@ namespace Engine {
         m_collisionManager = new CollisionManager();
         m_actionManager = new ActionManager();
         m_uiManager = new UIManager();
+        m_fontManager = new FontManager();
         m_renderer = renderer;
 
         return true;
@@ -146,6 +148,7 @@ namespace Engine {
         delete m_collisionManager;
         delete m_actionManager;
         delete m_uiManager;
+        delete m_fontManager;
 
         SDL_DestroyRenderer(ren);
         SDL_DestroyWindow(win);
@@ -172,6 +175,11 @@ namespace Engine {
 
     ActionManager *Core::actionManager() {
         return m_actionManager;
+    }
+
+    FontManager *Core::fontManager()
+    {
+        return m_fontManager;
     }
 
     Rect Core::getLogicalWindowSize() {

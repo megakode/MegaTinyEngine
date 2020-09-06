@@ -3,20 +3,22 @@
 //
 
 #include "TextNode.h"
-
+#include "Core.h"
 namespace Engine {
 
-    TextNode::TextNode(const std::shared_ptr<Texture> &texture, char firstCharacter, char lastCharacter , unsigned int characterWidth, unsigned int characterHeight ) {
+    TextNode::TextNode(const std::string& textureName, char firstCharacter, char lastCharacter , unsigned int characterWidth, unsigned int characterHeight ) {
 
-        m_texture = texture;
+        m_texture = Core::textureCache()->getTextureWithIdentifier(textureName);
         m_first_character = firstCharacter;
         m_last_character = lastCharacter;
-        m_character_width = characterWidth;
-        m_character_height = characterHeight;
+        m_character_width = (int)characterWidth;
+        m_character_height = (int)characterHeight;
     }
 
-    std::shared_ptr<TextNode> TextNode::create(const std::shared_ptr<Texture> &texture, char firstCharacter, char lastCharacter, unsigned int characterWidth, unsigned int characterHeight) {
-        return std::make_shared<TextNode>(texture,firstCharacter,lastCharacter,characterWidth,characterHeight);
+    std::shared_ptr<TextNode> TextNode::create()
+    {
+        auto font = Core::fontManager()->getDefaultFont();
+        return std::make_shared<TextNode>(font.texture,' ','z',font.charWidth,font.charHeight);
     }
 
 

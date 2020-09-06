@@ -101,17 +101,40 @@ namespace Engine {
                     resourceFile.textureFileNames.push_back(textureName);
                 }
             }
+            else if(element.key() == "fonts")
+            {
+                for( auto& singleFontDictionary : element.value().items() )
+                {
+                    const std::string& fontName = singleFontDictionary.key();
+                    FontDefinition font = singleFontDictionary.value();
+
+                    resourceFile.fontDefinitions.emplace_back(font);
+                }
+            }
         }
 
 
         // Add loaded data to core managers
 
-        for( auto& texture : resourceFile.textureFileNames){
+        // Textures (including fonts)
+
+        for( auto& texture : resourceFile.textureFileNames)
+        {
             std::string absoluteTextureFileName = jsonFilePath + texture;
             Core::textureCache()->loadTexture(absoluteTextureFileName,texture);
         }
 
-        for( auto& animation : resourceFile.animations){
+        for( auto& fontDef : resourceFile.fontDefinitions)
+        {
+            std::string absoluteTextureFileName = jsonFilePath + fontDef.texture;
+            Core::textureCache()->loadTexture(absoluteTextureFileName,fontDef.texture);
+            Core::fontManager()->addFont(fontDef);
+        }
+
+        // animations
+
+        for( auto& animation : resourceFile.animations)
+        {
             Core::animationManager()->addAnimationPreset(animation.first,animation.second);
         }
 

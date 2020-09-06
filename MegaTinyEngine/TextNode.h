@@ -15,13 +15,13 @@ namespace Engine {
 
     public:
 
-        static std::shared_ptr<TextNode> create(const std::shared_ptr <Texture> &texture, char firstCharacter, char lastCharacter, unsigned int characterWidth, unsigned int characterHeight);
+        static std::shared_ptr<TextNode> create();
 
         void draw(SDL_Renderer *renderer) override;
 
         void setText(const std::string &text);
 
-        TextNode(const std::shared_ptr <Texture> &texture, char firstCharacter, char lastCharacter, unsigned int characterWidth, unsigned int characterHeight);
+        TextNode(const std::string& textureName, char firstCharacter, char lastCharacter , unsigned int characterWidth, unsigned int characterHeight );
 
     private:
 

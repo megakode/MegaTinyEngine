@@ -8,6 +8,7 @@
 
 #include <MegaTinyEngine/Actions/ActionManager.h>
 #include <MegaTinyEngine/UI/UIManager.h>
+#include <MegaTinyEngine/UI/FontManager.h>
 #include "Collision/CollisionManager.h"
 #include "AnimationManager.h"
 #include "TextureCache.h"
@@ -37,10 +38,6 @@ namespace Engine {
 
         static int runGame(IGame *game, int windowWidth, int windowHeight, int logicalWidth, int logicalHeight);
 
-        // Factory functions
-
-        static std::shared_ptr<Sprite> createSprite(const std::string& textureId, const std::string& animationId = "");
-
         // Getters for the managers
 
         static AnimationManager* animationManager();
@@ -48,6 +45,7 @@ namespace Engine {
         static InputManager* inputManager();
         static CollisionManager* collisionManager();
         static ActionManager* actionManager();
+        static FontManager* fontManager();
 
         // Settings
 
@@ -67,6 +65,7 @@ namespace Engine {
         static ActionManager *m_actionManager;
         static SDL_Renderer *m_renderer;
         static UIManager *m_uiManager;
+        static FontManager *m_fontManager;
 
         static void destroy();
     };
