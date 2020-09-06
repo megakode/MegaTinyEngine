@@ -31,13 +31,15 @@ namespace Engine {
 
     public:
 
-        static SpritePtr create( const std::shared_ptr<Texture>& texture = nullptr );
-
         Sprite( const std::shared_ptr<Texture>& texture = nullptr );
+
+        static SpritePtr createWithTexture( const std::string& textureId );
+        static SpritePtr createWithAnimation(const std::string& animationId);
+
 
         ~Sprite();
 
-        void playAnimation( const std::string& id );
+        void setAnimation( const std::string& id );
 
         // GameObject overrides
 
@@ -112,7 +114,6 @@ namespace Engine {
         Rect m_bbox;
 
         std::shared_ptr<Texture> m_texture;
-
     };
 
 }

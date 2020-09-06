@@ -25,6 +25,11 @@ namespace Engine {
 
             // last - current = removed
             // current - last = added
+
+            // Sort to prevent crash, as set_difference requires sequences to be sorted.
+            // m_mouseOverColliders should already be sorted from last time we were called.
+            std::sort(newColliders.begin(),newColliders.end());
+
             std::set_difference(m_mouseOverColliders.begin(), m_mouseOverColliders.end(), newColliders.begin(), newColliders.end(),std::inserter(removedColliders, removedColliders.begin()));
             std::set_difference(newColliders.begin(), newColliders.end(), m_mouseOverColliders.begin(), m_mouseOverColliders.end(),std::inserter(addedColliders, addedColliders.begin()));
 

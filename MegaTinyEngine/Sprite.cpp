@@ -13,8 +13,20 @@
 
 namespace Engine {
 
-    SpritePtr Sprite::create(const std::shared_ptr<Texture> &texture) {
-        return std::make_shared<Sprite>(texture);
+    SpritePtr Sprite::createWithTexture( const std::string& textureId )
+    {
+        auto texture = Core::textureCache()->getTextureWithIdentifier(textureId);
+        assert(texture);
+        auto sprite = std::make_shared<Sprite>(texture);
+
+        return sprite;
+    }
+
+    SpritePtr Sprite::createWithAnimation(const std::string& animationId )
+    {
+        auto spr = std::make_shared<Sprite>();
+        spr->setAnimation(animationId);
+        return spr;
     }
 
     Sprite::Sprite( const std::shared_ptr<Texture>& texture )
@@ -98,7 +110,7 @@ namespace Engine {
     /// Play Animation
     ///
 
-    void Sprite::playAnimation( const std::string& id )
+    void Sprite::setAnimation(const std::string& id  )
     {
         if(m_currentAnimation!= nullptr){
             Core::animationManager()->destroyAnimation(m_currentAnimation);
@@ -106,11 +118,18 @@ namespace Engine {
 
         m_currentAnimation = Core::animationManager()->createAnimation(id);
 
-        updateTextureRect();
+        assert(m_currentAnimation);
+
+        auto animationTexture = Core::textureCache()->getTextureWithIdentifier(m_currentAnimation->textureId);
+
+        assert(animationTexture);
+
+        setTexture(animationTexture);
 
         if(m_bbox.isZeroSize()){
             setDefaultBBox();
         }
+
     }
 
 

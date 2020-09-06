@@ -154,20 +154,6 @@ namespace Engine {
         return 0;
     }
 
-    std::shared_ptr<Sprite> Core::createSprite(const std::string& textureId, const std::string& animationId){
-
-        auto texture = m_textureCache->getTextureWithIdentifier(textureId);
-        assert(texture);
-        auto sprite = std::make_shared<Sprite>(texture);
-
-
-        if(!animationId.empty()){
-            sprite->playAnimation(animationId);
-        }
-
-        return sprite;
-    }
-
     AnimationManager* Core::animationManager() {
         return m_animationManager;
     }
