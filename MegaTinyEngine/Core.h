@@ -35,8 +35,8 @@ namespace Engine {
         Core& operator=(const Core&) = delete;
 
         // Initialization
-
-        static int runGame(IGame *game, int windowWidth, int windowHeight, int logicalWidth, int logicalHeight);
+        static bool createWindowAndRenderer(int pixelWidth, int pixelHeight, int scaling, bool resizable);
+        static int runGame(IGame *game);
 
         // Getters for the managers
 
@@ -47,6 +47,8 @@ namespace Engine {
         static ActionManager* actionManager();
         static FontManager* fontManager();
 
+        static SDL_Window* getWindow();
+
         // Settings
 
         static Rect getLogicalWindowSize();
@@ -56,18 +58,20 @@ namespace Engine {
         Core() = default;
         ~Core() = default;
 
-        static bool init(SDL_Renderer *renderer );
+        static bool init();
 
         static AnimationManager *m_animationManager;
         static TextureCache *m_textureCache;
         static InputManager *m_inputManager;
         static CollisionManager *m_collisionManager;
         static ActionManager *m_actionManager;
-        static SDL_Renderer *m_renderer;
         static UIManager *m_uiManager;
         static FontManager *m_fontManager;
+        static SDL_Renderer *m_renderer;
+        static SDL_Window *m_window;
 
         static void destroy();
+
     };
 
 }

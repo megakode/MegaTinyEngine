@@ -15,7 +15,7 @@ namespace Engine {
 
     public:
 
-        static void loadFromJSON(std::string jsonFileName);
+        static void loadFromJSON(std::string jsonFileName, bool prefixResourceDirectory = true );
 
         static void saveAnimations( std::string filename );
 

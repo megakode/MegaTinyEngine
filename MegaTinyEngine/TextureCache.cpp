@@ -9,6 +9,7 @@
 #include <SDL_image.h>
 #include <iostream>
 #include "TextureCache.h"
+#include <cassert>
 
 namespace Engine {
 
@@ -19,6 +20,7 @@ namespace Engine {
 
     std::shared_ptr<Texture> TextureCache::loadTexture( const std::string& absoluteFileNameWithPath, const std::string& identifier )
     {
+        assert(m_renderer != nullptr);
         SDL_Texture *sdl_texture;
 
         sdl_texture = IMG_LoadTexture(m_renderer, (absoluteFileNameWithPath.c_str()));

@@ -10,7 +10,6 @@
 #include "MegaTinyEngine/Resources/JSONSerialization.h"
 #include "MegaTinyEngine/Resources/ResourceFile.h"
 #include "MegaTinyEngine/Resources/ResourceLoader.h"
-#include "MegaTinyEngine/Animation.h"
 
 using json = nlohmann::json;
 
@@ -45,19 +44,26 @@ namespace Engine {
         }
     }
 
-    void ResourceLoader::loadFromJSON( std::string jsonFileName )
+    void ResourceLoader::loadFromJSON( std::string jsonFileName , bool prefixResourceDirectory )
     {
 
         json json;
         ResourceFile resourceFile;
         std::string resourceFolder = getResourcePath();
+        std::string fullPath;
 
-        convertPathSeparatorsToCurrentPlatform(jsonFileName);
+        if( prefixResourceDirectory ){
+            fullPath = resourceFolder + jsonFileName;
+        } else {
+            fullPath = jsonFileName;
+        }
 
-        std::ifstream inputFile(resourceFolder + jsonFileName);
+        convertPathSeparatorsToCurrentPlatform(fullPath);
+
+        std::ifstream inputFile(fullPath);
 
         if(!inputFile){
-            std::cerr << "could not open JSON file: " << resourceFolder << jsonFileName << std::endl;
+            std::cerr << "could not open JSON file: " << fullPath << std::endl;
             assert(0);
             return;
         }
@@ -65,7 +71,7 @@ namespace Engine {
         try {
             inputFile >> json;
         } catch (json::parse_error& ex) {
-            std::cerr << "could not load: " << resourceFolder << jsonFileName << std::endl;
+            std::cerr << "could not load: " << fullPath << std::endl;
             std::cerr << "JSON error:" << ex.what() << std::endl;
             assert(0);
             return;
@@ -73,7 +79,7 @@ namespace Engine {
 
         //std::cout << "Loaded JSON: " << json << std::endl;
 
-        std::string jsonFilePath = getDirectoryFromFilename(resourceFolder + jsonFileName);
+        std::string jsonFilePath = getDirectoryFromFilename(fullPath);
 
         for (auto& element : json.items()) {
 

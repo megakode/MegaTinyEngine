@@ -17,68 +17,86 @@ namespace Engine {
     UIManager* Core::m_uiManager;
     FontManager* Core::m_fontManager;
     SDL_Renderer* Core::m_renderer;
+    SDL_Window* Core::m_window;
 
-    bool Core::init( SDL_Renderer *renderer ) {
+    bool Core::init() {
+
+        assert(m_renderer);
 
         m_animationManager = new AnimationManager();
-        m_textureCache = new TextureCache(renderer);
+        m_textureCache = new TextureCache(m_renderer);
         m_inputManager = new InputManager();
         m_collisionManager = new CollisionManager();
         m_actionManager = new ActionManager();
         m_uiManager = new UIManager();
         m_fontManager = new FontManager();
-        m_renderer = renderer;
 
         return true;
     }
 
-    int Core::runGame(IGame *game, int windowWidth, int windowHeight, int logicalWidth, int logicalHeight)
+    bool Core::createWindowAndRenderer(int pixelWidth, int pixelHeight, int scaling, bool resizable)
     {
         // Init SDL
 
-        if (SDL_Init(SDL_INIT_VIDEO) != 0){
+        if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0) // SDL_INIT_GAMECONTROLLER
+        {
             std::cerr << "SDL_Init Error: " << SDL_GetError() << std::endl;
-            return 1;
+            return false;
         }
 
         // Create Window
 
-        SDL_Window *win = SDL_CreateWindow("SDL MegaMiniEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, SDL_WINDOW_SHOWN );
-        if (win == nullptr){
+        Uint32 flags = SDL_WINDOW_SHOWN;
+
+        if (resizable) {
+            flags |= SDL_WINDOW_RESIZABLE;
+        }
+
+        m_window = SDL_CreateWindow("SDL MegaMiniEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, pixelWidth*scaling, pixelHeight*scaling, flags );
+        if (m_window == nullptr)
+        {
             std::cerr << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
             SDL_Quit();
-            return 1;
+            return false;
         }
 
         // Init SDL_Image library, so we can load PNGs
 
-        if( !(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
+        if( !(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
+        {
             std::cerr << "Could not init PNG image library";
-            SDL_DestroyWindow(win);
+            SDL_DestroyWindow(m_window);
             SDL_Quit();
-            return 1;
+            return false;
         }
 
         // Create renderer
 
-        SDL_Renderer *ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
+        m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
 
-        SDL_RenderSetLogicalSize(ren, logicalWidth, logicalHeight);
-        SDL_RenderSetIntegerScale(ren,SDL_TRUE);
+        SDL_RenderSetLogicalSize(m_renderer, pixelWidth, pixelHeight);
+        SDL_RenderSetIntegerScale(m_renderer,SDL_TRUE);
 
-        if (ren == nullptr){
+        if (m_renderer == nullptr)
+        {
             std::cerr << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
-            SDL_DestroyWindow(win);
+            SDL_DestroyWindow(m_window);
             SDL_Quit();
-            return 1;
+            return false;
         }
 
+        if(!Core::init()){
+            return false;
+        };
 
+        return true;
+    }
+
+    int Core::runGame(IGame *game)
+    {
         bool quit = false;
         Uint32 lastTime, currentTime;
         SDL_Event e;
-
-        Core::init(ren);
 
         auto sceneNode = game->initialize();
 
@@ -89,16 +107,16 @@ namespace Engine {
         while (!quit) {
 
             //First clear the renderer
-            SDL_SetRenderDrawColor(ren, 25, 42, 88, 255);
-            SDL_RenderClear(ren);
+            SDL_SetRenderDrawColor(m_renderer, 25, 42, 88, 255);
+            SDL_RenderClear(m_renderer);
 
             // Draw scene
-            sceneNode->draw(ren);
+            sceneNode->draw(m_renderer);
             // Let the game do additional drawing
-            game->draw(ren);
+            game->draw(m_renderer);
 
             //Update the screen
-            SDL_RenderPresent(ren);
+            SDL_RenderPresent(m_renderer);
 
             currentTime = SDL_GetTicks();
 
@@ -150,8 +168,8 @@ namespace Engine {
         delete m_uiManager;
         delete m_fontManager;
 
-        SDL_DestroyRenderer(ren);
-        SDL_DestroyWindow(win);
+        SDL_DestroyRenderer(m_renderer);
+        SDL_DestroyWindow(m_window);
         SDL_Quit();
 
         return 0;
@@ -196,6 +214,11 @@ namespace Engine {
 
     void Core::destroy(){
 
+    }
+
+    SDL_Window *Core::getWindow()
+    {
+        return m_window;
     }
 
 
