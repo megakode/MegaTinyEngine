@@ -34,7 +34,7 @@ namespace Engine {
         return true;
     }
 
-    bool Core::createWindowAndRenderer(int pixelWidth, int pixelHeight, int scaling, bool resizable)
+    bool Core::createWindowAndRenderer(int pixelWidth, int pixelHeight, int scaling, bool resizable, const std::string& title)
     {
         // Init SDL
 
@@ -52,7 +52,7 @@ namespace Engine {
             flags |= SDL_WINDOW_RESIZABLE;
         }
 
-        m_window = SDL_CreateWindow("SDL MegaMiniEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, pixelWidth*scaling, pixelHeight*scaling, flags );
+        m_window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, pixelWidth*scaling, pixelHeight*scaling, flags );
         if (m_window == nullptr)
         {
             std::cerr << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;

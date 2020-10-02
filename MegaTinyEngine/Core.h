@@ -35,7 +35,7 @@ namespace Engine {
         Core& operator=(const Core&) = delete;
 
         // Initialization
-        static bool createWindowAndRenderer(int pixelWidth, int pixelHeight, int scaling, bool resizable);
+        static bool createWindowAndRenderer(int pixelWidth, int pixelHeight, int scaling, bool resizable, const std::string& title);
         static int runGame(IGame *game);
 
         // Getters for the managers
