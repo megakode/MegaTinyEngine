@@ -48,17 +48,19 @@ namespace Engine {
         static FontManager* fontManager();
 
         static SDL_Window* getWindow();
+        static SDL_Renderer * getRenderer();
 
         // Settings
 
         static Rect getLogicalWindowSize();
 
+        static bool init();
+        static void destroy();
+
     private:
 
         Core() = default;
         ~Core() = default;
-
-        static bool init();
 
         static AnimationManager *m_animationManager;
         static TextureCache *m_textureCache;
@@ -70,7 +72,6 @@ namespace Engine {
         static SDL_Renderer *m_renderer;
         static SDL_Window *m_window;
 
-        static void destroy();
 
     };
 

@@ -16,8 +16,8 @@ namespace Engine {
     ActionManager* Core::m_actionManager;
     UIManager* Core::m_uiManager;
     FontManager* Core::m_fontManager;
-    SDL_Renderer* Core::m_renderer;
-    SDL_Window* Core::m_window;
+    SDL_Renderer* Core::m_renderer = nullptr;
+    SDL_Window* Core::m_window = nullptr;
 
     bool Core::init() {
 
@@ -32,6 +32,29 @@ namespace Engine {
         m_fontManager = new FontManager();
 
         return true;
+    }
+
+    void Core::destroy()
+    {
+        Core::inputManager()->setListener(nullptr);
+
+        delete m_animationManager;
+        delete m_textureCache;
+        delete m_inputManager;
+        delete m_collisionManager;
+        delete m_actionManager;
+        delete m_uiManager;
+        delete m_fontManager;
+
+        if(m_renderer != nullptr)
+        {
+            SDL_DestroyRenderer(m_renderer);
+        }
+        if(m_window != nullptr)
+        {
+            SDL_DestroyWindow(m_window);
+        }
+
     }
 
     bool Core::createWindowAndRenderer(int pixelWidth, int pixelHeight, int scaling, bool resizable, const std::string& title)
@@ -71,7 +94,6 @@ namespace Engine {
         }
 
         // Create renderer
-
         m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
 
         SDL_RenderSetLogicalSize(m_renderer, pixelWidth, pixelHeight);
@@ -94,8 +116,12 @@ namespace Engine {
 
     int Core::runGame(IGame *game)
     {
+        assert(m_window);   // Please call 'createWindowAndRenderer' first
+        assert(m_renderer); // Please call 'createWindowAndRenderer' first
+
         bool quit = false;
-        Uint32 lastTime, currentTime;
+        static Uint32 lastTime, currentTime;
+
         SDL_Event e;
 
         auto sceneNode = game->initialize();
@@ -158,18 +184,8 @@ namespace Engine {
             m_uiManager->handleInput(m_inputManager->getLastMousePosition());
         }
 
-        Core::inputManager()->setListener(nullptr);
+        destroy();
 
-        delete m_animationManager;
-        delete m_textureCache;
-        delete m_inputManager;
-        delete m_collisionManager;
-        delete m_actionManager;
-        delete m_uiManager;
-        delete m_fontManager;
-
-        SDL_DestroyRenderer(m_renderer);
-        SDL_DestroyWindow(m_window);
         SDL_Quit();
 
         return 0;
@@ -212,13 +228,14 @@ namespace Engine {
 
     // Private stuff
 
-    void Core::destroy(){
-
-    }
-
     SDL_Window *Core::getWindow()
     {
         return m_window;
+    }
+
+    SDL_Renderer *Core::getRenderer()
+    {
+        return m_renderer;
     }
 
 
