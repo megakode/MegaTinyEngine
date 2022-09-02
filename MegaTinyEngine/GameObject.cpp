@@ -174,4 +174,14 @@ namespace Engine {
         children.clear();
     }
 
+
+    bool GameObject::isVisible() const {
+        return m_isVisible;
+    }
+
+    void GameObject::setVisible(bool isVisible) {
+        m_isVisible = isVisible;
+    }
+
+
 }

@@ -31,7 +31,7 @@ namespace Engine {
 
     Sprite::Sprite( const std::shared_ptr<Texture>& texture )
     {
-        m_texture = texture;
+        setTexture(texture);
     }
 
     Sprite::~Sprite( ){
@@ -63,13 +63,14 @@ namespace Engine {
 
     const Rect& Sprite::textureRect()
     {
-        updateTextureRect(); // Just to be sure it is set. Otherwise it is set for the first time in update()
         return m_textureRect;
     }
 
-
     void Sprite::updateTextureRect()
     {
+        if(m_texture == nullptr){
+            return;
+        }
 
         if( m_currentAnimation == nullptr ){
 
@@ -91,19 +92,8 @@ namespace Engine {
     void Sprite::setCurrentFrame(int frameNum){
         if(m_currentAnimation!= nullptr){
             m_currentAnimation->currentFrame = std::max(0,std::min(frameNum,(int)m_currentAnimation->frames.size()-1));
+            updateTextureRect();
         }
-    }
-
-    ///
-    /// Visibility
-    ///
-
-    void Sprite::setVisible( bool visible ){
-        m_visible = visible;
-    }
-
-    bool Sprite::isVisible(){
-        return m_visible;
     }
 
     ///
@@ -139,7 +129,7 @@ namespace Engine {
 
     void Sprite::update(float timeSinceLast )
     {
-        updateTextureRect();
+        //updateTextureRect();
 
         // Set sprite position to our simulated kinematic body position
 
@@ -162,12 +152,14 @@ namespace Engine {
 
     void Sprite::draw(SDL_Renderer *renderer)
     {
-        if(m_visible)
+        if(m_isVisible)
         {
+            float scaledWidth = scaling.x * m_textureRect.width;
+            float scaledHeight = scaling.y * m_textureRect.height;
             //Draw the m_texture
             Vec2i wp = getWorldPosition();
             SDL_Rect srcRect = {m_textureRect.x,m_textureRect.y,m_textureRect.width,m_textureRect.height};
-            SDL_Rect dstRect = {wp.x, wp.y, m_textureRect.width,m_textureRect.height };
+            SDL_Rect dstRect = {wp.x, wp.y, (int)scaledWidth, (int)scaledHeight };
             SDL_Point p {0,0};
 
             SDL_SetTextureAlphaMod(m_texture->Get(), m_alpha*255);

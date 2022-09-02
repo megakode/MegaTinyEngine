@@ -22,4 +22,4 @@ namespace Engine
 
 }
 
-#endif RESOURCEFILE_H
+#endif

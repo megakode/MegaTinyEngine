@@ -13,15 +13,15 @@
 #endif
 
 float easeOutExpo(float x) {
-    return std::min(1.0, 1.0 - std::powf(2, -10 * x) );
+    return std::min(1.0, 1.0 - std::pow(2.0f, -10.0f * x) );
 }
 
 float easeInExpo(float x){
-    return std::max( 0.f , std::powf(2, 10 * x - 10) );
+    return std::max( 0.f , std::pow(2.0f, 10.0f * x - 10.0f) );
 }
 
 float easeInOutExpo(float x){
-    return std::max(0.0f, std::min(1.0f, x < 0.5f ? std::powf(2, 20 * x - 10) / 2.0f : (2 - std::powf(2, -20 * x + 10)) / 2.0f ));
+    return std::max(0.0f, std::min(1.0f, x < 0.5f ? std::pow(2.0f, 20.0f * x - 10) / 2.0f : (2 - std::pow(2.0f, -20.0f * x + 10.0f)) / 2.0f ));
 }
 
 float easeInBack( float t ) {

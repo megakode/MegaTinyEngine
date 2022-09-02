@@ -44,8 +44,10 @@ namespace Engine {
         int getX() const;
         int getY() const;
 
-
         Vec2i getWorldPosition();
+
+        void setVisible( bool visible );
+        bool isVisible() const;
 
         virtual void update(float ticksSinceLast );
         virtual void draw( SDL_Renderer *renderer );
@@ -59,6 +61,8 @@ namespace Engine {
 
         bool isWorldPositionDirty;
 
+        bool m_isVisible = true;
+
         std::list<std::shared_ptr<GameObject>> children;
         GameObject *parent = nullptr;
 
@@ -67,13 +71,13 @@ namespace Engine {
         ///
         void setWorldPositionIsDirtyRecursively( bool isDirty );
 
-
     private:
 
         Vec2i localPosition = {0,0};
         Vec2i worldPosition = {0,0};
 
         void removeChild(GameObject *object);
+
     };
 
 }

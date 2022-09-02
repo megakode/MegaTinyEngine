@@ -2,8 +2,8 @@
 // Created by Peter Bone on 19/06/2020.
 //
 
-#ifndef SDLTEST_BOXCOLLIDER_H
-#define SDLTEST_BOXCOLLIDER_H
+#ifndef _BOXCOLLIDER_H
+#define _BOXCOLLIDER_H
 
 
 #include <cstdint>

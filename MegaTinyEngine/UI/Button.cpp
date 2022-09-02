@@ -28,7 +28,11 @@ namespace Engine{
             assert(1);
         }
 
-        setTexture( Engine::Core::textureCache()->getTextureWithIdentifier(m_currentAnimation->textureId) );
+        auto texture = Engine::Core::textureCache()->getTextureWithIdentifier(m_currentAnimation->textureId);
+
+        assert(texture->Get());
+
+        setTexture( texture );
         setDefaultBBox();
 
         m_tag = tag;

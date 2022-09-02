@@ -61,13 +61,6 @@ namespace Engine {
 
         void setDebugDraw(bool enabled);
 
-        /// Set whether to draw the Sprite or not
-        /// \param visible draw if true
-        void setVisible(bool visible);
-
-        /// Whether the Sprite is drawn or not
-        bool isVisible();
-
         /// Set a sprites alpha value used when rendering the texture
         ///
         /// \param alpha value between 0.0-1.0
@@ -80,6 +73,8 @@ namespace Engine {
 
         /// Get the current textureRect. If an animation is playing this will change with the animation. If not, this will be the full size of the texture.
         const Rect & textureRect();
+
+        Vec2f scaling = {1.0f,1.0f};
 
         void setCurrentFrame(int frameNum);
 
@@ -94,7 +89,6 @@ namespace Engine {
         Rect m_textureRect;
         KinematicBody m_kinematicBody;
 
-        bool m_visible = true;
         bool m_kinematicsEnabled = false;
 
         bool m_debugDraw = false;
