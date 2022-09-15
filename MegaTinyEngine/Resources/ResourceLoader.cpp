@@ -114,7 +114,7 @@ bool ResourceLoader::loadResources(const std::string &jsonFileName)
     {
         std::filesystem::path relativeFileName(texture);
         std::string absoluteTextureFileName = basePath / relativeFileName;
-        // Core::textureCache()->loadTexture(absoluteTextureFileName,texture);
+        Core::textureCache()->loadTexture(absoluteTextureFileName, texture);
     }
 
     for (auto &fontDef : resourceFile.fontDefinitions)
