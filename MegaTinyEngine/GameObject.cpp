@@ -7,181 +7,153 @@
 //
 
 #include "GameObject.h"
-#include <iostream>
-#include <assert.h>
 #include <algorithm>
+#include <assert.h>
+#include <iostream>
 
 namespace Engine {
 
-    GameObject::GameObject()
-    {
+GameObject::GameObject() { }
 
+GameObject::~GameObject() { }
+
+/// ***************************************************************
+/// Children
+/// ***************************************************************
+
+void GameObject::addChild(const std::shared_ptr<GameObject>& child)
+{
+    // Maybe we should use a raw pointer for the parent instead (i've seen this recommended for trees, as there should never be a parentless child, so no dangling )
+    child->parent = this;
+    child->setWorldPositionIsDirtyRecursively(true);
+    children.push_back(child);
+}
+
+// ***************************************************************
+// Position
+// ***************************************************************
+
+void GameObject::setWorldPositionIsDirtyRecursively(bool isDirty)
+{
+    this->isWorldPositionDirty = isDirty;
+
+    for (auto child : children) {
+        child->setWorldPositionIsDirtyRecursively(isDirty);
     }
+}
 
-    GameObject::~GameObject()
-    {
-    }
+//
+// Set local position
+//
 
-    /// ***************************************************************
-    /// Children
-    /// ***************************************************************
+void GameObject::setLocalPosition(int x, int y)
+{
+    localPosition.x = x;
+    localPosition.y = y;
+    setWorldPositionIsDirtyRecursively(true);
+}
 
-    void GameObject::addChild(const std::shared_ptr<GameObject>& child)
-    {
-        // Maybe we should use a raw pointer for the parent instead (i've seen this recommended for trees, as there should never be a parentless child, so no dangling )
-        child->parent = this;
-        child->setWorldPositionIsDirtyRecursively(true);
-        children.push_back(child);
-    }
+//
+// Get world position
+//
 
-    // ***************************************************************
-    // Position
-    // ***************************************************************
-
-    void GameObject::setWorldPositionIsDirtyRecursively( bool isDirty )
-    {
-        this->isWorldPositionDirty = isDirty;
-
-        for ( auto child : children)
-        {
-            child->setWorldPositionIsDirtyRecursively(isDirty);
-        }
-    }
-
-    //
-    // Set local position
-    //
-
-    void GameObject::setLocalPosition( int x, int y )
-    {
-        localPosition.x = x;
-        localPosition.y = y;
-        setWorldPositionIsDirtyRecursively(true);
-    }
-
-    //
-    // Get world position
-    //
-
-    Vec2i GameObject::getWorldPosition()
-    {
-        if(!isWorldPositionDirty){
-            return worldPosition;
-        } else {
-            // If we are a root node: world position = local position
-            if(parent==nullptr){
-                isWorldPositionDirty = false;
-                worldPosition = localPosition;
-                return worldPosition;
-            }
-
-            Vec2i parentPos = parent->getWorldPosition();
-
-            worldPosition = { parentPos.x + localPosition.x , parentPos.y + localPosition.y};
+Vec2i GameObject::getWorldPosition()
+{
+    if (!isWorldPositionDirty) {
+        return worldPosition;
+    } else {
+        // If we are a root node: world position = local position
+        if (parent == nullptr) {
             isWorldPositionDirty = false;
+            worldPosition = localPosition;
             return worldPosition;
         }
+
+        Vec2i parentPos = parent->getWorldPosition();
+
+        worldPosition = { parentPos.x + localPosition.x, parentPos.y + localPosition.y };
+        isWorldPositionDirty = false;
+        return worldPosition;
     }
+}
 
-    const Vec2i &GameObject::getLocalPosition() const {
-        return localPosition;
+const Vec2i& GameObject::getLocalPosition() const { return localPosition; }
+
+int GameObject::getX() const { return localPosition.x; }
+
+int GameObject::getY() const { return localPosition.y; }
+
+//
+// Set local position
+//
+
+void GameObject::setLocalPosition(const Vec2i& position) { setLocalPosition(position.x, position.y); }
+
+///
+/// Update
+///
+
+void GameObject::update(float ticksSinceLast)
+{
+    // Override in subclasses
+    for (const auto& child : children) {
+        // A child might become null during iteration of children, as one child might remove another during update.
+        if (child != nullptr)
+            child->update(ticksSinceLast);
     }
+}
 
+///
+/// Draw
+///
 
-    int GameObject::getX() const
-    {
-        return localPosition.x;
+void GameObject::draw(SDL_Renderer* renderer)
+{
+    assert(renderer);
+    for (const auto& child : children) {
+        child->draw(renderer);
     }
+}
 
-    int GameObject::getY() const
-    {
-        return localPosition.y;
-    }
+///
+/// Handle Event
+///
 
-    //
-    // Set local position
-    //
-
-    void GameObject::setLocalPosition(const Vec2i &position)
-    {
-        setLocalPosition(position.x,position.y);
-    }
-
-    ///
-    /// Update
-    ///
-
-    void GameObject::update(float ticksSinceLast)
-    {
-        // Override in subclasses
-        for( const auto& child : children ){
-            // A child might become null during iteration of children, as one child might remove another during update.
-            if(child!=nullptr)child->update(ticksSinceLast);
+bool GameObject::handleEvent(const InputEvent& event)
+{
+    for (auto& iter : children) {
+        if (iter.get()->handleEvent(event)) {
+            return true;
         }
     }
+    return false;
+}
 
-    ///
-    /// Draw
-    ///
+const std::list<std::shared_ptr<GameObject>>& GameObject::getChildren() { return children; }
 
-    void GameObject::draw( SDL_Renderer *renderer )
-    {
-        assert(renderer);
-        for( const auto& child : children ){
-            child->draw(renderer);
-        }
+void GameObject::removeChild(GameObject* object)
+{
+    assert(object);
+    auto it = std::find_if(children.begin(), children.end(), [&](const auto& val) { return val.get() == object; });
+
+    if (it != children.end()) {
+        children.erase(it);
+    } else {
+        // not found!?
     }
+}
 
-    ///
-    /// Handle Event
-    ///
-
-    bool GameObject::handleEvent(const InputEvent& event) {
-        for(auto & iter : children){
-            if(iter.get()->handleEvent(event)){
-                return true;
-            }
-        }
-        return false;
+void GameObject::removeFromParent()
+{
+    if (parent != nullptr) {
+        parent->removeChild(this);
     }
+}
 
-    const std::list<std::shared_ptr<GameObject>>& GameObject::getChildren() {
-        return children;
-    }
+void GameObject::removeAllChildren() { children.clear(); }
 
+bool GameObject::isVisible() const { return m_isVisible; }
 
-    void GameObject::removeChild( GameObject *object ){
-        assert(object);
-        auto it = std::find_if(children.begin(),children.end(),
-                    [&](const auto& val){ return val.get() == object; } );
-
-        if(it != children.end()){
-            children.erase(it);
-        } else {
-            // not found!?
-        }
-
-    }
-
-    void GameObject::removeFromParent() {
-        if(parent!= nullptr){
-            parent->removeChild(this);
-        }
-    }
-
-    void GameObject::removeAllChildren()
-    {
-        children.clear();
-    }
-
-
-    bool GameObject::isVisible() const {
-        return m_isVisible;
-    }
-
-    void GameObject::setVisible(bool isVisible) {
-        m_isVisible = isVisible;
-    }
-
+void GameObject::setVisible(bool isVisible) { m_isVisible = isVisible; }
 
 }

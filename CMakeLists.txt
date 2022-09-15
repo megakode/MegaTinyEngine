@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(MTEngine)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} C:/Users/peter/Code/libs/SDL2-2.0.12/ C:/Users/peter/Code/libs/SDL2_image-2.0.5/)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
@@ -12,7 +12,7 @@ include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS})
 
 ADD_LIBRARY(MTEngine STATIC
         MegaTinyEngine/Collision/BoxCollider.cpp
-		MegaTinyEngine/Collision/BoxCollider.h
+        MegaTinyEngine/Collision/BoxCollider.h
         MegaTinyEngine/Collision/CollisionManager.cpp
         MegaTinyEngine/Collision/CollisionManager.h
         MegaTinyEngine/Resources/JSONSerialization.h
@@ -45,7 +45,7 @@ ADD_LIBRARY(MTEngine STATIC
         MegaTinyEngine/Texture.cpp
         MegaTinyEngine/Texture.hpp
         MegaTinyEngine/TextureCache.cpp
-        MegaTinyEngine/TextureCache.h MegaTinyEngine/IGame.h MegaTinyEngine/Actions/ActionManager.cpp MegaTinyEngine/Actions/ActionManager.h MegaTinyEngine/Actions/Action.cpp MegaTinyEngine/Actions/Action.h MegaTinyEngine/Actions/FadeAction.cpp MegaTinyEngine/Actions/FadeAction.h MegaTinyEngine/Actions/MoveAction.cpp MegaTinyEngine/Actions/MoveAction.h MegaTinyEngine/Actions/Easings.h MegaTinyEngine/Actions/DestroyAction.cpp MegaTinyEngine/Actions/DestroyAction.h MegaTinyEngine/Collision/CollisionInfo.cpp MegaTinyEngine/Collision/CollisionInfo.h MegaTinyEngine/UI/Button.cpp MegaTinyEngine/UI/Button.h MegaTinyEngine/Scene.cpp MegaTinyEngine/Scene.h MegaTinyEngine/Layer.cpp MegaTinyEngine/Layer.h MegaTinyEngine/Base.cpp MegaTinyEngine/Base.h MegaTinyEngine/UI/UIManager.cpp MegaTinyEngine/UI/UIManager.h MegaTinyEngine/UI/FontManager.cpp MegaTinyEngine/UI/FontManager.h MegaTinyEngine/UI/FontDefinition.h)
+        MegaTinyEngine/TextureCache.h MegaTinyEngine/IGame.h MegaTinyEngine/Actions/ActionManager.cpp MegaTinyEngine/Actions/ActionManager.h MegaTinyEngine/Actions/Action.cpp MegaTinyEngine/Actions/Action.h MegaTinyEngine/Actions/FadeAction.cpp MegaTinyEngine/Actions/FadeAction.h MegaTinyEngine/Actions/MoveAction.cpp MegaTinyEngine/Actions/MoveAction.h MegaTinyEngine/Actions/Easings.h MegaTinyEngine/Actions/DestroyAction.cpp MegaTinyEngine/Actions/DestroyAction.h MegaTinyEngine/Collision/CollisionInfo.cpp MegaTinyEngine/Collision/CollisionInfo.h MegaTinyEngine/UI/Button.cpp MegaTinyEngine/UI/Button.h MegaTinyEngine/Scene.cpp MegaTinyEngine/Scene.h MegaTinyEngine/Layer.cpp MegaTinyEngine/Layer.h MegaTinyEngine/Base.cpp MegaTinyEngine/Base.h MegaTinyEngine/UI/UIManager.cpp MegaTinyEngine/UI/UIManager.h MegaTinyEngine/UI/FontManager.cpp MegaTinyEngine/UI/FontManager.h MegaTinyEngine/UI/FontDefinition.h MegaTinyEngine/Resources/ResourcePathUtils.cpp MegaTinyEngine/Resources/ResourcePathUtils.h)
 
 target_include_directories(MTEngine PRIVATE .)
 
