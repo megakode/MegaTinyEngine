@@ -22,9 +22,6 @@ bool ResourceLoader::loadResourceFile(const std::string &jsonFileName, ResourceF
 {
 
     json json;
-    std::string resourceFolder = ResourcePathUtils::getResourcePath();
-
-    // ResourcePathUtils::convertPathSeparatorsToCurrentPlatform(fullPath);
     std::filesystem::path jsonFilePath(jsonFileName);
     std::ifstream inputFile(jsonFileName);
 
