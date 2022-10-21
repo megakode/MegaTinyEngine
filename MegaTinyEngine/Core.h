@@ -36,7 +36,7 @@ namespace Engine {
 
         // Initialization
         static bool createWindowAndRenderer(int pixelWidth, int pixelHeight, int scaling, bool resizable, const std::string& title);
-        static int runGame(IGame *game);
+        static int runGame(IGame *game, int framePerSecond = 60);
 
         // Getters for the managers
 

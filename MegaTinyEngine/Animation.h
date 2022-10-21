@@ -5,25 +5,30 @@
 #ifndef SDLTEST_ANIMATION_H
 #define SDLTEST_ANIMATION_H
 
-#include <vector>
-#include <cassert>
 #include "SpriteFrame.h"
+#include <cassert>
+#include <string>
+#include <vector>
 
-namespace Engine{
+namespace Engine
+{
 
-enum class AnimationType {
+enum class AnimationType
+{
     Manual,
     PlayOnce,
     Loop,
     PingPong
 };
 
-enum class AnimationDirection {
+enum class AnimationDirection
+{
     Forward,
     Reverse
 };
 
-struct SpriteAnimation {
+struct SpriteAnimation
+{
 
     AnimationType type = AnimationType::PingPong;
     AnimationDirection direction = AnimationDirection::Forward;
@@ -40,19 +45,22 @@ struct SpriteAnimation {
 
     std::vector<SpriteFrame> frames;
 
-    SpriteFrame* getCurrentFrame(){
+    SpriteFrame *getCurrentFrame()
+    {
         assert(currentFrame < frames.size());
         return &frames[currentFrame];
     }
 
-    void generateFrames(int numberOfFrames, int startx, int starty, int width, int height ){
+    void generateFrames(int numberOfFrames, int startx, int starty, int width, int height)
+    {
         this->numberOfFrames = numberOfFrames;
-        for(int i = 0 ; i < numberOfFrames ; i++ ){
-            frames.emplace_back(startx+width*i,starty,width,height);
+        for (int i = 0; i < numberOfFrames; i++)
+        {
+            frames.emplace_back(startx + width * i, starty, width, height);
         }
     }
 };
 
-}
+} // namespace Engine
 
-#endif //SDLTEST_ANIMATION_H
+#endif // SDLTEST_ANIMATION_H

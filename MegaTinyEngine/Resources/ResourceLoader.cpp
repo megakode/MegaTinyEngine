@@ -18,9 +18,14 @@ using json = nlohmann::json;
 namespace Engine
 {
 
+/**
+ * Loads and parses a JSON file into a ResourceFile struct
+ * @param jsonFileName The absolute path for the input JSON file
+ * @param resourceFile ResourceFile struct to output to
+ * @return
+ */
 bool ResourceLoader::loadResourceFile(const std::string &jsonFileName, ResourceFile &resourceFile)
 {
-
     json json;
     std::filesystem::path jsonFilePath(jsonFileName);
     std::ifstream inputFile(jsonFileName);
@@ -88,6 +93,8 @@ bool ResourceLoader::loadResourceFile(const std::string &jsonFileName, ResourceF
         }
     }
 
+    resourceFile.baseDirectory = jsonFilePath.parent_path();
+
     return true;
 }
 
@@ -101,7 +108,6 @@ bool ResourceLoader::loadResources(const std::string &jsonFileName)
     }
 
     std::filesystem::path jsonFilePath(jsonFileName);
-    std::filesystem::path basePath = jsonFilePath.parent_path();
 
     // Add loaded data to core managers
 
@@ -110,14 +116,14 @@ bool ResourceLoader::loadResources(const std::string &jsonFileName)
     for (auto &texture : resourceFile.textureFileNames)
     {
         std::filesystem::path relativeFileName(texture);
-        std::string absoluteTextureFileName = basePath / relativeFileName;
+        std::string absoluteTextureFileName = resourceFile.baseDirectory / relativeFileName;
         Core::textureCache()->loadTexture(absoluteTextureFileName, texture);
     }
 
     for (auto &fontDef : resourceFile.fontDefinitions)
     {
         std::filesystem::path relativeFileName(fontDef.texture);
-        std::string absoluteTextureFileName = basePath / relativeFileName;
+        std::string absoluteTextureFileName = resourceFile.baseDirectory / relativeFileName;
         Core::textureCache()->loadTexture(absoluteTextureFileName, fontDef.texture);
         Core::fontManager()->addFont(fontDef);
     }
@@ -128,6 +134,8 @@ bool ResourceLoader::loadResources(const std::string &jsonFileName)
     {
         Core::animationManager()->addAnimationPreset(animation.first, animation.second);
     }
+
+    return true;
 }
 
 /// Save animations to filename
