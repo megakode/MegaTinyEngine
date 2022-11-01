@@ -1,6 +1,5 @@
 //
 //  Sprite.cpp
-//  SDLTest
 //
 //  Created by Peter Bone on 20/05/2020.
 //  Copyright © 2020 megakode. All rights reserved.

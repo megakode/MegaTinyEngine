@@ -114,7 +114,7 @@ namespace Engine {
         return true;
     }
 
-    int Core::runGame(IGame *game, int framePerSecond)
+    int Core::runGame(IGame *game)
     {
         assert(m_window);   // Please call 'createWindowAndRenderer' first
         assert(m_renderer); // Please call 'createWindowAndRenderer' first
@@ -181,12 +181,13 @@ namespace Engine {
 
             // Get the last mouse position instead of doing it pr. SDL event, so we reduce the heavy uiManager call to once pr. frame
             m_uiManager->handleInput(m_inputManager->getLastMousePosition());
-
+            /*
             uint32_t currentFrameElapsedTime = (SDL_GetTicks() - currentTime) / 1000;
             uint32_t targetFrameTime = 1000 / framePerSecond;
             if(currentFrameElapsedTime < targetFrameTime){
                 SDL_Delay(  targetFrameTime-currentFrameElapsedTime );
             }
+             */
 
         }
 

@@ -16,7 +16,9 @@ add_subdirectory(MegaTinyEngine)
 target_include_directories(${PROJECT_NAME} PRIVATE .)
 target_include_directories(${PROJECT_NAME} INTERFACE .)
 target_include_directories(${PROJECT_NAME} PRIVATE Vendor)
-
-
 target_link_libraries(${PROJECT_NAME} SDL2::Main SDL2::Image)
 
+add_executable(example_basic)
+target_link_libraries(example_basic ${PROJECT_NAME})
+target_sources(example_basic PRIVATE examples/example_basic.cpp)
+target_include_directories(example_basic PRIVATE .)

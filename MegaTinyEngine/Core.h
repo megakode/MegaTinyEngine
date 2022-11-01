@@ -35,8 +35,25 @@ namespace Engine {
         Core& operator=(const Core&) = delete;
 
         // Initialization
+
+        /**
+         * Create the window that the game will be shown in.
+         * @param pixelWidth Horizontal resolution
+         * @param pixelHeight Vertical resolution
+         * @param scaling Scale the pixels by this factor
+         * @param resizable Whether the window will be resizable
+         * @param title Window title
+         * @return Whether the window could be created
+         */
         static bool createWindowAndRenderer(int pixelWidth, int pixelHeight, int scaling, bool resizable, const std::string& title);
-        static int runGame(IGame *game, int framePerSecond = 60);
+
+        /**
+         * Enter a continuous game run loop.
+         * @param game The game to run
+         * @param framePerSecond not used
+         * @return
+         */
+        static int runGame(IGame *game);
 
         // Getters for the managers
 
@@ -54,13 +71,14 @@ namespace Engine {
 
         static Rect getLogicalWindowSize();
 
-        static bool init();
         static void destroy();
 
     private:
 
         Core() = default;
         ~Core() = default;
+
+        static bool init();
 
         static AnimationManager *m_animationManager;
         static TextureCache *m_textureCache;

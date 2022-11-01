@@ -11,6 +11,19 @@
 
 namespace Engine {
 
+    /**
+     * The primary interface a game must implement, for the engine to be able to run it.
+     * The engines main run can be illustrated with the following pseudo code:
+     *
+     * game->initialize()
+     * while(!quit) {
+     *   game->update()
+     *   game->draw()
+     *   while(input_events_available)
+     *      game->handleInput(next_input_event)
+     * }
+     *
+     */
     class IGame : public IInputListener {
 
     public:
