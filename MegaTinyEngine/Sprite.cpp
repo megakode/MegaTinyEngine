@@ -128,7 +128,7 @@ namespace Engine {
 
     void Sprite::update(float timeSinceLast )
     {
-        //updateTextureRect();
+        updateTextureRect(); // removing this will break animation
 
         // Set sprite position to our simulated kinematic body position
 

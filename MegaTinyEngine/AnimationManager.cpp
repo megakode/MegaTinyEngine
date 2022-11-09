@@ -27,10 +27,10 @@ std::shared_ptr<SpriteAnimation> AnimationManager::createAnimation(const std::st
         return nullptr;
     }
 
-    SpriteAnimation animation = m_animationPresets[preset_id];
+    //SpriteAnimation animation = m_animationPresets[preset_id];
     std::shared_ptr<SpriteAnimation> ptr = std::make_shared<SpriteAnimation>(m_animationPresets[preset_id]);
 
-    assert(animation.frames.size() != 0);
+    //assert(animation.frames.size() != 0);
 
     if(addToList){
         m_animations.push_back(ptr);
@@ -116,7 +116,7 @@ void AnimationManager::updateAnimations( float deltaTime ) {
                     else if(animation->type == AnimationType::PingPong)
                     {
                         animation->direction = AnimationDirection::Forward;
-                        animation->currentFrame = 0;
+                        animation->currentFrame = 1;
 
                         continue;
                     }
