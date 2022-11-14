@@ -1,0 +1,19 @@
+{ "frames": [
+   {
+    "filename": "arcade_platformerV2.png",
+    "frame": { "x": 0, "y": 0, "w": 352, "h": 320 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 352, "h": 320 },
+    "sourceSize": { "w": 352, "h": 320 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.40-x64",
+  "format": "RGBA8888",
+  "size": { "w": 352, "h": 320 },
+  "scale": "1"
+ }
+}
