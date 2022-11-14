@@ -20,6 +20,7 @@ class ExampleGame : public Engine::IGame
         auto top_texture = Core::textureCache()->loadTexture("../examples/resources/sky_top.png","sky_top");
         auto cloud_texture = Core::textureCache()->loadTexture("../examples/resources/sky.png","sky");
         auto hills_texture = Core::textureCache()->loadTexture("../examples/resources/hills.png","hills");
+        auto grass_texture = Core::textureCache()->loadTexture("../examples/resources/grass_single.png","grass");
 
         auto scene = std::make_shared<Scene>();
 
@@ -39,6 +40,10 @@ class ExampleGame : public Engine::IGame
         hills_layer->setLocalPosition(0, Core::getLogicalWindowSize().height- hills_texture->getHeight());
         hills_texture_width = hills_texture->getWidth();
 
+        grass_layer = scene->addLayer(4,grass_texture,Layer::BackgroundTextureStyle::TileHorizontal);
+        grass_layer->setLocalPosition(0, Core::getLogicalWindowSize().height- grass_texture->getHeight());
+        grass_texture_width = grass_texture->getWidth();
+
         // Create a layer for adding our sprite(s)
         scene->addLayer(FOREGROUND_LAYER);
 
@@ -55,7 +60,7 @@ class ExampleGame : public Engine::IGame
         // Create a sprite using the animation we just created
 
         slime = Sprite::createWithAnimation(ANIM_SLIME_WALK);
-        slime->setLocalPosition(Core::getLogicalWindowSize().width/2, Core::getLogicalWindowSize().height-20);
+        slime->setLocalPosition(Core::getLogicalWindowSize().width/2, Core::getLogicalWindowSize().height-30);
         scene->addObjectToLayer(slime,FOREGROUND_LAYER);
 
         return scene;
@@ -64,14 +69,19 @@ class ExampleGame : public Engine::IGame
     void update( float deltaTime ) override  {
         // Scroll the clouds
         static float cloud_scroll = 0;
-        cloud_scroll += 0.15;
+        cloud_scroll += 0.08;
         if(cloud_scroll >= clouds_texture_width) cloud_scroll = 0;
         cloud_layer->setLocalPosition(-clouds_texture_width+(int)cloud_scroll, cloud_layer->getY());
         // Scroll the hills
         static float hills_scroll = 0;
-        hills_scroll += 0.5;
+        hills_scroll += 0.3;
         if(hills_scroll >= hills_texture_width) hills_scroll = 0;
         hills_layer->setLocalPosition(-hills_texture_width+(int)hills_scroll, hills_layer->getY());
+        // Scroll the grass
+        static float grass_scroll = 0;
+        grass_scroll += 0.6;
+        if(grass_scroll >= grass_texture_width) grass_scroll = 0;
+        grass_layer->setLocalPosition(-grass_texture_width+(int)grass_scroll, grass_layer->getY());
     };
 
     void draw( SDL_Renderer *renderer ) override {
@@ -88,8 +98,10 @@ class ExampleGame : public Engine::IGame
     Engine::SpritePtr slime;
     std::shared_ptr<Layer> cloud_layer;
     std::shared_ptr<Layer> hills_layer;
+    std::shared_ptr<Layer> grass_layer;
     int clouds_texture_width;
     int hills_texture_width;
+    int grass_texture_width;
 
 
 };
