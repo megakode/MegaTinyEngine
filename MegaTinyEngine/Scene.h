@@ -5,10 +5,10 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include "MegaTinyEngine/GameObjects/GameObject.h"
-#include "MegaTinyEngine/GameObjects/Layer.h"
 #include <list>
 #include <memory>
+#include "GameObjects/GameObject.h"
+#include "GameObjects/Layer.h"
 
 namespace Engine {
     class Scene {
@@ -20,13 +20,15 @@ namespace Engine {
          * @return Shared pointer to newly created layer
          */
         std::shared_ptr<Layer> addLayer( int tag );
+
         /**
          * Add an empty layer to the scene
          * @param layerId Integer used to identify the layer
-         * @param backgroundColor
+         * @param backgroundColor Color used to fill the entire layer. Note all layers added before this layer will not be visible if the color is fully opaque.
          * @return Shared pointer to newly created layer
          */
-        std::shared_ptr<Layer> addBackgroundLayer(int layerId, ColorRGBA8 backgroundColor);
+        std::shared_ptr<Layer> addLayer(int layerId, ColorRGBA8 backgroundColor);
+
         /**
          * Add an empty layer to the scene
          * @param layerId Integer used to identify the layer

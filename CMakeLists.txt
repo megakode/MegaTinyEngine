@@ -27,4 +27,4 @@ endmacro()
 
 AddExample(example_basic)
 AddExample(example_animation)
-AddExample(example_game)
+AddExample(example_layers)
