@@ -13,17 +13,17 @@ target_sources(MTEngine PUBLIC
         UI/FontManager.cpp
         UI/Button.cpp
         AnimationManager.cpp
-        Camera.cpp
+        GameObjects/Camera.cpp
         Core.cpp
-        GameObject.cpp
+        GameObjects/GameObject.cpp
         InputManager.cpp
         KinematicBody.cpp
         Settings.cpp
-        Sprite.cpp
+        GameObjects/Sprite.cpp
         TextNode.cpp
         Texture.cpp
         TextureCache.cpp
         Scene.cpp
-        Layer.cpp
+        GameObjects/Layer.cpp
         Base.cpp
 )

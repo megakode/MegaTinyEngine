@@ -6,7 +6,7 @@
 #define SDLTEST_TEXTNODE_H
 
 
-#include "GameObject.h"
+#include "MegaTinyEngine/GameObjects/GameObject.h"
 #include "Texture.hpp"
 
 namespace Engine {

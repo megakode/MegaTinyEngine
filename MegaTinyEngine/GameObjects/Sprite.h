@@ -9,18 +9,19 @@
 #ifndef Sprite_h
 #define Sprite_h
 
-#include <memory>
-#include <utility>
-#include <stdio.h>
-#include <map>
-#include "Rect.h"
-#include "Collision/BoxCollider.h"
-#include "SDL.h"
 
-#include "Texture.hpp"
-#include "GameObject.h"
-#include "AnimationManager.h"
-#include "KinematicBody.h"
+#include "SDL.h"
+#include <map>
+#include <memory>
+#include <stdio.h>
+#include <utility>
+
+#include "MegaTinyEngine/Collision/BoxCollider.h"
+#include "MegaTinyEngine/Base.h"
+#include "MegaTinyEngine/AnimationManager.h"
+#include "MegaTinyEngine/GameObjects/GameObject.h"
+#include "MegaTinyEngine/KinematicBody.h"
+#include "MegaTinyEngine/Texture.hpp"
 
 namespace Engine {
 

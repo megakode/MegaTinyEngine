@@ -5,9 +5,10 @@
 #ifndef SDLTEST_CAMERA_H
 #define SDLTEST_CAMERA_H
 
-#include <MegaTinyEngine/Actions/MoveAction.h>
+#include "MegaTinyEngine/Base.h"
 #include "GameObject.h"
-#include "KinematicBody.h"
+#include "MegaTinyEngine/Actions/MoveAction.h"
+#include "MegaTinyEngine/KinematicBody.h"
 
 // God forklaring af simpel camera formel:
 // https://gamedev.stackexchange.com/a/123844

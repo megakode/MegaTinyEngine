@@ -5,17 +5,17 @@
 #ifndef SDLTEST_CORE_H
 #define SDLTEST_CORE_H
 
-
-#include <MegaTinyEngine/Actions/ActionManager.h>
-#include <MegaTinyEngine/UI/UIManager.h>
-#include <MegaTinyEngine/UI/FontManager.h>
-#include "Collision/CollisionManager.h"
 #include "AnimationManager.h"
-#include "TextureCache.h"
-#include "Sprite.h"
-#include "InputManager.h"
-#include "Resources/ResourceLoader.h"
+#include "Base.h"
+#include "Collision/CollisionManager.h"
 #include "IGame.h"
+#include "InputManager.h"
+#include "MegaTinyEngine/GameObjects/Sprite.h"
+#include "Resources/ResourceLoader.h"
+#include "TextureCache.h"
+#include <MegaTinyEngine/Actions/ActionManager.h>
+#include <MegaTinyEngine/UI/FontManager.h>
+#include <MegaTinyEngine/UI/UIManager.h>
 
 namespace Engine {
 

@@ -5,10 +5,9 @@
 #ifndef SDLTEST_COLLISIONMANAGER_H
 #define SDLTEST_COLLISIONMANAGER_H
 
-
+#include "MegaTinyEngine/Base.h"
+#include "MegaTinyEngine/GameObjects/Sprite.h"
 #include <vector>
-#include "../Sprite.h"
-#include "../Rect.h"
 
 namespace Engine {
 

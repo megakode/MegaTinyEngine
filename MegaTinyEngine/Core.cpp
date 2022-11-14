@@ -2,10 +2,11 @@
 // Created by Peter Bone on 06/06/2020.
 //
 
-#include <iostream>
-#include "SDL_image.h"
 #include "Core.h"
-#include "Sprite.h"
+#include "Base.h"
+#include "MegaTinyEngine/GameObjects/Sprite.h"
+#include "SDL_image.h"
+#include <iostream>
 
 namespace Engine {
 

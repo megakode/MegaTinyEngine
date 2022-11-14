@@ -6,7 +6,7 @@
 #define SDLTEST_ACTION_H
 
 #include "../Base.h"
-#include "../Sprite.h"
+#include "MegaTinyEngine/GameObjects/Sprite.h"
 
 namespace Engine
 {

@@ -2,11 +2,12 @@
 // Created by Peter Bone on 14/06/2020.
 //
 
+#include "Camera.h"
+#include "MegaTinyEngine/Base.h"
+#include "MegaTinyEngine/Actions/MoveAction.h"
+#include "MegaTinyEngine/Core.h"
 #include <cmath>
 #include <iostream>
-#include "Camera.h"
-#include "Core.h"
-#include "Actions/MoveAction.h"
 void Engine::Camera::update(float ticksSinceLast) {
 
     int minAllowedX =  (Core::getLogicalWindowSize().width - m_bounds.width - m_bounds.x);
@@ -145,6 +146,6 @@ bool Engine::Camera::handleEvent(const Engine::InputEvent &event) {
     //return false;
  }
 
-void Engine::Camera::setScrollingBounds(const Engine::Rect& rect) {
+void Engine::Camera::setScrollingBounds(const Rect& rect) {
     m_bounds = rect;
 }

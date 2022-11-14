@@ -5,9 +5,9 @@
 #ifndef SDLTEST_FADEACTION_H
 #define SDLTEST_FADEACTION_H
 
-#include <memory>
-#include "../Sprite.h"
 #include "Action.h"
+#include "MegaTinyEngine/GameObjects/Sprite.h"
+#include <memory>
 
 namespace Engine {
 

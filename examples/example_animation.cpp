@@ -35,7 +35,7 @@ class ExampleGame : public Engine::IGame
        auto anim = SpriteAnimation();
        anim.textureId = "slime";
        anim.direction = AnimationDirection::Forward;
-       anim.ticksPrFrame = 300;
+       anim.ticksPrFrame = 100;
        anim.generateFrames(3,0,0,16,14);
        anim.type = AnimationType::PingPong;
        Core::animationManager()->addAnimationPreset("slime_animation",anim);

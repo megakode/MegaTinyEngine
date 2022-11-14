@@ -3,11 +3,23 @@
 //
 
 #include "Scene.h"
-#include "Layer.h"
+#include "MegaTinyEngine/GameObjects/Layer.h"
 
-void Engine::Scene::addLayer(int layerId )
+namespace Engine {
+
+std::shared_ptr<Layer> Engine::Scene::addLayer(int layerId, std::shared_ptr<Texture> backgroundTexture, Layer::BackgroundTextureStyle style)
 {
-    m_layers.emplace_back(std::make_shared<Layer>(layerId));
+    return m_layers.emplace_back(std::make_shared<Layer>(layerId,backgroundTexture,style));
+}
+
+std::shared_ptr<Layer> Engine::Scene::addBackgroundLayer( int layerId, ColorRGBA8 backgroundColor )
+{
+    return m_layers.emplace_front(std::make_shared<Layer>(layerId,backgroundColor));
+}
+
+std::shared_ptr<Layer> Engine::Scene::addLayer(int layerId )
+{
+    return m_layers.emplace_back(std::make_shared<Layer>(layerId));
 }
 
 void Engine::Scene::addLayerAboveLayer(int layerToAddTag, int aboveLayerTag)
@@ -73,3 +85,5 @@ void Engine::Scene::handleInput(const Engine::InputEvent &event)
     }
 }
 
+
+}

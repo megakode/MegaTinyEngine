@@ -5,10 +5,11 @@
 //  Copyright © 2020 megakode. All rights reserved.
 //
 
-#include <iostream>
 #include "Sprite.h"
+#include "MegaTinyEngine/Base.h"
+#include "MegaTinyEngine/Core.h"
 #include "SDL.h"
-#include "Core.h"
+#include <iostream>
 
 namespace Engine {
 

@@ -9,13 +9,13 @@
 #ifndef GameObject_h
 #define GameObject_h
 
-#include <memory>
-#include <vector>
-#include <string>
-#include <list>
+#include "MegaTinyEngine/Base.h"
+#include "MegaTinyEngine/InputManager.h"
 #include "SDL.h"
-#include "InputManager.h"
-#include "Base.h"
+#include <list>
+#include <memory>
+#include <string>
+#include <vector>
 
 namespace Engine {
 
