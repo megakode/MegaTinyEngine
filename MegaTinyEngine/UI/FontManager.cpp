@@ -6,7 +6,7 @@
 
 namespace Engine
 {
-    void FontManager::addFont( Engine::FontDefinition &fontDef )
+    void FontManager::addFont(const FontDefinition& fontDef )
     {
         fonts.emplace_back(fontDef);
     }

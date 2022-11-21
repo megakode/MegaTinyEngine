@@ -16,7 +16,7 @@ namespace Engine
 
             FontManager() = default;
 
-            void addFont( FontDefinition& fontDef );
+            void addFont(const FontDefinition& fontDef );
 
             /**
              * Gets the first font in the list

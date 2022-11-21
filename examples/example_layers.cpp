@@ -13,7 +13,7 @@ class ExampleGame : public Engine::IGame
 
     ExampleGame() = default;
 
-    std::shared_ptr<Engine::Scene> initialize() override
+    std::shared_ptr<Engine::Scene> createScene() override
     {
 
         Core::textureCache()->loadTexture("../examples/resources/slime.png","slime");

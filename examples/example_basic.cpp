@@ -16,7 +16,7 @@ class ExampleGame : public Engine::IGame
      * A scene is basically like one or more pieces of paper (called layers in the engine) which will be displayed on top of each other.
      * All objects you create can be added to one of the scenes layers, and will automatically be drawn when the layer is drawn.
      */
-    std::shared_ptr<Engine::Scene> initialize() override
+    std::shared_ptr<Engine::Scene> createScene() override
     {
 
         // First tell the texture cache to load the slime texture

@@ -61,7 +61,6 @@ namespace Engine
         j.at("texture").get_to(font.texture);
         j.at("charWidth").get_to(font.charWidth);
         j.at("charHeight").get_to(font.charHeight);
-        j.at("numStyles").get_to(font.numStyles);
     }
 
 }

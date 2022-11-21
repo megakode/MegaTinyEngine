@@ -15,10 +15,15 @@ namespace Engine {
         m_character_height = (int)characterHeight;
     }
 
-    std::shared_ptr<TextNode> TextNode::create()
+    std::shared_ptr<TextNode> TextNode::createWithTexture(const std::string &textureName, char firstCharacter, char lastCharacter, unsigned int characterWidth, unsigned int characterHeight)
+    {
+        return std::make_shared<TextNode>(textureName,firstCharacter,lastCharacter,characterWidth,characterHeight);
+    }
+
+    std::shared_ptr<TextNode> TextNode::createWithDefaultFont()
     {
         auto font = Core::fontManager()->getDefaultFont();
-        return std::make_shared<TextNode>(font.texture,' ','z',font.charWidth,font.charHeight);
+        return std::make_shared<TextNode>(font.texture,font.firstCharacter,font.lastCharacter,font.charWidth,font.charHeight);
     }
 
 
@@ -30,10 +35,18 @@ namespace Engine {
 
         //Draw the m_texture
         Vec2i wp = getWorldPosition();
+        int startx = wp.x;
+        int starty = wp.y;
+
+        if(alignment == TextNodeAlignment::Center){
+            startx -= m_text.size() * m_character_width / 2;
+        } else if(alignment == TextNodeAlignment::Right) {
+            startx -= m_text.size() * m_character_width;
+        }
 
         for( int i = 0 ; i < m_text.size() ; i++ ){
 
-            SDL_Rect dstRect = {wp.x+i*m_character_width, wp.y, m_character_width, m_character_height };
+            SDL_Rect dstRect = {startx+i*m_character_width, starty, m_character_width, m_character_height };
             SDL_Rect srcRect {0,0,m_character_width,m_character_height};
 
             char currentChar = m_text[i];
@@ -55,4 +68,4 @@ namespace Engine {
         }
     }
 
-}
+    }

@@ -11,17 +11,31 @@
 
 namespace Engine {
 
+    enum class TextNodeAlignment {
+        Left,
+        Right,
+        Center
+    };
+
     class TextNode : public GameObject {
 
     public:
 
-        static std::shared_ptr<TextNode> create();
+        TextNode(const std::string& textureName, char firstCharacter, char lastCharacter , unsigned int characterWidth, unsigned int characterHeight );
+
+        static std::shared_ptr<TextNode> createWithTexture(const std::string& textureName, char firstCharacter, char lastCharacter , unsigned int characterWidth, unsigned int characterHeight );
+
+        /**
+         * Create a TextNode with the first font added to FontManager.
+         * @return
+         */
+        static std::shared_ptr<TextNode> createWithDefaultFont();
 
         void draw(SDL_Renderer *renderer) override;
 
         void setText(const std::string &text);
 
-        TextNode(const std::string& textureName, char firstCharacter, char lastCharacter , unsigned int characterWidth, unsigned int characterHeight );
+        TextNodeAlignment alignment = TextNodeAlignment::Left;
 
     private:
 

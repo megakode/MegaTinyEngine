@@ -125,7 +125,7 @@ namespace Engine {
 
         SDL_Event e;
 
-        auto sceneNode = game->initialize();
+        auto sceneNode = game->createScene();
 
         Core::inputManager()->setListener(game);
 

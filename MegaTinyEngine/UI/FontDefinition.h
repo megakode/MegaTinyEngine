@@ -12,7 +12,8 @@ namespace Engine
         std::string texture;
         int charWidth;
         int charHeight;
-        int numStyles;
+        char firstCharacter;
+        char lastCharacter;
     };
 }
 
