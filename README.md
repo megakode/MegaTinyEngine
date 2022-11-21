@@ -6,10 +6,12 @@ The engine is a hobby engine meant to make me more productive in making small ca
 
 I develop the engine in tandem with a couple of small example games, as this has turned out to be a great productive and fun way for me. I therefore only add features once i actually need them in a game, and many obvious and common things might therefore be missing.
 
+![example_layers](https://user-images.githubusercontent.com/6302832/203104411-4bf35be4-7102-4a5f-a5e7-666999684798.gif)
 
 ## Features
 
 - Scene tree
+- Layers
 - AABB collision
 - Kinematics
 - Sprite animation
@@ -21,3 +23,4 @@ I develop the engine in tandem with a couple of small example games, as this has
 - CMake for building
 - SDL for rendering
 - https://github.com/nlohmann/json for handling JSON.
+
