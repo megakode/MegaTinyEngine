@@ -17,7 +17,8 @@ class ExampleGame : public Engine::IGame
 
        // First tell the texture cache to load the font texture
 
-       auto font_texture = Engine::Core::textureCache()->loadTexture("../examples/resources/big_numbers.png","numbers");
+       Engine::Core::textureCache()->loadTexture("../examples/resources/big_numbers.png","numbers");
+       Engine::Core::textureCache()->loadTexture("../examples/resources/font.png","letters");
 
        // Create a scene with a single colored layer
 
@@ -27,13 +28,19 @@ class ExampleGame : public Engine::IGame
        // *** Example 1: Create the text object using a font already defined in the FontManager ***
 
        // The first font added to the font manager becomes the default, and will be used for TextNode instances unless anything else is specified.
-       Engine::Core::fontManager()->addFont(Engine::FontDefinition{"numbers",25,32,'0','9'});
+       Engine::Core::fontManager()->addFont(Engine::FontDefinition{"letters",8,8,' ','~'});
 
        textNodeLeft = Engine::TextNode::createWithDefaultFont();
-       textNodeLeft->setLocalPosition(0, 0);
-       textNodeLeft->setText("123");
+       textNodeLeft->setLocalPosition(0, 8);
+       textNodeLeft->setText("This text is LEFT aligned");
        textNodeLeft->alignment = Engine::TextNodeAlignment::Left;
        scene->addObjectToLayer(textNodeLeft,FOREGROUND_LAYER);
+
+       textNodeRight = Engine::TextNode::createWithDefaultFont();
+       textNodeRight->setLocalPosition(Engine::Core::getLogicalWindowSize().width, Engine::Core::getLogicalWindowSize().height - 16);
+       textNodeRight->setText("This text is RIGHT aligned");
+       textNodeRight->alignment = Engine::TextNodeAlignment::Right;
+       scene->addObjectToLayer(textNodeRight,FOREGROUND_LAYER);
 
        // *** Example 2: Create the text object directly from a texture ***
 
@@ -66,6 +73,7 @@ class ExampleGame : public Engine::IGame
 
    std::shared_ptr<Engine::TextNode> textNodeCenter;
    std::shared_ptr<Engine::TextNode> textNodeLeft;
+   std::shared_ptr<Engine::TextNode> textNodeRight;
 
    static constexpr int FOREGROUND_LAYER = 10;
 };
