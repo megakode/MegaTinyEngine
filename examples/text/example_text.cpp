@@ -3,8 +3,8 @@
 */
 
 #include "MegaTinyEngine/Core.h"
+#include "MegaTinyEngine/GameObjects/TextNode.h"
 #include "MegaTinyEngine/IGame.h"
-#include "MegaTinyEngine/TextNode.h"
 
 class ExampleGame : public Engine::IGame
 {
@@ -17,8 +17,8 @@ class ExampleGame : public Engine::IGame
 
        // First tell the texture cache to load the font texture
 
-       Engine::Core::textureCache()->loadTexture("../examples/resources/big_numbers.png","numbers");
-       Engine::Core::textureCache()->loadTexture("../examples/resources/font.png","letters");
+       Engine::Core::textureCache()->loadTexture("resources/big_numbers.png","numbers");
+       Engine::Core::textureCache()->loadTexture("resources/font.png","letters");
 
        // Create a scene with a single colored layer
 

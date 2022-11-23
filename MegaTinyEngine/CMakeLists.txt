@@ -18,9 +18,8 @@ target_sources(MTEngine PUBLIC
         GameObjects/GameObject.cpp
         InputManager.cpp
         KinematicBody.cpp
-        Settings.cpp
         GameObjects/Sprite.cpp
-        TextNode.cpp
+        GameObjects/TextNode.cpp
         Texture.cpp
         TextureCache.cpp
         Scene.cpp

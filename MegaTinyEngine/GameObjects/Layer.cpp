@@ -63,8 +63,6 @@ void Layer::draw(SDL_Renderer *renderer)
         }
     }
 
-    // TODO: add drawing of background texture with all the different BackgroundTextureStyles
-
     GameObject::draw(renderer);
 }
 

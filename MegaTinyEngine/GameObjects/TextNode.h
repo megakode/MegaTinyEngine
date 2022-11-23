@@ -7,7 +7,7 @@
 
 
 #include "MegaTinyEngine/GameObjects/GameObject.h"
-#include "Texture.hpp"
+#include "MegaTinyEngine/Texture.hpp"
 
 namespace Engine {
 

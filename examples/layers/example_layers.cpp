@@ -16,11 +16,11 @@ class ExampleGame : public Engine::IGame
     std::shared_ptr<Engine::Scene> createScene() override
     {
 
-        Core::textureCache()->loadTexture("../examples/resources/slime.png","slime");
-        auto top_texture = Core::textureCache()->loadTexture("../examples/resources/sky_top.png","sky_top");
-        auto cloud_texture = Core::textureCache()->loadTexture("../examples/resources/sky.png","sky");
-        auto hills_texture = Core::textureCache()->loadTexture("../examples/resources/hills.png","hills");
-        auto grass_texture = Core::textureCache()->loadTexture("../examples/resources/grass_single.png","grass");
+        Core::textureCache()->loadTexture("resources/slime.png","slime");
+        auto top_texture = Core::textureCache()->loadTexture("resources/sky_top.png","sky_top");
+        auto cloud_texture = Core::textureCache()->loadTexture("resources/sky.png","sky");
+        auto hills_texture = Core::textureCache()->loadTexture("resources/hills.png","hills");
+        auto grass_texture = Core::textureCache()->loadTexture("resources/grass_single.png","grass");
 
         auto scene = std::make_shared<Scene>();
 

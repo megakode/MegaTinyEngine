@@ -21,7 +21,7 @@ class ExampleGame : public Engine::IGame
 
         // First tell the texture cache to load the slime texture
 
-        Engine::Core::textureCache()->loadTexture("../examples/resources/slime_single.png","slime");
+        Engine::Core::textureCache()->loadTexture("resources/slime_single.png","slime");
 
         // Then create a scene with a single layer
 
