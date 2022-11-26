@@ -20,13 +20,18 @@ namespace Engine {
 
     public:
 
+        FadeAction( const std::shared_ptr<Sprite>& target ) : ActionInterval(target)
+        {
+
+        };
+
         /// Create an action that fades the alpha of a Sprite from the current alpha value to 'dstAlpha'
         /// \param target Sprite to fade
         /// \param dstAlpha Destination alpha value of the fade.
         /// \return newly created FadeAction
         static std::shared_ptr<FadeAction> create( const std::shared_ptr<Sprite>& target, float duration, float srcAlpha, float dstAlpha )
         {
-            auto fadeAction = std::make_shared<FadeAction>();
+            auto fadeAction = std::make_shared<FadeAction>(target);
             fadeAction->m_sprite = target;
             fadeAction->m_startAlpha = srcAlpha;
             fadeAction->m_stopAlpha = dstAlpha;

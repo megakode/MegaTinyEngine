@@ -13,7 +13,7 @@ namespace Engine
     {
     public:
 
-        explicit DestroyAction( const std::shared_ptr<Sprite>& target ) : m_target(target) {};
+        explicit DestroyAction( const std::shared_ptr<Sprite>& target ) : ActionInstant(target) {};
 
         static std::shared_ptr<DestroyAction> create( const std::shared_ptr<Sprite>& target ){
             return std::make_shared<DestroyAction>(target);

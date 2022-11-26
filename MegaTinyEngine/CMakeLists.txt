@@ -4,6 +4,7 @@ target_sources(MTEngine PUBLIC
         Actions/FadeAction.cpp
         Actions/MoveAction.cpp
         Actions/DestroyAction.cpp
+        Actions/RepeatAction.cpp
         Collision/BoxCollider.cpp
         Collision/CollisionManager.cpp
         Collision/CollisionInfo.cpp

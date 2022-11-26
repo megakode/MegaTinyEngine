@@ -8,6 +8,12 @@
 
 namespace Engine {
 
+    Action::Action(const std::shared_ptr<GameObject> &gameObject)
+    {
+        this->gameObject = gameObject;
+    }
+
+
     void Action::update(float dt)
     {
         if( nextAction != nullptr && m_isDone ){
@@ -48,11 +54,19 @@ namespace Engine {
                 m_isDone = true;
             }
 
-            m_progress = easeOutExpo( std::min(m_elapsed / m_duration , 1.0f) );
+//            m_progress = easeOutExpo( std::min(m_elapsed / m_duration , 1.0f) );
+            m_progress = std::min(m_elapsed / m_duration , 1.0f);
             progress(m_progress);
         }
 
         Action::update(dt);
+    }
+
+    void ActionInterval::reset()
+    {
+        m_progress = 0;
+        m_elapsed = 0;
+        m_isDone = false;
     }
 
     ///
@@ -68,5 +82,10 @@ namespace Engine {
         }
 
         Action::update(dt);
+    }
+    void ActionInstant::reset()
+    {
+        m_hasExecuted = false;
+        m_isDone = false;
     }
 }
