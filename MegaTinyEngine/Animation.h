@@ -2,8 +2,8 @@
 // Created by Peter Bone on 04/06/2020.
 //
 
-#ifndef SDLTEST_ANIMATION_H
-#define SDLTEST_ANIMATION_H
+#ifndef ANIMATION_H
+#define ANIMATION_H
 
 #include "SpriteFrame.h"
 #include <cassert>
@@ -63,4 +63,4 @@ struct SpriteAnimation
 
 } // namespace Engine
 
-#endif // SDLTEST_ANIMATION_H
+#endif // ANIMATION_H

@@ -4,8 +4,8 @@
 #include "Vendor/json.hpp"
 #include "ResourceFile.h"
 
-#ifndef SDLTEST_JSONSERIALIZATION_H
-#define SDLTEST_JSONSERIALIZATION_H
+#ifndef JSONSERIALIZATION_H
+#define JSONSERIALIZATION_H
 
 using nlohmann::json;
 
@@ -66,4 +66,4 @@ namespace Engine
 }
 
 
-#endif //SDLTEST_JSONSERIALIZATION_H
+#endif //JSONSERIALIZATION_H

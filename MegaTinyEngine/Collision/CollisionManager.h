@@ -2,8 +2,8 @@
 // Created by Peter Bone on 19/06/2020.
 //
 
-#ifndef SDLTEST_COLLISIONMANAGER_H
-#define SDLTEST_COLLISIONMANAGER_H
+#ifndef COLLISIONMANAGER_H
+#define COLLISIONMANAGER_H
 
 #include "MegaTinyEngine/Base.h"
 #include "MegaTinyEngine/GameObjects/Sprite.h"
@@ -59,4 +59,4 @@ namespace Engine {
 
 }
 
-#endif //SDLTEST_COLLISIONMANAGER_H
+#endif //COLLISIONMANAGER_H

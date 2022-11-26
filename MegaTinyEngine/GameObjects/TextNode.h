@@ -2,8 +2,8 @@
 // Created by Peter Bone on 22/06/2020.
 //
 
-#ifndef SDLTEST_TEXTNODE_H
-#define SDLTEST_TEXTNODE_H
+#ifndef TEXTNODE_H
+#define TEXTNODE_H
 
 
 #include "MegaTinyEngine/GameObjects/GameObject.h"
@@ -50,4 +50,4 @@ namespace Engine {
 
 }
 
-#endif //SDLTEST_TEXTNODE_H
+#endif //TEXTNODE_H

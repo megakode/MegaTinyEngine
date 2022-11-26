@@ -2,8 +2,8 @@
 // Created by Peter Bone on 04/06/2020.
 //
 
-#ifndef SDLTEST_SPRITEFRAME_H
-#define SDLTEST_SPRITEFRAME_H
+#ifndef SPRITEFRAME_H
+#define SPRITEFRAME_H
 
 namespace Engine {
 
@@ -19,4 +19,4 @@ namespace Engine {
 }
 
 
-#endif //SDLTEST_SPRITEFRAME_H
+#endif //SPRITEFRAME_H

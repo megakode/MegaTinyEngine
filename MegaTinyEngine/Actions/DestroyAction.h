@@ -2,8 +2,8 @@
 // Created by Peter Bone on 05/07/2020.
 //
 
-#ifndef SDLTEST_DESTROYACTION_H
-#define SDLTEST_DESTROYACTION_H
+#ifndef DESTROYACTION_H
+#define DESTROYACTION_H
 #include <memory>
 #include "Action.h"
 
@@ -34,4 +34,4 @@ namespace Engine
 }
 
 
-#endif //SDLTEST_DESTROYACTION_H
+#endif //DESTROYACTION_H

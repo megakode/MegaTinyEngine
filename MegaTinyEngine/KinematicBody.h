@@ -2,8 +2,8 @@
 // Created by Peter Bone on 20/06/2020.
 //
 
-#ifndef SDLTEST_KINEMATICBODY_H
-#define SDLTEST_KINEMATICBODY_H
+#ifndef KINEMATICBODY_H
+#define KINEMATICBODY_H
 
 
 #include "Base.h"
@@ -57,4 +57,4 @@ namespace Engine {
 
 }
 
-#endif //SDLTEST_KINEMATICBODY_H
+#endif //KINEMATICBODY_H

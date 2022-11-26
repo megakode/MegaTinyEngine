@@ -2,8 +2,8 @@
 // Created by Peter Bone on 29/05/2020.
 //
 
-#ifndef SDLTEST_ANIMATIONMANAGER_H
-#define SDLTEST_ANIMATIONMANAGER_H
+#ifndef ANIMATIONMANAGER_H
+#define ANIMATIONMANAGER_H
 
 #include <memory>
 #include <map>
@@ -50,4 +50,4 @@ private:
 
 }
 
-#endif //SDLTEST_ANIMATIONMANAGER_H
+#endif //ANIMATIONMANAGER_H

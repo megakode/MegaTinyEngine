@@ -2,8 +2,8 @@
 // Created by Peter Bone on 05/07/2020.
 //
 
-#ifndef SDLTEST_EASINGS_H
-#define SDLTEST_EASINGS_H
+#ifndef EASINGS_H
+#define EASINGS_H
 
 #include <cmath>
 #include <algorithm>
@@ -80,4 +80,4 @@ float easeInOutBounce( float t ) {
 }
 
 
-#endif //SDLTEST_EASINGS_H
+#endif //EASINGS_H

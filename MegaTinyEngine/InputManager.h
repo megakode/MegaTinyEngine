@@ -2,8 +2,8 @@
 // Created by Peter Bone on 15/06/2020.
 //
 
-#ifndef SDLTEST_INPUTMANAGER_H
-#define SDLTEST_INPUTMANAGER_H
+#ifndef INPUTMANAGER_H
+#define INPUTMANAGER_H
 
 
 #include <SDL_events.h>
@@ -84,4 +84,4 @@ namespace Engine {
 }
 
 
-#endif //SDLTEST_INPUTMANAGER_H
+#endif //INPUTMANAGER_H

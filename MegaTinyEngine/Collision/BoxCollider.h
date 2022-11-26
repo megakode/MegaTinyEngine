@@ -24,4 +24,4 @@ namespace Engine {
 }
 
 
-#endif //SDLTEST_BOXCOLLIDER_H
+#endif //BOXCOLLIDER_H

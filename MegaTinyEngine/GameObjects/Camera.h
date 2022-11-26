@@ -2,8 +2,8 @@
 // Created by Peter Bone on 14/06/2020.
 //
 
-#ifndef SDLTEST_CAMERA_H
-#define SDLTEST_CAMERA_H
+#ifndef CAMERA_H
+#define CAMERA_H
 
 #include "MegaTinyEngine/Base.h"
 #include "GameObject.h"
@@ -43,4 +43,4 @@ namespace Engine {
 
 }
 
-#endif //SDLTEST_CAMERA_H
+#endif //CAMERA_H

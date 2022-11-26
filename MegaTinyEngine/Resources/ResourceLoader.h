@@ -2,8 +2,8 @@
 // Created by Peter Bone on 24/06/2020.
 //
 
-#ifndef SDLTEST_RESOURCELOADER_H
-#define SDLTEST_RESOURCELOADER_H
+#ifndef RESOURCELOADER_H
+#define RESOURCELOADER_H
 
 #include "MegaTinyEngine/Animation.h"
 #include "ResourceFile.h"
@@ -28,4 +28,4 @@ class ResourceLoader
 
 } // namespace Engine
 
-#endif // SDLTEST_RESOURCELOADER_H
+#endif // RESOURCELOADER_H

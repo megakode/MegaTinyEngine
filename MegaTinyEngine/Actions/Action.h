@@ -2,8 +2,8 @@
 // Created by Peter Bone on 04/07/2020.
 //
 
-#ifndef SDLTEST_ACTION_H
-#define SDLTEST_ACTION_H
+#ifndef ACTION_H
+#define ACTION_H
 
 #include "../Base.h"
 #include "MegaTinyEngine/GameObjects/Sprite.h"
@@ -67,4 +67,4 @@ namespace Engine
 }
 
 
-#endif //SDLTEST_ACTION_H
+#endif //ACTION_H

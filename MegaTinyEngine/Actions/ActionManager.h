@@ -2,8 +2,8 @@
 // Created by Peter Bone on 04/07/2020.
 //
 
-#ifndef SDLTEST_ACTIONMANAGER_H
-#define SDLTEST_ACTIONMANAGER_H
+#ifndef ACTIONMANAGER_H
+#define ACTIONMANAGER_H
 
 
 #include <memory>
@@ -28,4 +28,4 @@ namespace Engine {
 }
 
 
-#endif //SDLTEST_ACTIONMANAGER_H
+#endif //ACTIONMANAGER_H

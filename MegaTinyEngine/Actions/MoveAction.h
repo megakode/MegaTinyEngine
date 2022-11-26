@@ -2,8 +2,8 @@
 // Created by Peter Bone on 05/07/2020.
 //
 
-#ifndef SDLTEST_MOVEACTION_H
-#define SDLTEST_MOVEACTION_H
+#ifndef MOVEACTION_H
+#define MOVEACTION_H
 
 #include <memory>
 
@@ -47,4 +47,4 @@ namespace Engine {
 }
 
 
-#endif //SDLTEST_MOVEACTION_H
+#endif //MOVEACTION_H

@@ -2,8 +2,8 @@
 // Created by Peter Bone on 05/07/2020.
 //
 
-#ifndef SDLTEST_FADEACTION_H
-#define SDLTEST_FADEACTION_H
+#ifndef FADEACTION_H
+#define FADEACTION_H
 
 #include "Action.h"
 #include "MegaTinyEngine/GameObjects/Sprite.h"
@@ -54,4 +54,4 @@ namespace Engine {
 }
 
 
-#endif //SDLTEST_FADEACTION_H
+#endif //FADEACTION_H

@@ -2,8 +2,8 @@
 // Created by Peter Bone on 06/06/2020.
 //
 
-#ifndef SDLTEST_CORE_H
-#define SDLTEST_CORE_H
+#ifndef CORE_H
+#define CORE_H
 
 #include "AnimationManager.h"
 #include "Base.h"
@@ -95,4 +95,4 @@ namespace Engine {
 
 }
 
-#endif //SDLTEST_CORE_H
+#endif //CORE_H
