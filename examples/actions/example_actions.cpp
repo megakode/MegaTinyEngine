@@ -37,6 +37,9 @@ class ExampleGame : public Engine::IGame
        scene->addObjectToLayer(slime,FOREGROUND_LAYER);
 
        auto move = Engine::MoveAction::create(slime,1.0,{50,50},{100,50});
+       // TODO: Misleading syntax. find another solution.
+       //  Maybe scrap operator overloading and go for ActionSequence instead.
+       move + Engine::MoveAction::create(slime,1.0,{100,50},{100,100});
        auto repeat = Engine::RepeatAction::create(move,3);
 
        Engine::Core::actionManager()->addAction(repeat);

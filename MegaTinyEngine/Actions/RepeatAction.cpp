@@ -10,6 +10,8 @@ void RepeatAction::update(float dt){
 
         m_elapsed += dt;
 
+        // TODO: handle nextAction so the repeatAction repeats the entire chain of actions on each repetition.
+
         if(m_action_to_repeat->isDone()){
             if(m_repetitions == 1){
                 //m_elapsed = m_duration;
@@ -25,6 +27,12 @@ void RepeatAction::update(float dt){
     }
 
     Action::update(dt);
+}
+void RepeatAction::reset()
+{
+    m_action_to_repeat->reset();
+    m_repetitions = 0;
+    ActionInterval::reset();
 }
 void RepeatAction::progress(float progress)
 {

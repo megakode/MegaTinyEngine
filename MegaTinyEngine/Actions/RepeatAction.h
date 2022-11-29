@@ -39,6 +39,7 @@ class RepeatAction : public ActionInterval
     void update(float dt) override;
 
     void progress(float progress) override;
+    void reset() override;
 
   private:
 
