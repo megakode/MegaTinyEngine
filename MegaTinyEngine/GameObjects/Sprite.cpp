@@ -6,8 +6,8 @@
 //
 
 #include "Sprite.h"
-#include "MegaTinyEngine/Base.h"
-#include "MegaTinyEngine/Core.h"
+#include "Base.h"
+#include "Core.h"
 #include "SDL.h"
 #include <iostream>
 

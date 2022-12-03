@@ -2,49 +2,51 @@
 * This example shows how to load a single non animated texture, and display it on screen.
 */
 
-#include "MegaTinyEngine/Core.h"
-#include "MegaTinyEngine/IGame.h"
-#include "MegaTinyEngine/Actions/MoveAction.h"
-#include "MegaTinyEngine/Actions/RepeatAction.h"
+#include "Core.h"
+#include "IGame.h"
+#include "MoveAction.h"
+#include "RepeatAction.h"
+#include "Sequence.h"
 
-class ExampleGame : public Engine::IGame
+using namespace Engine;
+
+class ExampleGame : public IGame
 {
- public:
+  public:
+    virtual ~ExampleGame() = default;
 
-   ExampleGame() = default;
+    ExampleGame() = default;
 
-   /**
-    * Every game must implement this method. It creates the Scene which forms the graphical foundation for our game.
-    * A scene is basically like one or more pieces of paper (called layers in the engine) which will be displayed on top of each other.
-    * All objects you create can be added to one of the scenes layers, and will automatically be drawn when the layer is drawn.
-    */
-   std::shared_ptr<Engine::Scene> createScene() override
-   {
+    /**
+     * Every game must implement this method. It creates the Scene which forms the graphical foundation for our game.
+     * A scene is basically like one or more pieces of paper (called layers in the engine) which will be displayed on top of each other.
+     * All objects you create can be added to one of the scenes layers, and will automatically be drawn when the layer is drawn.
+     */
+    std::shared_ptr<Scene> createScene() override
+    {
 
-       // First tell the texture cache to load the slime texture
+        // First tell the texture cache to load the slime texture
 
-       Engine::Core::textureCache()->loadTexture("resources/slime_single.png","slime");
+        Core::textureCache()->loadTexture("resources/slime_single.png", "slime");
 
-       // Then create a scene with a single layer
+        // Then create a scene with a single layer
 
-       auto scene = std::make_shared<Engine::Scene>();
-       scene->addLayer(FOREGROUND_LAYER);
+        auto scene = std::make_shared<Engine::Scene>();
+        scene->addLayer(FOREGROUND_LAYER);
 
-       // And last, create a sprite using the texture we loaded earlier, and sets its position to the center of the window.
+        // And last, create a sprite using the texture we loaded earlier, and sets its position to the center of the window.
 
-       slime = Engine::Sprite::createWithTexture("slime");
-       slime->setLocalPosition(Engine::Core::getLogicalWindowSize().width/2, Engine::Core::getLogicalWindowSize().height/2);
-       scene->addObjectToLayer(slime,FOREGROUND_LAYER);
+        slime = Sprite::createWithTexture("slime");
+        slime->setLocalPosition(Core::getLogicalWindowSize().width / 2, Core::getLogicalWindowSize().height / 2);
+        scene->addObjectToLayer(slime, FOREGROUND_LAYER);
 
-       auto move = Engine::MoveAction::create(slime,1.0,{50,50},{100,50});
-       // TODO: Misleading syntax. find another solution.
-       //  Maybe scrap operator overloading and go for ActionSequence instead.
-       move + Engine::MoveAction::create(slime,1.0,{100,50},{100,100});
-       auto repeat = Engine::RepeatAction::create(move,3);
+        auto move = Engine::MoveAction::create(slime,1.0,{50,50},{100,50});
+        auto moveBack = Engine::MoveAction::create(slime,1.0,{100,50},{50,50});
+        auto seq = Engine::Actions::Sequence::create(slime,{move,moveBack});
+        auto repeat = Engine::RepeatAction::create(seq,3);
+        Core::actionManager()->addAction(repeat);
 
-       Engine::Core::actionManager()->addAction(repeat);
-
-       return scene;
+        return scene;
    };
 
    void update( float deltaTime ) override  {

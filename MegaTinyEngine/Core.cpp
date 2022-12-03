@@ -3,8 +3,6 @@
 //
 
 #include "Core.h"
-#include "Base.h"
-#include "MegaTinyEngine/GameObjects/Sprite.h"
 #include "SDL_image.h"
 #include <iostream>
 

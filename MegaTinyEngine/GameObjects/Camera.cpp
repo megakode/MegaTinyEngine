@@ -3,9 +3,9 @@
 //
 
 #include "Camera.h"
-#include "MegaTinyEngine/Base.h"
-#include "MegaTinyEngine/Actions/MoveAction.h"
-#include "MegaTinyEngine/Core.h"
+#include "Base.h"
+#include "MoveAction.h"
+#include "Core.h"
 #include <cmath>
 #include <iostream>
 void Engine::Camera::update(float ticksSinceLast) {

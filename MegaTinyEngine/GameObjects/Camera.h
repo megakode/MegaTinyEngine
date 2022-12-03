@@ -5,10 +5,10 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "MegaTinyEngine/Base.h"
+#include "Base.h"
 #include "GameObject.h"
-#include "MegaTinyEngine/Actions/MoveAction.h"
-#include "MegaTinyEngine/KinematicBody.h"
+#include "MoveAction.h"
+#include "KinematicBody.h"
 
 // God forklaring af simpel camera formel:
 // https://gamedev.stackexchange.com/a/123844

@@ -6,7 +6,7 @@
 #define FADEACTION_H
 
 #include "Action.h"
-#include "MegaTinyEngine/GameObjects/Sprite.h"
+#include "Sprite.h"
 #include <memory>
 
 namespace Engine {

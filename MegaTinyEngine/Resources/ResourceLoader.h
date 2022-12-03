@@ -5,7 +5,7 @@
 #ifndef RESOURCELOADER_H
 #define RESOURCELOADER_H
 
-#include "MegaTinyEngine/Animation.h"
+#include "Animation.h"
 #include "ResourceFile.h"
 #include "Vendor/json.hpp"
 #include <string>

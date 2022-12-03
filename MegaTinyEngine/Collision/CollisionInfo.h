@@ -6,7 +6,7 @@
 #define SIMPLESHARKGAME_COLLISIONINFO_H
 
 #include "BoxCollider.h"
-#include "MegaTinyEngine/GameObjects/GameObject.h"
+#include "GameObject.h"
 #include <memory>
 
 namespace Engine {

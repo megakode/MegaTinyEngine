@@ -16,12 +16,12 @@
 #include <stdio.h>
 #include <utility>
 
-#include "MegaTinyEngine/Collision/BoxCollider.h"
-#include "MegaTinyEngine/Base.h"
-#include "MegaTinyEngine/AnimationManager.h"
-#include "MegaTinyEngine/GameObjects/GameObject.h"
-#include "MegaTinyEngine/KinematicBody.h"
-#include "MegaTinyEngine/Texture.hpp"
+#include "BoxCollider.h"
+#include "Base.h"
+#include "AnimationManager.h"
+#include "GameObjects/GameObject.h"
+#include "KinematicBody.h"
+#include "Texture.hpp"
 
 namespace Engine {
 

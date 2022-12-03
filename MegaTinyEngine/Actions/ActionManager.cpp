@@ -7,7 +7,7 @@
 
 namespace Engine {
 
-void ActionManager::addAction(const std::shared_ptr<Action>& action)
+void ActionManager::addAction(const std::shared_ptr<AbstractAction>& action)
 {
     m_actions.push_back(action);
 }

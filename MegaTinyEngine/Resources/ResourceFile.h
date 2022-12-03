@@ -5,8 +5,8 @@
 #ifndef RESOURCEFILE_H
 #define RESOURCEFILE_H
 
-#include "MegaTinyEngine/Animation.h"
-#include "MegaTinyEngine/UI/FontDefinition.h"
+#include "Animation.h"
+#include "FontDefinition.h"
 #include <filesystem>
 #include <list>
 #include <map>

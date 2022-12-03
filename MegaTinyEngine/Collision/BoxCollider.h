@@ -5,7 +5,7 @@
 #ifndef _BOXCOLLIDER_H
 #define _BOXCOLLIDER_H
 
-#include "MegaTinyEngine/Base.h"
+#include "Base.h"
 #include <cstdint>
 
 namespace Engine {

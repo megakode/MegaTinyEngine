@@ -6,7 +6,7 @@
 #include <SDL.h>
 #include <iostream>
 #include <algorithm>
-#include "MegaTinyEngine/Resources/ResourcePathUtils.h"
+#include "ResourcePathUtils.h"
 
 #ifdef _WIN32
 const char PATH_SEP = '\\';

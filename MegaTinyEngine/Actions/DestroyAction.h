@@ -6,6 +6,7 @@
 #define DESTROYACTION_H
 #include <memory>
 #include "Action.h"
+#include "Sprite.h"
 
 namespace Engine
 {

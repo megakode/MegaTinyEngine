@@ -6,8 +6,8 @@
 #define TEXTNODE_H
 
 
-#include "MegaTinyEngine/GameObjects/GameObject.h"
-#include "MegaTinyEngine/Texture.hpp"
+#include "GameObject.h"
+#include "Texture.hpp"
 
 namespace Engine {
 

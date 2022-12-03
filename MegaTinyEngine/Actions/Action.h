@@ -5,19 +5,25 @@
 #ifndef ACTION_H
 #define ACTION_H
 
-#include "../Base.h"
-#include "MegaTinyEngine/GameObjects/Sprite.h"
+#include "GameObject.h"
+#include "Base.h"
 
 namespace Engine
 {
-    class Action {
+    class AbstractAction {
     public:
 
-        Action() = delete;
+        AbstractAction() = delete;
+        virtual ~AbstractAction() = default;
 
-        explicit Action( const std::shared_ptr<GameObject>& gameObject );
+        AbstractAction(const AbstractAction& src) = delete; // Copy constructor
+        AbstractAction(AbstractAction&&) = delete; // Move constructor
+        AbstractAction& operator=(const AbstractAction& other) = delete; // Copy assignment operator
+        AbstractAction& operator=(AbstractAction&& other) = delete; // Move assignment operator
 
-        virtual void update(float dt);
+        explicit AbstractAction( const std::shared_ptr<GameObject>& gameObject );
+
+        virtual void update(float dt) = 0;
 
         bool isDone() const;
 
@@ -27,26 +33,24 @@ namespace Engine
          /// Reset the progress and state of an Action
         virtual void reset() = 0;
 
-        /// The + operator can chain actions sequentially, and return one action that runs the two added ones.
-        friend std::shared_ptr<Action> operator+(std::shared_ptr<Action> firstAction, const std::shared_ptr<Action>& otherAction);
-
         std::shared_ptr<GameObject> gameObject;
 
     protected:
-        std::shared_ptr<Action> nextAction = nullptr;
 
         bool m_isDone = false;
     };
 
-    class ActionInterval : public Action, std::enable_shared_from_this<ActionInterval>
+    class ActionInterval : public AbstractAction, std::enable_shared_from_this<ActionInterval>
     {
     public:
 
-        explicit ActionInterval( const std::shared_ptr<GameObject>& target ) : Action(target){};
+        explicit ActionInterval( const std::shared_ptr<GameObject>& target ) : AbstractAction(target){};
 
         void update( float dt) override;
         void reset() override;
         virtual void progress(float progress) = 0;
+
+    protected:
 
         /// How long the duration of this Action is supposed to be
         float m_duration = 0;
@@ -54,19 +58,17 @@ namespace Engine
         /// How much time has elapsed since the Action started
         float m_elapsed = 0;
 
-    protected:
-
         /// Float that indicates the Actions progress (0.0 -> 1.0).
         /// Subclasses should look at this value when determining the state of its animations.
         float m_progress = 0;
 
     };
 
-    class ActionInstant : public Action {
+    class ActionInstant : public AbstractAction {
 
     public:
 
-        explicit ActionInstant( const std::shared_ptr<GameObject>& target ) : Action(target){};
+        explicit ActionInstant( const std::shared_ptr<GameObject>& target ) : AbstractAction(target){};
 
         virtual void execute() = 0;
 

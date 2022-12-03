@@ -16,13 +16,13 @@ namespace Engine {
 
     public:
 
-        void addAction( const std::shared_ptr<Action>& action );
+        void addAction( const std::shared_ptr<AbstractAction>& action );
 
         void update( float dt );
 
     private:
 
-        std::vector<std::shared_ptr<Action>> m_actions;
+        std::vector<std::shared_ptr<AbstractAction>> m_actions;
     };
 
 }

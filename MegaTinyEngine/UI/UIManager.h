@@ -6,8 +6,8 @@
 #define SIMPLEWESTERNGAME_UIMANAGER_H
 
 #include <vector>
-#include <MegaTinyEngine/Collision/BoxCollider.h>
-#include "MegaTinyEngine/InputManager.h"
+#include <BoxCollider.h>
+#include "InputManager.h"
 
 namespace Engine {
 

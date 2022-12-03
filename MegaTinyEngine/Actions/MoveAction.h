@@ -17,7 +17,7 @@ namespace Engine {
 
         MoveAction() = delete;
 
-        explicit MoveAction( const std::shared_ptr<GameObject>& target );
+        explicit MoveAction( const std::shared_ptr<GameObject>& target ) : ActionInterval(target) { };
 
         /// Create an action that moves a Sprite
         /// \param target The Sprite to move
@@ -40,9 +40,11 @@ namespace Engine {
             m_target->setLocalPosition(x,y);
         }
 
+        Vec2i& SrcPoint(){
+            return m_srcPoint;
+        }
+
     private:
-
-
 
         std::shared_ptr<GameObject> m_target;
         Vec2i m_srcPoint;

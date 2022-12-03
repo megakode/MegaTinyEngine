@@ -9,8 +9,8 @@
 #ifndef GameObject_h
 #define GameObject_h
 
-#include "MegaTinyEngine/Base.h"
-#include "MegaTinyEngine/InputManager.h"
+#include "Base.h"
+#include "InputManager.h"
 #include "SDL.h"
 #include <list>
 #include <memory>

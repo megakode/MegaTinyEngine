@@ -5,7 +5,7 @@
 #ifndef SIMPLEWESTERNGAME_FONTMANAGER_H
 #define SIMPLEWESTERNGAME_FONTMANAGER_H
 
-#include "MegaTinyEngine/Resources/ResourceFile.h"
+#include "ResourceFile.h"
 
 namespace Engine
 {

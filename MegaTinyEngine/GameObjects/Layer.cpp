@@ -3,7 +3,7 @@
 //
 
 #include "Layer.h"
-#include "MegaTinyEngine/Core.h"
+#include "Core.h"
 
 namespace Engine
 {

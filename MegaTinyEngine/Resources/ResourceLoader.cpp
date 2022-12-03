@@ -6,11 +6,11 @@
 #include <iostream>
 #include <string>
 
-#include "MegaTinyEngine/Core.h"
-#include "MegaTinyEngine/Resources/JSONSerialization.h"
-#include "MegaTinyEngine/Resources/ResourceFile.h"
-#include "MegaTinyEngine/Resources/ResourceLoader.h"
-#include "MegaTinyEngine/Resources/ResourcePathUtils.h"
+#include "Core.h"
+#include "JSONSerialization.h"
+#include "ResourceFile.h"
+#include "ResourceLoader.h"
+#include "ResourcePathUtils.h"
 #include "Vendor/json.hpp"
 
 using json = nlohmann::json;

@@ -5,8 +5,8 @@
 #ifndef SIMPLEWESTERNGAME_BUTTON_H
 #define SIMPLEWESTERNGAME_BUTTON_H
 
-#include "MegaTinyEngine/Core.h"
-#include "MegaTinyEngine/GameObjects/Sprite.h"
+#include "Core.h"
+#include "Sprite.h"
 
 namespace Engine {
 

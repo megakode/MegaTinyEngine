@@ -3,7 +3,7 @@
 //
 
 #include "TextNode.h"
-#include "MegaTinyEngine/Core.h"
+#include "Core.h"
 namespace Engine {
 
     TextNode::TextNode(const std::string& textureName, char firstCharacter, char lastCharacter , unsigned int characterWidth, unsigned int characterHeight ) {

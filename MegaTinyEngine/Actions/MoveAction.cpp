@@ -3,7 +3,7 @@
 //
 
 #include "MoveAction.h"
-Engine::MoveAction::MoveAction(const std::shared_ptr<GameObject> &target) : ActionInterval(target)
-{
-
-}
+//Engine::MoveAction::MoveAction(const std::shared_ptr<GameObject> &target) : ActionInterval(target)
+//{
+//
+//}

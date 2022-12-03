@@ -3,42 +3,23 @@
 //
 
 #include <algorithm>
+#include <memory>
 #include "Action.h"
-#include "Easings.h"
 
 namespace Engine {
 
-    Action::Action(const std::shared_ptr<GameObject> &gameObject)
+    AbstractAction::AbstractAction(const std::shared_ptr<GameObject> &gameObject) : gameObject(gameObject)
     {
-        this->gameObject = gameObject;
+
     }
 
-
-    void Action::update(float dt)
+    bool AbstractAction::isDone() const
     {
-        if( nextAction != nullptr && m_isDone ){
-            nextAction->update(dt);
-        }
+        return m_isDone;
     }
 
-    bool Action::isDone() const
-    {
-        bool nextActionDone = true;
-
-        if( nextAction != nullptr ){
-            nextActionDone = nextAction->isDone();
-        }
-        return m_isDone && nextActionDone;
-    }
-
-    void Action::stop() {
+    void AbstractAction::stop() {
         m_isDone = true;
-    }
-
-    std::shared_ptr<Action> operator+(std::shared_ptr<Action> firstAction, const std::shared_ptr<Action> &otherAction)
-    {
-        firstAction->nextAction = otherAction;
-        return firstAction;
     }
 
     ///
@@ -55,11 +36,10 @@ namespace Engine {
             }
 
 //            m_progress = easeOutExpo( std::min(m_elapsed / m_duration , 1.0f) );
-            m_progress = std::min(m_elapsed / m_duration , 1.0f);
+            m_progress = std::min(m_elapsed / m_duration , 1.0F);
             progress(m_progress);
         }
 
-        Action::update(dt);
     }
 
     void ActionInterval::reset()
@@ -73,7 +53,7 @@ namespace Engine {
     /// Action Instant
     ///
 
-    void ActionInstant::update(float dt)
+    void ActionInstant::update(float  /*dt*/)
     {
         if(!m_hasExecuted){
             execute();
@@ -81,7 +61,6 @@ namespace Engine {
             m_hasExecuted = true;
         }
 
-        Action::update(dt);
     }
     void ActionInstant::reset()
     {

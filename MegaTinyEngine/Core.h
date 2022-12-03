@@ -7,15 +7,15 @@
 
 #include "AnimationManager.h"
 #include "Base.h"
-#include "Collision/CollisionManager.h"
+#include "CollisionManager.h"
 #include "IGame.h"
 #include "InputManager.h"
-#include "MegaTinyEngine/GameObjects/Sprite.h"
-#include "Resources/ResourceLoader.h"
+#include "Sprite.h"
+#include "ResourceLoader.h"
 #include "TextureCache.h"
-#include <MegaTinyEngine/Actions/ActionManager.h>
-#include <MegaTinyEngine/UI/FontManager.h>
-#include <MegaTinyEngine/UI/UIManager.h>
+#include <ActionManager.h>
+#include <FontManager.h>
+#include <UIManager.h>
 
 namespace Engine {
 

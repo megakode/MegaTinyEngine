@@ -5,8 +5,8 @@
 #ifndef COLLISIONMANAGER_H
 #define COLLISIONMANAGER_H
 
-#include "MegaTinyEngine/Base.h"
-#include "MegaTinyEngine/GameObjects/Sprite.h"
+#include "Base.h"
+#include "Sprite.h"
 #include <vector>
 
 namespace Engine {

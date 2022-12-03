@@ -1,10 +1,19 @@
-target_sources(MTEngine PUBLIC
+
+target_include_directories(${PROJECT_NAME} PUBLIC .)
+target_include_directories(${PROJECT_NAME} PUBLIC Actions)
+target_include_directories(${PROJECT_NAME} PUBLIC Collision)
+target_include_directories(${PROJECT_NAME} PUBLIC GameObjects)
+target_include_directories(${PROJECT_NAME} PUBLIC Resources)
+target_include_directories(${PROJECT_NAME} PUBLIC UI)
+
+target_sources(${PROJECT_NAME} PUBLIC
         Actions/ActionManager.cpp
         Actions/Action.cpp
         Actions/FadeAction.cpp
         Actions/MoveAction.cpp
         Actions/DestroyAction.cpp
         Actions/RepeatAction.cpp
+        Actions/Sequence.cpp
         Collision/BoxCollider.cpp
         Collision/CollisionManager.cpp
         Collision/CollisionInfo.cpp
