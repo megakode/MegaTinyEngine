@@ -1,11 +1,11 @@
 //
 // Created by sbeam on 11/26/22.
 //
-#include "RepeatAction.h"
+#include "Repeat.h"
 
-namespace Engine {
+namespace Engine::Actions {
 
-void RepeatAction::update(float dt)
+void Repeat::update(float dt)
 {
     if( !m_isDone ) {
 
@@ -14,7 +14,6 @@ void RepeatAction::update(float dt)
         if(m_action_to_repeat->isDone()){
 
             if(m_repetitions == 1){
-                //m_elapsed = m_duration;
                 m_isDone = true;
             } else {
                 m_repetitions--;
@@ -33,14 +32,14 @@ void RepeatAction::update(float dt)
 //    ActionInterval::update(dt);
 }
 
-void RepeatAction::reset()
+void Repeat::reset()
 {
     m_action_to_repeat->reset();
     m_repetitions = 0;
     ActionInterval::reset();
 }
 
-void RepeatAction::progress(float progress)
+void Repeat::progress(float progress)
 {
 }
 

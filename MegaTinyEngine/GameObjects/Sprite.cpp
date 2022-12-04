@@ -34,10 +34,6 @@ namespace Engine {
         setTexture(texture);
     }
 
-    Sprite::~Sprite( ){
-        std::cout << "sprite destroyed" << std::endl;
-    }
-
     void Sprite::setDefaultBBox()
     {
         auto wp = getWorldPosition();

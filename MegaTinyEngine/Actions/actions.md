@@ -33,8 +33,8 @@ FiniteTimeAction : Action
  Thinking of implementing the API like this:
  
  // Seriel sequence
- sprite.addAction( FadeAction.create(.200f) + MoveAction.create({100,-50}) );
+ sprite.addAction( Fade.create(.200f) + MoveAction.create({100,-50}) );
  
  // Parallel sequence
- sprite.addAction( FadeAction.create(.200f) );
+ sprite.addAction( Fade.create(.200f) );
  sprite.addAction( MoveAction.create({100,-50}) );

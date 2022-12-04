@@ -9,10 +9,10 @@ target_include_directories(${PROJECT_NAME} PUBLIC UI)
 target_sources(${PROJECT_NAME} PUBLIC
         Actions/ActionManager.cpp
         Actions/Action.cpp
-        Actions/FadeAction.cpp
-        Actions/MoveAction.cpp
-        Actions/DestroyAction.cpp
-        Actions/RepeatAction.cpp
+        Actions/Fade.cpp
+        Actions/Move.cpp
+        Actions/Destroy.cpp
+        Actions/Repeat.cpp
         Actions/Sequence.cpp
         Collision/BoxCollider.cpp
         Collision/CollisionManager.cpp

@@ -9,18 +9,17 @@
 #include "Sprite.h"
 #include <memory>
 
-namespace Engine {
+namespace Engine::Actions {
 
 ///
 /// Fade a Sprites alpha value
 ///
 
-    class FadeAction : public ActionInterval
+    class Fade : public ActionInterval
     {
 
     public:
-
-        FadeAction( const std::shared_ptr<Sprite>& target ) : ActionInterval(target)
+      Fade( const std::shared_ptr<Sprite>& target ) : ActionInterval(target)
         {
 
         };
@@ -28,10 +27,10 @@ namespace Engine {
         /// Create an action that fades the alpha of a Sprite from the current alpha value to 'dstAlpha'
         /// \param target Sprite to fade
         /// \param dstAlpha Destination alpha value of the fade.
-        /// \return newly created FadeAction
-        static std::shared_ptr<FadeAction> create( const std::shared_ptr<Sprite>& target, float duration, float srcAlpha, float dstAlpha )
+        /// \return newly created Fade
+        static std::shared_ptr<Fade> create( const std::shared_ptr<Sprite>& target, float duration, float srcAlpha, float dstAlpha )
         {
-            auto fadeAction = std::make_shared<FadeAction>(target);
+            auto fadeAction = std::make_shared<Fade>(target);
             fadeAction->m_sprite = target;
             fadeAction->m_startAlpha = srcAlpha;
             fadeAction->m_stopAlpha = dstAlpha;

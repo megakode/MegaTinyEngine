@@ -4,8 +4,8 @@
 
 #include "Camera.h"
 #include "Base.h"
-#include "MoveAction.h"
 #include "Core.h"
+#include "Move.h"
 #include <cmath>
 #include <iostream>
 void Engine::Camera::update(float ticksSinceLast) {
@@ -26,7 +26,7 @@ void Engine::Camera::update(float ticksSinceLast) {
 
         //int moveDist = newLocalPos.dist(getLocalPosition());
         float duration = 0.4; // Lets start with a fixed duration, and not factoring in the distance.
-        auto move = MoveAction::create(shared_from_this(),duration,getLocalPosition(),newLocalPos);
+        auto move = Actions::Move::create(shared_from_this(),duration,getLocalPosition(),newLocalPos);
 
         if(m_CurrentMoveAction != nullptr){
             m_CurrentMoveAction->stop();

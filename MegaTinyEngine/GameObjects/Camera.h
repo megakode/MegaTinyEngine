@@ -7,8 +7,8 @@
 
 #include "Base.h"
 #include "GameObject.h"
-#include "MoveAction.h"
 #include "KinematicBody.h"
+#include "Move.h"
 
 // God forklaring af simpel camera formel:
 // https://gamedev.stackexchange.com/a/123844
@@ -36,7 +36,7 @@ namespace Engine {
         Vec2i dragStartPos; // The mouse window position at start of drag
         Vec2i dragCurrentPos; // The current mouse window position when dragging
         bool dragIsDirty = false;
-        std::shared_ptr<MoveAction> m_CurrentMoveAction = nullptr;
+        std::shared_ptr<Actions::Move> m_CurrentMoveAction = nullptr;
         Rect m_bounds;
 
     };

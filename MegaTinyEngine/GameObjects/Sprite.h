@@ -37,9 +37,6 @@ namespace Engine {
         static SpritePtr createWithTexture( const std::string& textureId );
         static SpritePtr createWithAnimation(const std::string& animationId);
 
-
-        ~Sprite();
-
         void setAnimation( const std::string& id );
 
         // GameObject overrides

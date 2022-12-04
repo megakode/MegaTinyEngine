@@ -15,9 +15,7 @@ namespace Engine
     public:
 
         AbstractAction() = delete;
-        virtual ~AbstractAction() {
-            std::cout << "action destroyed" << std::endl;
-        };
+        virtual ~AbstractAction() { };
 
         AbstractAction(const AbstractAction& src) = delete; // Copy constructor
         AbstractAction(AbstractAction&&) = delete; // Move constructor
@@ -36,11 +34,9 @@ namespace Engine
          /// Reset the progress and state of an Action
         virtual void reset() = 0;
 
-        std::shared_ptr<GameObject> gameObject;
-
     protected:
-
         bool m_isDone = false;
+      std::shared_ptr<GameObject> gameObject;
     };
 
     class ActionInterval : public AbstractAction, std::enable_shared_from_this<ActionInterval>
