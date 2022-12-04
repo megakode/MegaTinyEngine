@@ -5,8 +5,9 @@
 #ifndef ACTION_H
 #define ACTION_H
 
-#include "GameObject.h"
 #include "Base.h"
+#include "GameObject.h"
+#include <iostream>
 
 namespace Engine
 {
@@ -14,7 +15,9 @@ namespace Engine
     public:
 
         AbstractAction() = delete;
-        virtual ~AbstractAction() = default;
+        virtual ~AbstractAction() {
+            std::cout << "action destroyed" << std::endl;
+        };
 
         AbstractAction(const AbstractAction& src) = delete; // Copy constructor
         AbstractAction(AbstractAction&&) = delete; // Move constructor

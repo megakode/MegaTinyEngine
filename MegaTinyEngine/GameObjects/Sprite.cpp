@@ -35,6 +35,7 @@ namespace Engine {
     }
 
     Sprite::~Sprite( ){
+        std::cout << "sprite destroyed" << std::endl;
     }
 
     void Sprite::setDefaultBBox()

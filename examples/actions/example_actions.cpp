@@ -7,6 +7,7 @@
 #include "MoveAction.h"
 #include "RepeatAction.h"
 #include "Sequence.h"
+#include "DestroyAction.h"
 
 using namespace Engine;
 
@@ -42,9 +43,12 @@ class ExampleGame : public IGame
 
         auto move = Engine::MoveAction::create(slime,1.0,{50,50},{100,50});
         auto moveBack = Engine::MoveAction::create(slime,1.0,{100,50},{50,50});
-        auto seq = Engine::Actions::Sequence::create(slime,{move,moveBack});
-        auto repeat = Engine::RepeatAction::create(seq,3);
-        Core::actionManager()->addAction(repeat);
+        auto destroy = Engine::DestroyAction::create(slime);
+        auto seq = Engine::Actions::Sequence::create(slime,{move,moveBack,destroy});
+//        auto repeat = Engine::RepeatAction::create(seq,1);
+        Core::actionManager()->addAction(seq);
+
+        // TODO: ERROR: slime sprite does not get deallocated when done with the sequence.
 
         return scene;
    };

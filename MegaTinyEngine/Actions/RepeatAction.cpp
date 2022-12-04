@@ -12,6 +12,7 @@ void RepeatAction::update(float dt)
         m_elapsed += dt;
 
         if(m_action_to_repeat->isDone()){
+
             if(m_repetitions == 1){
                 //m_elapsed = m_duration;
                 m_isDone = true;
@@ -20,8 +21,12 @@ void RepeatAction::update(float dt)
                 m_action_to_repeat->reset();
             }
         }
+        else
+        {
+            m_action_to_repeat->update(dt);
+        }
 
-        m_action_to_repeat->update(dt);
+
 
     }
 

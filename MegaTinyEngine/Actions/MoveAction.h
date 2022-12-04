@@ -33,7 +33,7 @@ namespace Engine {
             return action;
         }
 
-        void progress(float progress) override
+        void progress(float  /*progress*/) override
         {
             int x = m_srcPoint.x + (float)(m_dstPoint.x - m_srcPoint.x) * m_progress;
             int y = m_srcPoint.y + (float)(m_dstPoint.y - m_srcPoint.y) * m_progress;

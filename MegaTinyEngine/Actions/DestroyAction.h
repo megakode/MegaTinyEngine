@@ -22,14 +22,10 @@ namespace Engine
 
         void execute() override
         {
-            if(m_target!=nullptr){
-                m_target->removeFromParent();
+            if(gameObject!=nullptr){
+                gameObject->removeFromParent();
             }
         }
-
-    private:
-
-        std::shared_ptr<Sprite> m_target;
 
     };
 }
