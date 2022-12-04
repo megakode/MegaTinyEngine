@@ -41,6 +41,10 @@ class Repeat : public ActionInterval
      */
     static std::shared_ptr<Repeat> createRepeatForever( const std::shared_ptr<AbstractAction>& action_to_repeat )
     {
+        // Setting repetitions to -1 is actually just making the repetition counter wrap all the way around and
+        // keep repeating until it reaches 0. Which will be after 2^64 iterations, which should be enough.
+        // This way we save doing another compare operation and storage space for a variable indicating whether
+        // to repeat indefinitely or not.
         return std::make_shared<Repeat>(action_to_repeat,-1);
     }
 
