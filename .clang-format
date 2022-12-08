@@ -1,4 +1,4 @@
 ---
-BasedOnStyle: Microsoft
+BasedOnStyle: WebKit
 ColumnLimit: 200
 ...

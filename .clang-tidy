@@ -1,12 +1,7 @@
 Checks: 'bugprone*,clang-analyzer*,cert*,cppcore*,misc*,modernize*,performance*,portability*,
-      
-        google*,-google-runtime-references,
-        -google-readability-*,
-        hicpp*,-hicpp-signed-bitwise,
         -misc-non-private-member-variables-in-classes,
         -modernize-use-trailing-return-type,
-        -cppcoreguidelines-avoid-magic-numbers,
-        -readability-magic-numbers'
+        -cppcoreguidelines-avoid-magic-numbers'
 FormatStyle:     file
 CheckOptions:
       - key:     readability-implicit-bool-conversion.AllowIntegerConditions
