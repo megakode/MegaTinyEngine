@@ -25,10 +25,10 @@ namespace Engine::Actions {
         /// \param toPoint The local position to move the Sprite to
         static std::shared_ptr<Move> create( const std::shared_ptr<GameObject>& target, float duration, const Vec2i& fromPoint, const Vec2i& toPoint );
 
-        void progress(float  /*progress*/) override
+        void progress(float progress) override
         {
-            int x = m_fromPoint.x + (float)(m_toPoint.x - m_fromPoint.x) * m_progress;
-            int y = m_fromPoint.y + (float)(m_toPoint.y - m_fromPoint.y) * m_progress;
+            int x = m_fromPoint.x + (float)(m_toPoint.x - m_fromPoint.x) * progress;
+            int y = m_fromPoint.y + (float)(m_toPoint.y - m_fromPoint.y) * progress;
             m_target->setLocalPosition(x,y);
         }
 

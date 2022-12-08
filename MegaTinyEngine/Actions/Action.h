@@ -5,9 +5,10 @@
 #ifndef ACTION_H
 #define ACTION_H
 
+#include <iostream>
 #include "Base.h"
 #include "GameObject.h"
-#include <iostream>
+#include "Easings.h"
 
 namespace Engine
 {
@@ -39,6 +40,8 @@ namespace Engine
       std::shared_ptr<GameObject> gameObject;
     };
 
+
+
     class ActionInterval : public AbstractAction, std::enable_shared_from_this<ActionInterval>
     {
     public:
@@ -49,6 +52,9 @@ namespace Engine
         void reset() override;
         virtual void progress(float progress) = 0;
 
+        /// The easing type that progress is advanced by (linear, exponential, bounce, etc.)
+        Actions::EasingType easingType = Actions::EasingType::None;
+
     protected:
 
         /// How long the duration of this Action is supposed to be
@@ -56,6 +62,8 @@ namespace Engine
 
         /// How much time has elapsed since the Action started
         float m_elapsed = 0;
+
+      private:
 
         /// Float that indicates the Actions progress (0.0 -> 1.0).
         /// Subclasses should look at this value when determining the state of its animations.

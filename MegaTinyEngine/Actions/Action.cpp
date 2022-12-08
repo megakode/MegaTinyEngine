@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <memory>
 #include "Action.h"
+#include "Easings.h"
 
 namespace Engine {
 
@@ -35,8 +36,8 @@ namespace Engine {
                 m_isDone = true;
             }
 
-//            m_progress = easeOutExpo( std::min(m_elapsed / m_duration , 1.0f) );
-            m_progress = std::min(m_elapsed / m_duration , 1.0F);
+            m_progress = Actions::Easing::value( this->easingType, std::min(m_elapsed / m_duration, 1.0F));
+            // m_progress = std::min(m_elapsed / m_duration , 1.0F);
             progress(m_progress);
         }
 

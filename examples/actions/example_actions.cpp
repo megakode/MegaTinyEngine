@@ -43,8 +43,10 @@ class ExampleGame : public IGame
 
         // Make a repeating sequence of actions, that moves a sprite back and forth
 
-        auto move = Actions::Move::create(slime,1.0,{50,50},{100,50});
-        auto moveBack = Actions::Move::create(slime,1.0,{100,50},{50,50});
+        auto move = Actions::Move::create(slime,1.0,{50,100},{50,50});
+        move->easingType = Actions::EasingType::OutExpo;
+        auto moveBack = Actions::Move::create(slime,1.0,{50,50},{50,100});
+        moveBack->easingType = Actions::EasingType::InExpo;
         auto seq = Actions::Sequence::create({move,moveBack});
         auto repeat = Actions::Repeat::createRepeatForever(seq);
 
