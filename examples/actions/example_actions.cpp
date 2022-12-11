@@ -45,7 +45,7 @@ class ExampleGame : public IGame
 
         constexpr Vec2i from = {50,100};
         constexpr Vec2i to = {50,50};
-        constexpr float duration = 1.0f
+        constexpr float duration = 1.0f;
 
 
         auto move = Actions::Move::create(slime,duration,from,to,Actions::EasingType::OutExpo);
