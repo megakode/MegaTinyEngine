@@ -10,6 +10,7 @@ target_sources(${PROJECT_NAME} PUBLIC
         Actions/ActionManager.cpp
         Actions/Action.cpp
         Actions/Fade.cpp
+        Actions/Easings.cpp
         Actions/Move.cpp
         Actions/Destroy.cpp
         Actions/Repeat.cpp
