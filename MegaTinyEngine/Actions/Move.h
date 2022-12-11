@@ -23,7 +23,7 @@ namespace Engine::Actions {
         /// \param target The Sprite to move
         /// \param fromPoint The local position to start moving the Sprite from
         /// \param toPoint The local position to move the Sprite to
-        static std::shared_ptr<Move> create( const std::shared_ptr<GameObject>& target, float duration, const Vec2i& fromPoint, const Vec2i& toPoint );
+        static std::shared_ptr<Move> create( const std::shared_ptr<GameObject>& target, float duration, const Vec2i& fromPoint, const Vec2i& toPoint, EasingType easingType = EasingType::None);
 
         void progress(float progress) override
         {

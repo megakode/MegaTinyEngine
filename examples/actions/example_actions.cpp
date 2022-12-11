@@ -43,15 +43,23 @@ class ExampleGame : public IGame
 
         // Make a repeating sequence of actions, that moves a sprite back and forth
 
-        auto move = Actions::Move::create(slime,1.0,{50,100},{50,50});
-        move->easingType = Actions::EasingType::InElastic;
-        auto moveBack = Actions::Move::create(slime,1.0,{50,50},{50,100});
+        constexpr Vec2i from = {50,100};
+        constexpr Vec2i to = {50,50};
+        constexpr float duration = 1.0f
+
+
+        auto move = Actions::Move::create(slime,duration,from,to,Actions::EasingType::OutExpo);
+
+        auto moveBack = Actions::Move::create(slime,duration,to,from);
+        // All IntervalAction subclasses (including Move) have the easingType property.
         moveBack->easingType = Actions::EasingType::OutBounce;
+
+        // Create a sequence with the two Move actions...
         auto seq = Actions::Sequence::create({move,moveBack});
+        // ...and repeat it forever
         auto repeat = Actions::Repeat::createRepeatForever(seq);
 
         // Remember to add the action to the ActionManager, otherwise they will not run.
-
         Core::actionManager()->addAction(repeat);
 
         return scene;
