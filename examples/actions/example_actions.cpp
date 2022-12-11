@@ -43,8 +43,8 @@ class ExampleGame : public IGame
 
         // Make a repeating sequence of actions, that moves a sprite back and forth
 
-        constexpr Vec2i from = {50,100};
-        constexpr Vec2i to = {50,50};
+        const Vec2i from = {Core::getLogicalWindowSize().width / 2,100};
+        const Vec2i to = {Core::getLogicalWindowSize().width / 2,50};
         constexpr float duration = 1.0f;
 
 
