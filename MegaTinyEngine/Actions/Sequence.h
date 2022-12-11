@@ -15,7 +15,7 @@ class Sequence : public ActionInterval
 
   public:
 
-    explicit Sequence() : ActionInterval(nullptr)
+    explicit Sequence() : ActionInterval(nullptr,0)
     {
     };
 

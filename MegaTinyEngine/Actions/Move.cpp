@@ -10,7 +10,7 @@ namespace Actions
 
 std::shared_ptr<Move> Move::create(const std::shared_ptr<GameObject> &target, float duration, const Vec2i &fromPoint, const Vec2i &toPoint, EasingType easingType)
 {
-    auto action = std::make_shared<Move>(target);
+    auto action = std::make_shared<Move>(target,duration);
     action->m_duration = duration;
     action->m_fromPoint = fromPoint;
     action->m_toPoint = toPoint;

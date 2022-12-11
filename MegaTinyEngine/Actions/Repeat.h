@@ -17,7 +17,7 @@ class Repeat : public ActionInterval
 {
 
   public:
-    Repeat( const std::shared_ptr<AbstractAction>& action_to_repeat , int repetitions ) : ActionInterval(nullptr)
+    Repeat( const std::shared_ptr<AbstractAction>& action_to_repeat , int repetitions ) : ActionInterval(nullptr,0)
     {
         m_action_to_repeat = action_to_repeat;
         m_repetitions = repetitions;

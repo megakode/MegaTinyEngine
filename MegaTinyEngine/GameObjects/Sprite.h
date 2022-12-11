@@ -59,26 +59,37 @@ namespace Engine {
 
         void setDebugDraw(bool enabled);
 
-        /// Set a sprites alpha value used when rendering the texture
-        ///
-        /// \param alpha value between 0.0-1.0
-        void setAlpha( float alpha );
-
-        /// Get a sprites alpha value used when rendering the texture
-        ///
-        /// \return alpha value between 0.0-1.0
-        float getAlpha();
-
         /// Get the current textureRect. If an animation is playing this will change with the animation. If not, this will be the full size of the texture.
         const Rect & textureRect();
-
-        Vec2f scaling = {1.0f,1.0f};
 
         void setCurrentFrame(int frameNum);
 
         void setTexture(  const std::shared_ptr<Texture>& texture );
 
         std::shared_ptr<Texture> texture();
+
+        /**
+         * Set a sprites alpha value used when rendering the texture
+         * @param alpha value between 0.0-1.0
+         */
+        void setAlpha( float alpha );
+
+        /**
+         * Get a sprites alpha value used when rendering the texture
+         * @return alpha value between 0.0-1.0
+         */
+        float getAlpha();
+
+        /**
+         * Set a sprites scale factor.
+         * @param scaling
+         */
+        void setScaling(const Vec2f& scaling);
+
+        /**
+         * Get a sprites scale factor.
+         */
+        const Vec2f& getScaling() const;
 
     protected:
 
@@ -90,6 +101,9 @@ namespace Engine {
         bool m_kinematicsEnabled = false;
 
         bool m_debugDraw = false;
+
+        Vec2f m_scaling {1.0f, 1.0f};
+
         float m_alpha = 1.0f;
 
 

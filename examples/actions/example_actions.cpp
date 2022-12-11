@@ -1,19 +1,19 @@
 /**
-* This example shows how to load a single non animated texture, and display it on screen.
-*/
+ * This example shows how to load a single non animated texture, and display it on screen.
+ */
 
 #include "Core.h"
 #include "Destroy.h"
 #include "IGame.h"
 #include "Move.h"
+#include "Scale.h"
 #include "Repeat.h"
 #include "Sequence.h"
 
 using namespace Engine;
 
-class ExampleGame : public IGame
-{
-  public:
+class ExampleGame : public IGame {
+public:
     virtual ~ExampleGame() = default;
 
     ExampleGame() = default;
@@ -43,19 +43,18 @@ class ExampleGame : public IGame
 
         // Make a repeating sequence of actions, that moves a sprite back and forth
 
-        const Vec2i from = {Core::getLogicalWindowSize().width / 2,100};
-        const Vec2i to = {Core::getLogicalWindowSize().width / 2,50};
+        const Vec2i from = { Core::getLogicalWindowSize().width / 2, 100 };
+        const Vec2i to = { Core::getLogicalWindowSize().width / 2, 50 };
         constexpr float duration = 1.0f;
 
+        auto move = Actions::Move::create(slime, duration, from, to, Actions::EasingType::OutExpo);
 
-        auto move = Actions::Move::create(slime,duration,from,to,Actions::EasingType::OutExpo);
-
-        auto moveBack = Actions::Move::create(slime,duration,to,from);
+        auto moveBack = Actions::Move::create(slime, duration, to, from);
         // All IntervalAction subclasses (including Move) have the easingType property.
         moveBack->easingType = Actions::EasingType::OutBounce;
 
         // Create a sequence with the two Move actions...
-        auto seq = Actions::Sequence::create({move,moveBack});
+        auto seq = Actions::Sequence::create({ move, moveBack });
         // ...and repeat it forever
         auto repeat = Actions::Repeat::createRepeatForever(seq);
 
@@ -63,34 +62,30 @@ class ExampleGame : public IGame
         Core::actionManager()->addAction(repeat);
 
         return scene;
-   };
+    };
 
-   void update( float deltaTime ) override  {
-       // Here we would update game logic, move stuff around, etc.
-   };
+    void update(float deltaTime) override {
+        // Here we would update game logic, move stuff around, etc.
+    };
 
-   void draw( SDL_Renderer *renderer ) override {
-       // Here we could render additional stuff each frame using the SDL renderer directly.
-   };
+    void draw(SDL_Renderer* renderer) override {
+        // Here we could render additional stuff each frame using the SDL renderer directly.
+    };
 
-   void handleInput( const Engine::InputEvent& event ) override {
+    void handleInput(const Engine::InputEvent& event) override {
 
-   };
+    };
 
- private:
-
-
-
-   static constexpr int FOREGROUND_LAYER = 10;
+private:
+    static constexpr int FOREGROUND_LAYER = 10;
 };
-
 
 int main()
 {
-   ExampleGame game;
+    ExampleGame game;
 
-   Engine::Core::createWindowAndRenderer(320,200,3,false,"Example - Actions");
-   Engine::Core::runGame(&game);
+    Engine::Core::createWindowAndRenderer(320, 200, 3, false, "Example - Actions");
+    Engine::Core::runGame(&game);
 
-   return 0;
+    return 0;
 }

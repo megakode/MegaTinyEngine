@@ -37,7 +37,8 @@ namespace Engine
 
     protected:
         bool m_isDone = false;
-      std::shared_ptr<GameObject> gameObject;
+        // TODO: maybe remove this, as typically Sprite is more usefull and only used in ActionInterval.
+        std::shared_ptr<GameObject> gameObject;
     };
 
 
@@ -46,7 +47,7 @@ namespace Engine
     {
     public:
 
-        explicit ActionInterval( const std::shared_ptr<GameObject>& target ) : AbstractAction(target){};
+        explicit ActionInterval( const std::shared_ptr<GameObject>& target, float duration = 1.0f ) : AbstractAction(target), m_duration(duration){};
 
         void update( float dt) override;
         void reset() override;

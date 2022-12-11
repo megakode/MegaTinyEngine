@@ -14,6 +14,7 @@ target_sources(${PROJECT_NAME} PUBLIC
         Actions/Move.cpp
         Actions/Destroy.cpp
         Actions/Repeat.cpp
+        Actions/Scale.cpp
         Actions/Sequence.cpp
         Collision/BoxCollider.cpp
         Collision/CollisionManager.cpp

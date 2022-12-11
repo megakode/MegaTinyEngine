@@ -17,7 +17,7 @@ namespace Engine::Actions {
 
         Move() = delete;
 
-        explicit Move( const std::shared_ptr<GameObject>& target ) : ActionInterval(target) { };
+        explicit Move( const std::shared_ptr<GameObject>& target, float duration ) : ActionInterval(target,duration) { };
 
         /// Create an action that moves a Sprite
         /// \param target The Sprite to move
