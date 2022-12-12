@@ -1,9 +1,6 @@
 #include <map>
-
-#include "Easings.h"
-#include <algorithm>
 #include <cmath>
-#include <functional>
+#include "Easings.h"
 
 namespace Engine::Actions {
 
@@ -71,19 +68,20 @@ inline float Easing::easeInOutElastic(float x)
 }
 
 inline float Easing::easeInBounce(float x) {
-    return powf(2, 6 * (x - 1)) * abs(sinf(x * PI * 3.5f));
+
+    return powf(2, 6 * (x - 1)) * std::fabs(sinf(x * PI * 3.5f));
 }
 
 inline float Easing::easeOutBounce(float x) {
-    return 1 - powf(2, -6 * x) * abs(cosf(x * PI * 3.5f));
+    return 1 - powf(2, -6 * x) * std::fabs(cosf(x * PI * 3.5f));
 }
 
 inline float Easing::easeInOutBounce(float x)
 {
     if (x < 0.5) {
-        return 8 * powf(2, 8.0f * (x - 1)) * abs(sinf(x * PI * 7));
+        return 8.0f * powf(2, 8.0f * (x - 1)) * std::fabs(sinf(x * PI * 7));
     } else {
-        return 1 - 8 * powf(2, -8.0f * x) * abs(sinf(x * PI * 7));
+        return 1 - 8.0f * powf(2, -8.0f * x) * std::fabs(sinf(x * PI * 7));
     }
 }
 

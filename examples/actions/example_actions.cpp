@@ -6,7 +6,6 @@
 #include "Destroy.h"
 #include "IGame.h"
 #include "Move.h"
-#include "Scale.h"
 #include "Repeat.h"
 #include "Sequence.h"
 
@@ -43,15 +42,15 @@ public:
 
         // Make a repeating sequence of actions, that moves a sprite back and forth
 
-        const Vec2i from = { Core::getLogicalWindowSize().width / 2, 100 };
-        const Vec2i to = { Core::getLogicalWindowSize().width / 2, 50 };
+        const Vec2i to = { Core::getLogicalWindowSize().width / 2, 100 };
+        const Vec2i from = { Core::getLogicalWindowSize().width / 2, 50 };
         constexpr float duration = 1.0f;
 
-        auto move = Actions::Move::create(slime, duration, from, to, Actions::EasingType::OutExpo);
+        auto move = Actions::Move::create(slime, duration, from, to, Actions::EasingType::OutBounce);
 
         auto moveBack = Actions::Move::create(slime, duration, to, from);
         // All IntervalAction subclasses (including Move) have the easingType property.
-        moveBack->easingType = Actions::EasingType::OutBounce;
+        moveBack->easingType = Actions::EasingType::InBounce;
 
         // Create a sequence with the two Move actions...
         auto seq = Actions::Sequence::create({ move, moveBack });
