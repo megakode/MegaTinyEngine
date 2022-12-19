@@ -51,10 +51,13 @@ while (!quit) {
 }
 ```
 
-First, all the Scenes layers are drawn, as well as all the objects that are added to them.
+1) `Scene` layers are drawn, as well as all the `GameObjects` that are added to them.
 
-Second, `draw()` is called on `IGame`, which is the games chance to do any additional drawing, not related to any specific GameObject.
+2) `draw()` is called on `IGame`, which is the games chance to do any additional drawing, not related to any specific GameObject.
 
-Third, `update()` is called, which is where all the game logic is usually placed. Here you can move objects, spawn bullets, etc.
+3) `update()` is called, which is where all the game logic is usually placed. Here you can move objects, spawn bullets, etc.
 
-Fourth, ` handleInput()` is called if any input event has occurred. (Mouse / keyboard)
+3) ` handleInput()` is called if any input event has occurred. (Mouse / keyboard)
+
+# Sprites
+
