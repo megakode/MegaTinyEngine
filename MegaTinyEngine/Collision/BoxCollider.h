@@ -13,9 +13,13 @@ namespace Engine {
     class BoxCollider {
 
     public:
+        virtual ~BoxCollider() = default;
         virtual Rect bbox() = 0;
 
-        /// The collision mask bits are AND'ed together when the collision manager determines if two objects collide. If the results is > 0, a collision occurs.
+        /**
+         * Collision mask bits are AND'ed together when the collision manager determines if two objects collide.
+         * If the results is > 0, a collision occurs.
+         */
         std::uint32_t collision_mask_bits = 0;
         std::uint32_t collision_group_id = 0;
     };

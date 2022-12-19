@@ -13,9 +13,9 @@
 
 namespace Engine {
 
-    TextureCache::TextureCache(SDL_Renderer *renderer)
+    TextureCache::TextureCache(SDL_Renderer *renderer) : m_renderer(renderer)
     {
-        m_renderer = renderer;
+        
     }
 
     std::shared_ptr<Texture> TextureCache::loadTexture( const std::string& absoluteFileNameWithPath, const std::string& identifier )

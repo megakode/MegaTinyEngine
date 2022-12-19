@@ -26,13 +26,13 @@ class ExampleGame : public Engine::IGame
         // Then create a scene with a single layer
 
         auto scene = std::make_shared<Engine::Scene>();
-        scene->addLayer(FOREGROUND_LAYER);
+        scene->addLayer(FOREGROUND_LAYER_TAG);
 
         // And last, create a sprite using the texture we loaded earlier, and sets its position to the center of the window.
 
         slime = Engine::Sprite::createWithTexture("slime");
         slime->setLocalPosition(Engine::Core::getLogicalWindowSize().width/2, Engine::Core::getLogicalWindowSize().height/2);
-        scene->addObjectToLayer(slime,FOREGROUND_LAYER);
+        scene->addObjectToLayer(slime,FOREGROUND_LAYER_TAG);
 
         return scene;
     };
@@ -53,7 +53,7 @@ class ExampleGame : public Engine::IGame
 
     Engine::SpritePtr slime;
 
-    static constexpr int FOREGROUND_LAYER = 10;
+    static constexpr int FOREGROUND_LAYER_TAG = 10;
 };
 
 
