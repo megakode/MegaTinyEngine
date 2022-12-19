@@ -4,8 +4,9 @@
 
 #include "MegaTinyEngine/Core.h"
 #include "MegaTinyEngine/IGame.h"
+#include "Scale.h"
 
-class ExampleGame : public Engine::IGame
+class ExampleGame : public Engine::IGame, Engine::ICollisionManagerListener
 {
 public:
 
@@ -32,57 +33,51 @@ public:
        // And last, create a sprite using the texture we loaded earlier, and sets its position to the center of the window.
 
        slime = Engine::Sprite::createWithTexture("slime");
-       slime->setLocalPosition(Engine::Core::getLogicalWindowSize().width/2, Engine::Core::getLogicalWindowSize().height/2);
+       slime->setLocalPosition(Engine::Core::getLogicalWindowSize().width/2, SPAWN_Y);
        slime->collision_mask_bits = 1;
 
        scene->addObjectToLayer(slime,FOREGROUND_LAYER_TAG);
+
+       Engine::Core::collisionManager()->addCollider(slime);
+       Engine::Core::collisionManager()->setListener(this);
 
        return scene;
    };
 
    void update( float deltaTime ) override  {
-       // Here we would update game logic, move stuff around, etc.
+
        timeSinceLastMissile += deltaTime;
+
+       // Spawn new missile
 
        if(timeSinceLastMissile >= MISSILE_SPAWN_INTERVAL){
            auto missile = Engine::Sprite::createWithTexture("missile");
            missiles.push_back(missile);
-           missile->setLocalPosition(Engine::Core::getLogicalWindowSize().width,std::rand() % 200);
+           missile->setLocalPosition(Engine::Core::getLogicalWindowSize().width,SPAWN_Y);
            missile->setKinematicsEnabled(true);
            missile->setVelocity({-100.f,0.0f});
            missile->setFriction(1.0f);
+           missile->collision_mask_bits = 1;
+           missile->collision_group_id = MISSILE_COLLISION_GROUP;
            timeSinceLastMissile = 0;
            scene->addObjectToLayer(missile,FOREGROUND_LAYER_TAG);
+           // TODO: Refactor this.. it's a bit tedious for users to have to manually add objects to the collision manager
+           Engine::Core::collisionManager()->addCollider(missile);
        }
 
-       auto deletePredicate = [](Engine::SpritePtr& missile){
-           if(missile->getLocalPosition().x < 0){
-               missile->removeFromParent();
-               return true;
-           }
-           return false;
-       };
-       missiles.erase(std::remove_if(missiles.begin(),missiles.end(),deletePredicate), missiles.end());
+       // Remove all the missiles going past the screen border
 
-       /*
-       auto iterator = missiles.begin();
-       while( iterator != missiles.end() ){
-           if(iterator->get()->getLocalPosition().x < 0){
-               iterator->get()->removeFromParent();
-               iterator = missiles.erase(iterator);
-           } else {
-               iterator++;
-           }
-       }
-*/
+       erase_if(missiles, [](auto missile){
+          if(missile->getLocalPosition().x < 0){
+              missile->removeFromParent();
+              // TODO: Refactor this.. it's a bit tedious for users to have to manually remove objects from the collision manager
+              Engine::Core::collisionManager()->removeCollider(missile);
+              return true;
+          }
+          return false;
+      });
 
-       /*
-       for( auto &missile : missiles){
-            if(missile->getLocalPosition().x < 0){
 
-            }
-       }
-       */
    };
 
    void draw( SDL_Renderer *renderer ) override {
@@ -90,6 +85,23 @@ public:
    };
 
    void handleInput( const Engine::InputEvent& event ) override {
+
+   };
+
+   // ICollisionManagerListener
+
+   void collisionManagerDetectedCollisionBetween( const std::shared_ptr<Engine::BoxCollider>& firstObject , const std::shared_ptr<Engine::BoxCollider>& secondObject )
+   {
+       auto scale = Engine::Actions::Scale::create(slime,1.0f, {1.5f,1.5f},{1.0f,1.0f});
+       Engine::Core::actionManager()->addAction(scale);
+
+       if(firstObject->collision_group_id == MISSILE_COLLISION_GROUP){
+           Engine::Core::collisionManager()->removeCollider(firstObject);
+       }
+
+       if(secondObject->collision_group_id == MISSILE_COLLISION_GROUP){
+           Engine::Core::collisionManager()->removeCollider(secondObject);
+       }
 
    };
 
@@ -103,6 +115,8 @@ private:
 
    static constexpr int FOREGROUND_LAYER_TAG = 10;
    static constexpr int MISSILE_SPAWN_INTERVAL = 1.0f;
+   static constexpr int SPAWN_Y = 100;
+   static constexpr int MISSILE_COLLISION_GROUP = 1;
 };
 
 

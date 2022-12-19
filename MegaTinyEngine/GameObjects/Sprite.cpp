@@ -29,7 +29,11 @@ SpritePtr Sprite::createWithAnimation(const std::string& animationId)
     return spr;
 }
 
-Sprite::Sprite(const std::shared_ptr<Texture>& texture) { setTexture(texture); }
+Sprite::Sprite(const std::shared_ptr<Texture>& texture)
+{
+    setTexture(texture);
+    setDefaultBBox();
+}
 
 void Sprite::setDefaultBBox()
 {
@@ -42,7 +46,10 @@ void Sprite::setDefaultBBox()
 /// \param yoffset relative yoffset to the sprite origin
 /// \param width  box width
 /// \param height box height
-void Sprite::setBBox(int xoffset, int yoffset, int width, int height) { m_bbox = { xoffset, yoffset, width, height }; }
+void Sprite::setBBox(int xoffset, int yoffset, int width, int height)
+{
+    m_bbox = { xoffset, yoffset, width, height };
+}
 
 ///
 /// Get the sprites bounding box
@@ -54,7 +61,10 @@ Rect Sprite::bbox()
     return { wp.x + m_bbox.x, wp.y + m_bbox.y, m_bbox.width, m_bbox.height };
 }
 
-const Rect& Sprite::textureRect() { return m_textureRect; }
+const Rect& Sprite::textureRect()
+{
+    return m_textureRect;
+}
 
 void Sprite::updateTextureRect()
 {
