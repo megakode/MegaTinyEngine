@@ -95,6 +95,8 @@ public:
        auto scale = Engine::Actions::Scale::create(slime,1.0f, {1.5f,1.5f},{1.0f,1.0f});
        Engine::Core::actionManager()->addAction(scale);
 
+       // TODO: Consider refactoring this callback method to trigger 2 callbacks pr. collision. One where each collider is set as firstObject.
+
        if(firstObject->collision_group_id == MISSILE_COLLISION_GROUP){
            Engine::Core::collisionManager()->removeCollider(firstObject);
        }
