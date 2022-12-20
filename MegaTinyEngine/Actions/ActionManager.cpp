@@ -14,22 +14,10 @@ void ActionManager::addAction(const std::shared_ptr<AbstractAction>& action)
 
 void ActionManager::update(float dt)
 {
-
-    auto iterator = m_actions.begin();
-
-    while( iterator != m_actions.end() ){
-
-        iterator->get()->update(dt);
-        if(iterator->get()->isDone()){
-            iterator = m_actions.erase(iterator);
-        } else {
-            iterator++;
-        }
-
-
-    }
-
-
+    erase_if(m_actions, [&](auto action){
+        action->update(dt);
+        return action->isDone();
+    });
 }
 
 
