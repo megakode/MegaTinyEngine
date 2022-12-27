@@ -35,11 +35,16 @@ public:
        slime = Engine::Sprite::createWithTexture("slime");
        slime->setLocalPosition(Engine::Core::getLogicalWindowSize().width/2, SPAWN_Y);
        slime->collision_mask_bits = 1;
+       slime->collision_group_id = PLAYER_COLLISION_GROUP;
 
        scene->addObjectToLayer(slime,FOREGROUND_LAYER_TAG);
 
        Engine::Core::collisionManager()->addCollider(slime);
-       Engine::Core::collisionManager()->setListener(this);
+       //Engine::Core::collisionManager()->setListener(this);
+
+       Engine::Core::collisionManager()->addListener(PLAYER_COLLISION_GROUP, MISSILE_COLLISION_GROUP, [this](auto&& obj_a, auto&& obj_b) {
+           collisionManagerDetectedCollisionBetween(obj_a, obj_b);
+       });
 
        return scene;
    };
@@ -119,6 +124,7 @@ private:
    static constexpr int MISSILE_SPAWN_INTERVAL = 1.0f;
    static constexpr int SPAWN_Y = 100;
    static constexpr int MISSILE_COLLISION_GROUP = 1;
+   static constexpr int PLAYER_COLLISION_GROUP = 2;
 };
 
 

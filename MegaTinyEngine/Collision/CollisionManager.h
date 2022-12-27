@@ -7,6 +7,7 @@
 
 #include "Base.h"
 #include "Sprite.h"
+#include <functional>
 #include <vector>
 
 namespace Engine {
@@ -45,13 +46,28 @@ namespace Engine {
         std::vector<std::shared_ptr<BoxCollider>> ray( const Vec2i& at , int collision_group_id = -1 );
 
         ///
-        /// Set listener to be called whenever a collision occurs
-        /// Apart from this listener, the individual elements who are colliding are also called using their 'onCollide' method.
+        /// Set a catch-all listener to be called whenever a collision occurs.
         ///
         void setListener( ICollisionManagerListener* listener );
 
+        /// Add a listener to be called, whenever a collision between objects with the two specified collision groups occur.
+        /// \param collision_group_a
+        /// \param collision_group_b
+        /// \param callback Called when the specified collision occurs.
+        void addListener( int collision_group_a , int collision_group_b , std::function<void(const std::shared_ptr<BoxCollider>&,const std::shared_ptr<BoxCollider>&)> callback);
+
     private:
 
+        /// Listener that is triggered by collision group ids colliding.
+        struct CollisionGroupListener {
+            int collision_group_a;
+            int collision_group_b;
+            std::function<void(std::shared_ptr<BoxCollider>,std::shared_ptr<BoxCollider>)> callback;
+        };
+
+        std::vector<CollisionGroupListener> m_collisionGroupListeners;
+
+        // Catch-all listener that gets called whenever a collision occurs.
         ICollisionManagerListener *m_listener = nullptr;
         std::vector<std::shared_ptr<BoxCollider>> m_objects;
 

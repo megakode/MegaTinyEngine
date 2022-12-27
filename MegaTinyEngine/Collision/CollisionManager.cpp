@@ -68,6 +68,18 @@ namespace Engine {
                 m_listener->collisionManagerDetectedCollisionBetween(collision.first,collision.second);
             }
 
+            for( auto& group_listener : m_collisionGroupListeners ){
+                if(collision.first->collision_group_id == group_listener.collision_group_a ) {
+                    if (collision.second->collision_group_id == group_listener.collision_group_b) {
+                        group_listener.callback(collision.first,collision.second);
+                    }
+                } else if( collision.second->collision_group_id == group_listener.collision_group_a ) {
+                    if (collision.first->collision_group_id == group_listener.collision_group_b) {
+                        group_listener.callback(collision.second,collision.first);
+                    }
+                }
+            }
+
             // Do this last, as it potentially deletes the object on collision
             //a->onCollide(b);
 
@@ -79,7 +91,8 @@ namespace Engine {
         m_listener = listener;
     }
 
+    void CollisionManager::addListener(int collision_group_a, int collision_group_b, std::function<void(const std::shared_ptr<BoxCollider>&, const std::shared_ptr<BoxCollider>&)> callback) {
+        m_collisionGroupListeners.push_back({ collision_group_a,collision_group_b, std::move(callback) });
+    }
 
-
-
-}
+    }
