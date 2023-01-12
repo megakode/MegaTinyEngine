@@ -2,8 +2,8 @@
 // Created by peter on 08/07/2020.
 //
 
-#ifndef SIMPLESHARKGAME_COLLISIONINFO_H
-#define SIMPLESHARKGAME_COLLISIONINFO_H
+#ifndef COLLISIONINFO_H
+#define COLLISIONINFO_H
 
 #include "BoxCollider.h"
 #include "GameObject.h"
@@ -13,8 +13,6 @@ namespace Engine {
 
     struct CollisionInfo {
 
-
-
         std::shared_ptr<BoxCollider> first;
         std::shared_ptr<BoxCollider> second;
 
@@ -22,4 +20,4 @@ namespace Engine {
 
 }
 
-#endif //SIMPLESHARKGAME_COLLISIONINFO_H
+#endif // COLLISIONINFO_H
