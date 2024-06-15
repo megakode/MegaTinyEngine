@@ -10,49 +10,42 @@
 
 namespace Engine {
 
-    class Layer : public GameObject {
-        public:
+class Layer : public GameObject {
+public:
+    virtual ~Layer() = default;
 
-        int layerId;
+    int layerId;
 
-        enum class BackgroundTextureStyle {
-            Normal,
-            TileHorizontal,
-            TileVertical,
-            TileBoth,
-            Stretch
-        };
+    enum class BackgroundTextureStyle { Normal, TileHorizontal, TileVertical, TileBoth, Stretch };
 
+    ColorRGBA8 backgroundColor = { 0, 0, 0, 0 };
 
-        ColorRGBA8 backgroundColor = {0,0,0,0};
+    std::shared_ptr<Texture> backgroundTexture = nullptr;
 
-        std::shared_ptr<Texture> backgroundTexture = nullptr;
+    BackgroundTextureStyle backgroundTextureStyle = BackgroundTextureStyle::Normal;
 
-        BackgroundTextureStyle backgroundTextureStyle = BackgroundTextureStyle::Normal;
+    explicit Layer(int layerId)
+        : layerId(layerId) {};
 
-        explicit Layer( int layerId ) : layerId(layerId) {};
+    Layer(int layerId, ColorRGBA8 backgroundColor)
+    {
+        this->layerId = layerId;
+        this->m_useBackgroundColor = true;
+        this->backgroundColor = backgroundColor;
+    }
 
-        Layer( int layerId, ColorRGBA8 backgroundColor ){
-            this->layerId = layerId;
-            this->m_useBackgroundColor = true;
-            this->backgroundColor = backgroundColor;
-        }
+    Layer(int layerId, const std::shared_ptr<Texture>& backgroundTexture, BackgroundTextureStyle style)
+    {
+        this->layerId = layerId;
+        this->backgroundTexture = backgroundTexture;
+        this->backgroundTextureStyle = style;
+    }
+    void draw(SDL_Renderer* renderer) override;
 
-        Layer( int layerId, const std::shared_ptr<Texture>& backgroundTexture , BackgroundTextureStyle style )
-        {
-            this->layerId = layerId;
-            this->backgroundTexture = backgroundTexture;
-            this->backgroundTextureStyle = style;
-        }
-        void draw(SDL_Renderer *renderer) override;
-
-      private:
-
-        bool m_useBackgroundColor = false;
-
-    };
+private:
+    bool m_useBackgroundColor = false;
+};
 
 }
-
 
 #endif //__LAYER_H
