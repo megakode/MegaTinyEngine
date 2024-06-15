@@ -13,7 +13,7 @@
 
 namespace Engine {
 
-SpritePtr Sprite::createWithTexture(const std::string& textureId)
+SpritePtr Sprite::createWithTexture(const std::string_view& textureId)
 {
     auto texture = Core::textureCache()->getTextureWithIdentifier(textureId);
     assert(texture);
@@ -22,7 +22,7 @@ SpritePtr Sprite::createWithTexture(const std::string& textureId)
     return sprite;
 }
 
-SpritePtr Sprite::createWithAnimation(const std::string& animationId)
+SpritePtr Sprite::createWithAnimation(const std::string_view& animationId)
 {
     auto spr = std::make_shared<Sprite>();
     spr->setAnimation(animationId);
@@ -46,10 +46,7 @@ void Sprite::setDefaultBBox()
 /// \param yoffset relative yoffset to the sprite origin
 /// \param width  box width
 /// \param height box height
-void Sprite::setBBox(int xoffset, int yoffset, int width, int height)
-{
-    m_bbox = { xoffset, yoffset, width, height };
-}
+void Sprite::setBBox(int xoffset, int yoffset, int width, int height) { m_bbox = { xoffset, yoffset, width, height }; }
 
 ///
 /// Get the sprites bounding box
@@ -61,10 +58,7 @@ Rect Sprite::bbox()
     return { wp.x + m_bbox.x, wp.y + m_bbox.y, m_bbox.width, m_bbox.height };
 }
 
-const Rect& Sprite::textureRect()
-{
-    return m_textureRect;
-}
+const Rect& Sprite::textureRect() { return m_textureRect; }
 
 void Sprite::updateTextureRect()
 {
@@ -100,7 +94,7 @@ void Sprite::setCurrentFrame(int frameNum)
 /// Play Animation
 ///
 
-void Sprite::setAnimation(const std::string& id)
+void Sprite::setAnimation(const std::string_view& id)
 {
     if (m_currentAnimation != nullptr) {
         Core::animationManager()->destroyAnimation(m_currentAnimation);
@@ -208,29 +202,14 @@ void Sprite::setTexture(const std::shared_ptr<Texture>& texture)
     updateTextureRect();
 }
 
-std::shared_ptr<Texture> Sprite::texture()
-{
-    return m_texture;
-}
+std::shared_ptr<Texture> Sprite::texture() { return m_texture; }
 
-void Sprite::setAlpha(float alpha)
-{
-    m_alpha = alpha;
-}
+void Sprite::setAlpha(float alpha) { m_alpha = alpha; }
 
-float Sprite::getAlpha()
-{
-    return m_alpha;
-}
+float Sprite::getAlpha() { return m_alpha; }
 
-void Sprite::setScaling(const Vec2f& scaling)
-{
-    m_scaling = scaling;
-}
+void Sprite::setScaling(const Vec2f& scaling) { m_scaling = scaling; }
 
-const Vec2f& Sprite::getScaling() const
-{
-    return m_scaling;
-}
+const Vec2f& Sprite::getScaling() const { return m_scaling; }
 
 }

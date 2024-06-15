@@ -9,118 +9,115 @@
 #ifndef Sprite_h
 #define Sprite_h
 
-
 #include "SDL.h"
 #include <map>
 #include <memory>
 #include <stdio.h>
+#include <string_view>
 #include <utility>
 
-#include "BoxCollider.h"
-#include "Base.h"
 #include "AnimationManager.h"
+#include "Base.h"
+#include "BoxCollider.h"
 #include "GameObjects/GameObject.h"
 #include "KinematicBody.h"
 #include "Texture.hpp"
 
 namespace Engine {
 
-    class Sprite;
-    typedef std::shared_ptr<Sprite> SpritePtr;
+class Sprite;
+typedef std::shared_ptr<Sprite> SpritePtr;
 
-    class Sprite : public GameObject, public BoxCollider {
+class Sprite : public GameObject, public BoxCollider {
 
-    public:
+public:
+    Sprite(const std::shared_ptr<Texture>& texture = nullptr);
 
-        Sprite( const std::shared_ptr<Texture>& texture = nullptr );
+    static SpritePtr createWithTexture(const std::string_view& textureId);
+    static SpritePtr createWithAnimation(const std::string_view& animationId);
 
-        static SpritePtr createWithTexture( const std::string& textureId );
-        static SpritePtr createWithAnimation(const std::string& animationId);
+    void setAnimation(const std::string_view& id);
 
-        void setAnimation( const std::string& id );
+    // GameObject overrides
 
-        // GameObject overrides
+    void update(float timeSinceLast) override;
+    void draw(SDL_Renderer* renderer) override;
 
-        void update(float timeSinceLast ) override;
-        void draw( SDL_Renderer *renderer ) override;
+    // Collision
 
-        // Collision
+    Rect bbox() override;
 
-        Rect bbox() override;
+    // Physics
+    void setVelocity(const Vec2f& velocity);
+    void setAcceleration(const Vec2f& vec);
+    void setFriction(float friction);
+    void setKinematicBodyPosition(const Vec2f& pos);
 
-        // Physics
-        void setVelocity( const Vec2f& velocity );
-        void setAcceleration( const Vec2f& vec );
-        void setFriction( float friction );
-        void setKinematicBodyPosition( const Vec2f& pos );
+    bool isKinematicsEnabled() const;
+    void setKinematicsEnabled(bool enabled);
 
-        bool isKinematicsEnabled() const;
-        void setKinematicsEnabled( bool enabled );
+    void setDebugDraw(bool enabled);
 
-        void setDebugDraw(bool enabled);
+    /// Get the current textureRect. If an animation is playing this will change with the animation. If not, this will be the full size of the texture.
+    const Rect& textureRect();
 
-        /// Get the current textureRect. If an animation is playing this will change with the animation. If not, this will be the full size of the texture.
-        const Rect & textureRect();
+    void setCurrentFrame(int frameNum);
 
-        void setCurrentFrame(int frameNum);
+    void setTexture(const std::shared_ptr<Texture>& texture);
 
-        void setTexture(  const std::shared_ptr<Texture>& texture );
+    std::shared_ptr<Texture> texture();
 
-        std::shared_ptr<Texture> texture();
+    /**
+     * Set a sprites alpha value used when rendering the texture
+     * @param alpha value between 0.0-1.0
+     */
+    void setAlpha(float alpha);
 
-        /**
-         * Set a sprites alpha value used when rendering the texture
-         * @param alpha value between 0.0-1.0
-         */
-        void setAlpha( float alpha );
+    /**
+     * Get a sprites alpha value used when rendering the texture
+     * @return alpha value between 0.0-1.0
+     */
+    float getAlpha();
 
-        /**
-         * Get a sprites alpha value used when rendering the texture
-         * @return alpha value between 0.0-1.0
-         */
-        float getAlpha();
+    /**
+     * Set a sprites scale factor.
+     * @param scaling
+     */
+    void setScaling(const Vec2f& scaling);
 
-        /**
-         * Set a sprites scale factor.
-         * @param scaling
-         */
-        void setScaling(const Vec2f& scaling);
+    /**
+     * Get a sprites scale factor.
+     */
+    const Vec2f& getScaling() const;
 
-        /**
-         * Get a sprites scale factor.
-         */
-        const Vec2f& getScaling() const;
+protected:
+    std::shared_ptr<SpriteAnimation> m_currentAnimation = nullptr;
 
-    protected:
+    Rect m_textureRect;
+    KinematicBody m_kinematicBody;
 
-        std::shared_ptr<SpriteAnimation> m_currentAnimation = nullptr;
+    bool m_kinematicsEnabled = false;
 
-        Rect m_textureRect;
-        KinematicBody m_kinematicBody;
+    bool m_debugDraw = false;
 
-        bool m_kinematicsEnabled = false;
+    Vec2f m_scaling { 1.0f, 1.0f };
 
-        bool m_debugDraw = false;
+    float m_alpha = 1.0f;
 
-        Vec2f m_scaling {1.0f, 1.0f};
+    void updateTextureRect();
 
-        float m_alpha = 1.0f;
+    ///
+    /// Sets a bounding box with a size that equals the same as the sprites texture rect (a single animation frame)
+    ///
+    void setDefaultBBox();
 
+    void setBBox(int xoffset, int yoffset, int width, int height);
 
-        void updateTextureRect();
+private:
+    Rect m_bbox;
 
-        ///
-        /// Sets a bounding box with a size that equals the same as the sprites texture rect (a single animation frame)
-        ///
-        void setDefaultBBox();
-
-        void setBBox(int xoffset, int yoffset, int width, int height);
-
-    private:
-        Rect m_bbox;
-
-        std::shared_ptr<Texture> m_texture;
-    };
+    std::shared_ptr<Texture> m_texture;
+};
 
 }
 
