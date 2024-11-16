@@ -42,8 +42,8 @@ void Sprite::setDefaultBBox()
 }
 
 /// Set the sprite bounding box
-/// \param xoffset relative xoffset to the sprite origin
-/// \param yoffset relative yoffset to the sprite origin
+/// \param xoffset relative xoffset to the sprites 0,0
+/// \param yoffset relative yoffset to the sprites 0,0
 /// \param width  box width
 /// \param height box height
 void Sprite::setBBox(int xoffset, int yoffset, int width, int height) { m_bbox = { xoffset, yoffset, width, height }; }
@@ -142,17 +142,20 @@ void Sprite::update(float timeSinceLast)
 
 void Sprite::draw(SDL_Renderer* renderer)
 {
+    
     if (m_isVisible) {
         float scaledWidth = m_scaling.x * m_textureRect.width;
         float scaledHeight = m_scaling.y * m_textureRect.height;
         // Draw the m_texture
         Vec2i wp = getWorldPosition();
+        wp.x -= m_origin.x;
+        wp.y -= m_origin.y;
         SDL_Rect srcRect = { m_textureRect.x, m_textureRect.y, m_textureRect.width, m_textureRect.height };
         SDL_Rect dstRect = { wp.x, wp.y, (int)scaledWidth, (int)scaledHeight };
-        SDL_Point p { 0, 0 };
+        SDL_Point p { m_origin.x, m_origin.y };
 
         SDL_SetTextureAlphaMod(m_texture->Get(), m_alpha * 255);
-        SDL_RenderCopyEx(renderer, m_texture->Get(), &srcRect, &dstRect, 0, &p, SDL_FLIP_NONE);
+        SDL_RenderCopyEx(renderer, m_texture->Get(), &srcRect, &dstRect, m_rotation, &p, SDL_FLIP_NONE);
 
         if (m_debugDraw) {
             // Draw dst rect
@@ -207,6 +210,62 @@ std::shared_ptr<Texture> Sprite::texture() { return m_texture; }
 void Sprite::setAlpha(float alpha) { m_alpha = alpha; }
 
 float Sprite::getAlpha() { return m_alpha; }
+
+void Sprite::setOrigin(const Vec2i& origin)
+{
+    m_origin = origin;
+}
+
+void Sprite::setOrigin( Origin origin )
+{
+    switch (origin)
+    {
+    case Origin::UpperLeft:
+        m_origin = {0,0};
+        break;
+
+    case Origin::UpperCenter:
+        m_origin = {m_texture->getWidth()/2,0};
+        break;
+
+    case Origin::UpperRight:
+        m_origin = {m_texture->getWidth(),0};
+        break;
+
+    case Origin::CenterLeft:
+        m_origin = {0,m_texture->getHeight()/2};
+        break;
+
+    case Origin::Center:
+        m_origin = {m_texture->getWidth()/2,m_texture->getHeight()/2};
+        break;
+
+    case Origin::CenterRight:
+        m_origin = {m_texture->getWidth(),m_texture->getHeight()/2};
+        break;
+
+        case Origin::LowerLeft:
+        m_origin = {0,m_texture->getHeight()};
+        break;
+
+        case Origin::LowerCenter:
+        m_origin = {m_texture->getWidth()/2,m_texture->getHeight()};
+        break;
+
+        case Origin::LowerRight:
+        m_origin = {m_texture->getWidth(),m_texture->getHeight()};
+        break;
+    
+    default:
+        break;
+    }
+}
+
+void Sprite::setRotation(float degree){
+    m_rotation = degree;
+}
+
+const Vec2f& Sprite::getOrigin() const { return m_origin; };
 
 void Sprite::setScaling(const Vec2f& scaling) { m_scaling = scaling; }
 

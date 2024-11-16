@@ -31,6 +31,20 @@ typedef std::shared_ptr<Sprite> SpritePtr;
 class Sprite : public GameObject, public BoxCollider {
 
 public:
+
+    enum class Origin {
+        UpperLeft,
+        UpperCenter,
+        UpperRight,
+        CenterLeft,
+        Center,
+        CenterRight,
+        LowerLeft,
+        LowerCenter,
+        LowerRight
+    };
+
+
     Sprite(const std::shared_ptr<Texture>& texture = nullptr);
 
     static SpritePtr createWithTexture(const std::string_view& textureId);
@@ -79,6 +93,26 @@ public:
      */
     float getAlpha();
 
+    void setRotation(float degree);
+
+    /**
+     * Define the center point from which a sprite is drawn. 
+     * Default it is 0,0.
+     * Max is sprite width and height.
+     */
+    void setOrigin(const Vec2i& origin);
+
+    /**
+     * Define the center point from which a sprite is drawn. 
+     * Default it is UpperLeft.
+     */
+    void setOrigin( Origin origin );
+
+    /**
+     * Get a sprites origin point. (the center point from where the sprite is drawn)
+     */
+    const Vec2f& getOrigin() const;
+
     /**
      * Set a sprites scale factor.
      * @param scaling
@@ -96,6 +130,8 @@ protected:
     Rect m_textureRect;
     KinematicBody m_kinematicBody;
 
+    float m_rotation = 0;
+
     bool m_kinematicsEnabled = false;
 
     bool m_debugDraw = false;
@@ -103,6 +139,8 @@ protected:
     Vec2f m_scaling { 1.0f, 1.0f };
 
     float m_alpha = 1.0f;
+    
+    Vec2i m_origin;
 
     void updateTextureRect();
 

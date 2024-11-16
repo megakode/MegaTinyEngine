@@ -10,10 +10,13 @@
 #include <list>
 #include <memory>
 
-namespace Engine {
-class Scene {
+namespace Engine
+{
+class Scene
+{
 
-public:
+  public:
+    void addLayer(const std::shared_ptr<Layer> &layer);
     /**
      * Add an empty layer to the scene
      * @param tag Integer used to identify the layer
@@ -57,17 +60,17 @@ public:
      * @param object The object to add
      * @param layerTag The identifier of the layer
      */
-    void addObjectToLayer(const std::shared_ptr<GameObject>& object, int layerTag);
+    void addObjectToLayer(const std::shared_ptr<GameObject> &object, int layerTag);
 
-    void draw(SDL_Renderer* renderer);
+    void draw(SDL_Renderer *renderer);
 
     void update(float deltaTime);
 
-    void handleInput(const InputEvent& event);
+    void handleInput(const InputEvent &event);
 
-private:
+  private:
     std::list<std::shared_ptr<Layer>> m_layers;
 };
-}
+} // namespace Engine
 
 #endif // SCENE_H

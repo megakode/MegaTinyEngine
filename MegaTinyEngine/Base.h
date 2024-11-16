@@ -2,8 +2,7 @@
 // Created by Peter Bone on 07/08/2020.
 //
 
-#ifndef SIMPLEWESTERNGAME_BASE_H
-#define SIMPLEWESTERNGAME_BASE_H
+#pragma once
 
 #include <cmath>
 #include <stdint.h>
@@ -101,7 +100,3 @@ namespace Engine {
     };
 
 }
-
-
-
-#endif //SIMPLEWESTERNGAME_BASE_H
