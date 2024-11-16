@@ -35,7 +35,9 @@ void TextNode::setText(const std::string &text)
 
 void TextNode::draw(SDL_Renderer *renderer)
 {
-
+    if(!m_isVisible){
+        return;
+    }
     // Draw the m_texture
     Vec2i wp = getWorldPosition();
     int startx = wp.x;
