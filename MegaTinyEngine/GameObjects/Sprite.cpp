@@ -225,35 +225,35 @@ void Sprite::setOrigin( Origin origin )
         break;
 
     case Origin::UpperCenter:
-        m_origin = {m_texture->getWidth()/2,0};
+        m_origin = {m_textureRect.width/2,0};
         break;
 
     case Origin::UpperRight:
-        m_origin = {m_texture->getWidth(),0};
+        m_origin = {m_textureRect.width,0};
         break;
 
     case Origin::CenterLeft:
-        m_origin = {0,m_texture->getHeight()/2};
+        m_origin = {0,m_textureRect.height/2};
         break;
 
     case Origin::Center:
-        m_origin = {m_texture->getWidth()/2,m_texture->getHeight()/2};
+        m_origin = {m_textureRect.width/2,m_textureRect.height/2};
         break;
 
     case Origin::CenterRight:
-        m_origin = {m_texture->getWidth(),m_texture->getHeight()/2};
+        m_origin = {m_textureRect.width,m_textureRect.height/2};
         break;
 
         case Origin::LowerLeft:
-        m_origin = {0,m_texture->getHeight()};
+        m_origin = {0,m_textureRect.height};
         break;
 
         case Origin::LowerCenter:
-        m_origin = {m_texture->getWidth()/2,m_texture->getHeight()};
+        m_origin = {m_textureRect.width/2,m_textureRect.height};
         break;
 
         case Origin::LowerRight:
-        m_origin = {m_texture->getWidth(),m_texture->getHeight()};
+        m_origin = {m_textureRect.width,m_textureRect.height};
         break;
     
     default:
