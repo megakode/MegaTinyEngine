@@ -12,7 +12,7 @@
 
 namespace Engine
 {
-class Scene
+class Scene : public IInputListener
 {
 
   public:
