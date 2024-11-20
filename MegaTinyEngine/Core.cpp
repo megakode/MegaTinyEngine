@@ -133,7 +133,7 @@ int Core::runGame(IGame* game)
         SDL_RenderClear(m_renderer);
 
         // Draw scene
-        //sceneNode->draw(m_renderer);
+        sceneNode->draw(m_renderer);
         // Let the game do additional drawing
         game->draw(m_renderer);
 
@@ -148,7 +148,7 @@ int Core::runGame(IGame* game)
 
         // Update Game
 
-        //sceneNode->update(frameTime);
+        sceneNode->update(frameTime);
         game->update(frameTime);
 
         Core::collisionManager()->doCollisionChecks();
