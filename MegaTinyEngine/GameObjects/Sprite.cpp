@@ -55,7 +55,7 @@ void Sprite::setBBox(int xoffset, int yoffset, int width, int height) { m_bbox =
 Rect Sprite::bbox()
 {
     auto wp = getWorldPosition();
-    return { wp.x + m_bbox.x, wp.y + m_bbox.y, m_bbox.width, m_bbox.height };
+    return { wp.x + m_bbox.x - m_origin.x, wp.y + m_bbox.y - m_origin.y, m_bbox.width, m_bbox.height };
 }
 
 const Rect& Sprite::textureRect() { return m_textureRect; }
@@ -110,9 +110,15 @@ void Sprite::setAnimation(const std::string_view& id)
 
     setTexture(animationTexture);
 
-    if (m_bbox.isZeroSize()) {
+    // I don't remember why I set this check in the first place. 
+    // 21/11/2024 I disabled it, because it was causing problems with animated sprites.
+    
+    // Sprite(const std::shared_ptr<Texture>& texture) <- sets texture rect and bbox
+    // setAnimation( myanimation ) <- with the below check, it did not reset the bounding box to a smaller size matching a single frame.
+    // 
+    //if (m_bbox.isZeroSize()) {
         setDefaultBBox();
-    }
+    //}
 }
 
 ///
@@ -131,6 +137,12 @@ void Sprite::update(float timeSinceLast)
         }
 
         m_kinematicBody.update(timeSinceLast);
+    }
+
+    if(m_currentAnimation){
+        if(m_currentAnimation->type == AnimationType::PlayOnceAndDestroy && m_currentAnimation->isFinished){
+            removeFromParent();
+        }
     }
 
     GameObject::update(timeSinceLast);
