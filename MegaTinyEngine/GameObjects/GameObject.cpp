@@ -26,7 +26,7 @@ void GameObject::addChild(const std::shared_ptr<GameObject>& child)
     // Maybe we should use a raw pointer for the parent instead (i've seen this recommended for trees, as there should never be a parentless child, so no dangling )
     child->parent = this;
     child->setWorldPositionIsDirtyRecursively(true);
-    children.push_back(child);
+    children.insert(child);
 }
 
 // ***************************************************************
@@ -97,9 +97,14 @@ void GameObject::update(float ticksSinceLast)
 {
     // Override in subclasses
     for (const auto& child : children) {
-        // A child might become null during iteration of children, as one child might remove another during update.
-        if (child != nullptr)
-            child->update(ticksSinceLast);
+        child->update(ticksSinceLast);
+    }
+
+    // A child might become null during iteration of children, as one child might remove another during update.
+    // So we use defered deletion to be safe.
+    for(const auto& child : children_to_delete)
+    {
+        children.erase(child);
     }
 }
 
@@ -129,24 +134,20 @@ bool GameObject::handleEvent(const InputEvent& event)
     return false;
 }
 
-const std::list<std::shared_ptr<GameObject>>& GameObject::getChildren() { return children; }
+const std::unordered_set<std::shared_ptr<GameObject>>& GameObject::getChildren() { return children; }
 
-void GameObject::removeChild(GameObject* object)
+void GameObject::removeChild(GameObjectPtr object)
 {
     assert(object);
-    auto it = std::find_if(children.begin(), children.end(), [&](const auto& val) { return val.get() == object; });
+    children_to_delete.insert(object);
 
-    if (it != children.end()) {
-        children.erase(it);
-    } else {
-        // not found!?
-    }
 }
 
 void GameObject::removeFromParent()
 {
     if (parent != nullptr) {
-        parent->removeChild(this);
+        parent->removeChild(shared_from_this());
+        parent = nullptr;
     }
 }
 

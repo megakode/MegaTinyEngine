@@ -12,16 +12,19 @@
 #include "Base.h"
 #include "InputManager.h"
 #include "SDL.h"
-#include <list>
+#include <unordered_set>
 #include <memory>
 #include <string>
 #include <vector>
 
 namespace Engine {
 
+
     class GameObject : public std::enable_shared_from_this<GameObject> {
 
     public:
+
+        using GameObjectPtr = std::shared_ptr<GameObject>;
 
         std::string debugName;
 
@@ -29,7 +32,7 @@ namespace Engine {
         ~GameObject();
 
         void addChild(const std::shared_ptr<GameObject>& child);
-        const std::list<std::shared_ptr<GameObject>>& getChildren();
+        const std::unordered_set<std::shared_ptr<GameObject>>& getChildren();
 
         void removeAllChildren();
 
@@ -63,7 +66,8 @@ namespace Engine {
 
         bool m_isVisible = true;
 
-        std::list<std::shared_ptr<GameObject>> children;
+        std::unordered_set<std::shared_ptr<GameObject>> children;
+        std::unordered_set<std::shared_ptr<GameObject>> children_to_delete;
         GameObject *parent = nullptr;
 
         ///
@@ -76,7 +80,7 @@ namespace Engine {
         Vec2i localPosition = {0,0};
         Vec2i worldPosition = {0,0};
 
-        void removeChild(GameObject *object);
+        void removeChild(GameObjectPtr object);
 
     };
 

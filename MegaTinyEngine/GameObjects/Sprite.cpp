@@ -138,7 +138,7 @@ void Sprite::update(float timeSinceLast)
 
         m_kinematicBody.update(timeSinceLast);
     }
-
+    
     if(m_currentAnimation){
         if(m_currentAnimation->type == AnimationType::PlayOnceAndDestroy && m_currentAnimation->isFinished){
             removeFromParent();
