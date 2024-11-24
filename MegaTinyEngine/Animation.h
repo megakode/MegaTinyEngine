@@ -17,6 +17,7 @@ enum class AnimationType
 {
     Manual,
     PlayOnce,
+    PlayOnceAndDestroy, // Removes the Sprite from parent after animation is finished
     Loop,
     PingPong
 };
