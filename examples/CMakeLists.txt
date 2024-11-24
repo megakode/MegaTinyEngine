@@ -7,7 +7,7 @@ macro(AddExample EXAMPLE_NAME)
     add_custom_command(
             TARGET example_${EXAMPLE_NAME} POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy_directory
-            ${CMAKE_SOURCE_DIR}/examples/resources
+            ${CMAKE_CURRENT_SOURCE_DIR}/resources
             ${CMAKE_CURRENT_BINARY_DIR}/resources)
 endmacro()
 

@@ -66,7 +66,7 @@ void AnimationManager::updateAnimations(float deltaTime)
                 if (animation->currentFrame == animation->numberOfFrames) {
 
                     // Loop, restart or stop the m_animation according to AnimationType.
-                    if (animation->type == AnimationType::PlayOnce) {
+                    if (animation->type == AnimationType::PlayOnce || animation->type == AnimationType::PlayOnceAndDestroy) {
                         animation->isFinished = true;
                         animation->currentFrame--;
                         continue;
@@ -91,7 +91,7 @@ void AnimationManager::updateAnimations(float deltaTime)
                 // If we have reached the first frame...
                 if (animation->currentFrame < 0) {
                     // Loop, restart or stop the m_animation according to AnimationType.
-                    if (animation->type == AnimationType::PlayOnce) {
+                    if (animation->type == AnimationType::PlayOnce || animation->type == AnimationType::PlayOnceAndDestroy) {
                         animation->currentFrame = 0;
                         animation->isFinished = true;
                         continue;
