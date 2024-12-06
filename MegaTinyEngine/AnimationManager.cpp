@@ -21,7 +21,7 @@ std::shared_ptr<SpriteAnimation> AnimationManager::createAnimation(const std::st
 {
 
     if (m_animationPresets.count(preset_id) == 0) {
-        std::cout << "Trying to create an animation from an ID which has no preset in AnimationManager";
+        std::cerr << "Trying to create an animation from an ID which has no preset in AnimationManager" << std::endl;
         assert(0);
         return nullptr;
     }
