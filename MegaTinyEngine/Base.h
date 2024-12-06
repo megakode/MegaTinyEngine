@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <cmath>
+#include <algorithm>
 #include <stdint.h>
 
 namespace Engine {
